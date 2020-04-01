@@ -409,10 +409,10 @@ for(C in Countries_focus_narrow) {
   annot = list(yref="paper", xref="x", y=1, x=0.5, xanchor='left', showarrow=FALSE)
 
   plot1 = plot_ly(D3, x=~Date, y=~Cases, color=~Country, name=~Country, colors=Colors(reverse=C<Country0), type='scatter', mode='lines') %>%
-    layout(annotations=annot %append% list(text='<b>'%.%C%.%'</b> (cases)'), xaxis=list(title="", showticklabels = FALSE))
+    layout(annotations=annot %append% list(text='<b>'%.%C%.%'</b> '%.%Country0%.%' (cases)'), xaxis=list(title="", showticklabels = FALSE))
 
   plot2 = plot_ly(D3, x=~Date, y=~Deaths, color=~Country, name=~Country, colors=Colors(reverse=C<Country0), type='scatter', mode='lines') %>%
-    layout(annotations=annot %append% list(text='<b>'%.%C%.%'</b> (deaths)'), xaxis=list(title="", showticklabels = FALSE))
+    layout(annotations=annot %append% list(text='<b>'%.%C%.%'</b> '%.%Country0%.%' (deaths)'), xaxis=list(title="", showticklabels = FALSE))
 
   plots1 %<>% append(list(plot1))
   plots2 %<>% append(list(plot2))
