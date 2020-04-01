@@ -499,7 +499,8 @@ ls(pattern='^plot') %>%
   catn("\nCreated plot objects:\n\n\t", .,'\n')
 
 if(do_save_plotly_to_file) {
-  catn("<!DOCTYPE HTML>\n<html lang='en'>\n<head>\n<title>Pecanka: Coronavirus plots</title>\n</head>\n<body>", file='index.html')
+  catn("<!DOCTYPE HTML>\n<html lang='en'>\n<head>\n<title>Pecanka: Coronavirus plots</title>\n</head>\n<body style='font-family: Arial'>", file='index.html')
+  catn("Wait for all the plots to load (this will take a while!) ...", file='index.html', append=TRUE)
   file = list()
   for(p in ls(pattern='^plot')) {
     catn("Saving plot "%.%p%.%"' to file ...")
