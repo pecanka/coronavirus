@@ -499,12 +499,16 @@ ls(pattern='^plot') %>%
   catn("\nCreated plot objects:\n\n\t", .,'\n')
 
 if(do_save_plotly_to_file) {
+  catn("<!DOCTYPE HTML>\n<html lang='en'>\n<head>\n<title>Pecanka: Coronavirus plots</title>\n</head>\n<body>", file='index.html')
   file = list()
   for(p in ls(pattern='^plot')) {
     catn("Saving plot "%.%p%.%"' to file ...")
     filename = p%.%'.html'
-    htmlwidgets::saveWidget(as_widget(get(p)), file=filename)
-    file.rename(filename, 'plots_plotly/'%.%filename)
+    filename2 = 'plots_plotly/'%.%filename
+    #htmlwidgets::saveWidget(as_widget(get(p)), file=filename)
+    file.rename(filename, filename2)
+    catn("<iframe style='width: 100%; height: 900px; border: none;' src='"%.%filename2%.%"'></iframe>", file='index.html', append=TRUE)
   }
+  catn("</body>\n</html>", file='index.html', append=TRUE)
   catn("Finished.")
 }
