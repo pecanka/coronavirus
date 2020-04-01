@@ -500,7 +500,8 @@ ls(pattern='^plot') %>%
 
 if(do_save_plotly_to_file) {
   catn("<!DOCTYPE HTML>\n<html lang='en'>\n<head>\n<title>Pecanka: Coronavirus plots</title>\n</head>\n<body style='font-family: Arial'>", file='index.html')
-  catn("<div style='background-color: #444444; color: purple'>Wait for all the plots to load (this will take a while!) ...</div>", file='index.html', append=TRUE)
+  catn("<div style='background-color: #dddddd; font-weight: bold; height: 30px; line-height: 30px; vertical-align: middle'>\n",
+       "Wait for all the interactive plots to load (this might take a while, they are quite big!) ...\n</div>", file='index.html', append=TRUE)
   file = list()
   for(p in ls(pattern='^plot')) {
     catn("Saving plot "%.%p%.%"' to file ...")
