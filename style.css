@@ -1,6 +1,6 @@
 body {
   background-color: black;
-  color: red;
+  color: #33bb45;
   text-align: center;
   font-size: 15 px;
   font-family: Calibri, Arial, sans-serif;
@@ -8,7 +8,7 @@ body {
 
 .head {
   font-size: 40px;
-  color: white;
+  color: red;
   width: 500px;
   margin-left: auto;
   margin-right: auto;
@@ -26,6 +26,29 @@ body {
   padding: 15px;
   vertical-align: middle;
   padding-bottom: 1px;
+}
+
+.note {
+  width: 95%;
+  background-color: #151515;
+  padding: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.note2 {
+  width: 40%;
+  background-color: #202020;
+  padding: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  text-align: center;
+  color: yellow;
 }
 
 .descriptions, .descriptions a {
@@ -62,7 +85,7 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .source a:link, .source a:visited, .source a:active {
-  color: red;
+  color: green;
 }
 
 .source a:hover {
