@@ -28,6 +28,7 @@ countries_focus = 'all'
 countries_focus = 'broad'
 #countries_focus = 'narrow'
 
+PerPopulation = 100000
 Country0 = 'Italy'
 Countries_focus_narrow = c("Netherlands","Germany","USA","Czechia")
 
@@ -43,6 +44,9 @@ cz_daily_deaths = tribble(~Date, ~DailyDeaths,
 
 cz_deaths = cz_daily_deaths %>% mutate(Deaths=cumsum(DailyDeaths)) %>% select(-DailyDeaths)
 ### TEMPORARILY ADD THE CZECH DEATHS MANUALLY ###
+
+data_source = "Based on data from <a href='"%.%url_wom%.%"'>Worldometers</a>, <a href='"%.%
+  url_ocdc%.%"'>OCDC</a>"%.%" and <a href='"%.%url_mzcz%.%"'>mzcr.cz</a>"
 
 #########################################################
 
@@ -105,7 +109,7 @@ download_data_ocdc = function(url, force_download=FALSE) {
     if(!url_exists(url)) {
       warn("File '",url,"' does not seem to exist.")
     } else {
-      download.file(url_ocdc, file, mode="wb")
+      download.file(url, file, mode="wb")
     }
   }
 }
@@ -142,7 +146,7 @@ read_data_ocdc = function(url, default_to_yday=TRUE) {
     mutate(Cases=cumsum(DailyCases),
            Deaths=cumsum(DailyDeaths)) %>%
     ungroup() %>%
-    select(Date, Country, Cases, Deaths, DailyCases, DailyDeaths)
+    select(Date, Country, Cases, Deaths, DailyCases, DailyDeaths, Population)
 
 }
 
@@ -256,15 +260,22 @@ load_data_individual = function(countries) {
   Data = Latest = NULL
   for(country in split_rows(countries)) {
 
-    rda_file_country = 'data/'%.%country$name%.%'_historical_'%.%c(y_day(lag=0:-1))%.%'.rda' %>% `[`(file.exists(.)) %>% h1()
-    rda_file_latest = list.files('data', country$name%.%'_latest_', full.names=TRUE) %>% file_sort_time() %>% h1()
+    rda_file_country = 'data/'%.%country$name%.%'_historical_'%.%c(y_day(lag=0:-1))%.%'.rda' %>%
+      `[`(file.exists(.)) %>% h1()
+    rda_file_latest = list.files('data', country$name%.%'_latest_', full.names=TRUE) %>%
+      file_sort_time() %>% h1()
 
-    if(is_empty(rda_file_country)) error('No file with the historical data found for ', country$name,'.')
-    if(is_empty(rda_file_country)) error('No file with the historical data found for ', country$name,'.')
+    if(is_empty(rda_file_country))
+      error('No file with the historical data found for ', country$name,'.')
+    if(is_empty(rda_file_latest))
+      error('No file with the latest data found for ', country$name,'.')
 
     catn("Loading data for ",country$name,"...")
     load(rda_file_country)
     load(rda_file_latest)
+
+    data %<>%  add_col(CurrentlyInfected=NA) %>%
+      rename(Infected=CurrentlyInfected)
 
     Data %<>% bind_rows(data)
     Latest %<>% bind_rows(latest)
@@ -377,6 +388,21 @@ if(do_load_data || !exists('Data') || !exists('Latest')) {
   Data %<>% bind_rows(DataCZ, .)
   Latest %<>% bind_rows(LatestCZ, .)
 
+  PopData = Data_ocdc %>% mutate(Country=recode(Country, 'Czech_Republic'='Czechia',
+      'United_States_of_America'='USA', 'United_Kingdom'='UK', 'South_Korea'='S. Korea')) %>%
+    group_by(Country) %>% slice(1) %>% ungroup() %>% select(Country, Population) %>%
+    add_row(Country='Hong Kong', Population=7500000)
+
+  # Check for some country's population missing
+  PopData %>% anti_join(Data, ., by='Country') %>% group_by(Country) %>% slice(1) %>% ungroup() %>% nrow() %>% {stopifnot(.==0)}
+
+  Data %<>% left_join(PopData, by='Country') %>%
+    mutate_at(vars(Cases,Deaths,DailyCases,DailyDeaths), ~ifelse(.x==0, NA, .x)) %>%
+    mutate(CasesPop=Cases, DeathsPop=Deaths, TestedPop=Tested, InfectedPop=Infected) %>%
+    mutate_at(vars(ends_with("Pop")), ~.x/Population*PerPopulation)
+    #mutate(CasesPop=Cases/Population*PerPopulation, DeathsPop=Deaths/Population*PerPopulation,
+    #       TestedPop=Tested/Population*PerPopulation, InfectedPop=Infected/Population*PerPopulation)
+
 }
 
 #if(do_process_lag && (do_force_lag_calculation || some_fresh_data_present || !exists('K'))) {
@@ -395,6 +421,7 @@ DataCZ2 = Data_Lag_Cases %>% filter(Country=='Czechia')
 
 ### PRODUCE COMPARISON PLOTS ###
 catn("Plotting comparisons with Italy ...")
+descriptions = c()
 plots1 = plots2 = list()
 for(C in Countries_focus_narrow) {
 
@@ -419,49 +446,118 @@ for(C in Countries_focus_narrow) {
 
 }
 
-#plot0 = do.call(subplot, append(append(plots1, plots2), list(nrows=2, shareY = FALSE, titleY=TRUE, titleX = TRUE))) %>%
+descriptions %<>% c(plot_lag="Comparison of the lag (in number of days) behind "%.%Country0)
+title = "Total number of cases and deaths: comparison with "%.%Country0%.%"\n("%.%data_source%.%")"
 plot_lag = do.call(subplot, plots1 %append% plots2 %append% list(nrows=2, shareY = FALSE, titleY=TRUE, titleX = TRUE)) %>%
-  layout(title = "Total number of cases and deaths: comparison with "%.%Country0, showlegend = FALSE)
+  layout(title = title, showlegend = FALSE)
 rm(annot, plot1, plot2, plots1, plots2)
 
 ### PRODUCE PLOTS FOR ALL COUNTRIES ###
 catn("Plotting ...")
 
 Latest %<>% arrange(desc(Cases))
+
+#plot_infect_bar = plot_ly(data=Latest, x=~Country, y=~Infected, color=~Country, name=~Country, colors=Colors(), type='bar') %>%
+#  layout(title = "Number of active infections", xaxis = list(title = "Country", categoryorder = "array", categoryarray = ~Country))
+#descriptions %<>% c(plot_infect_bar="Barplot of the <b>number of active infections</b> for various countries")
+
+descriptions %<>% c(plot_cases_bar="Barplot of the <b>total number of cases</b> for various countries")
+title = "Total number of cases (as of "%.%t_day()%.%")\n("%.%data_source%.%")"
 plot_cases_bar = plot_ly(data=Latest, x=~Country, y=~Cases, color=~Country, name=~Country, colors=Colors(), type='bar') %>%
-  layout(title = "Total number of cases", xaxis = list(title = "Country", categoryorder = "array", categoryarray = ~Country))
+  layout(title = title, xaxis = list(title = "Country", categoryorder = "array", categoryarray = ~Country))
+
+descriptions %<>% c(plot_deaths_bar="Barplot of the <b>total number of deaths</b> for various countries")
+title = "Total number of deaths (as of "%.%t_day()%.%")\n("%.%data_source%.%")"
+plot_deaths_bar = plot_ly(data=Latest, x=~Country, y=~Deaths, color=~Country, name=~Country, colors=Colors(), type='bar') %>%
+  layout(title = title, xaxis = list(title = "Country", categoryorder = "array", categoryarray = ~Country))
+
+descriptions %<>% c(plot_recovered_bar="Barplot of the <b>total number of recovered patients</b> for various countries")
+title = "Number of recovered patients (as of "%.%t_day()%.%")\n("%.%data_source%.%")"
+plot_recovered_bar = plot_ly(data=Latest, x=~Country, y=~Recovered, color=~Country, name=~Country, colors=Colors(), type='bar') %>%
+  layout(title = title, xaxis = list(title = "Country", categoryorder = "array", categoryarray = ~Country))
+
 
 Data4 = Data %>% mutate(Date=sub('[0-9]+-','',Date))
 if(countries_focus=="broad") Data4 %<>% filter(Country %in% Countries_focus_broad)
 if(countries_focus=="narrow") Data4 %<>% filter(Country %in% Countries_focus_narrow)
 
-plot_infected = plot_ly(data=Data4, x=~Date, y=~CurrentlyInfected, color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
-  layout(title = "Number of currently infected", yaxis = list(title = "Current Cases"))
 
+descriptions %<>% c(plot_infect="Evolution of the <b>number of active infections</b> over time for various countries")
+title = "Number of active infections (as of "%.%t_day()%.%")\n("%.%data_source%.%")"
+plot_infect = plot_ly(data=Data4, x=~Date, y=~Infected, color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
+  layout(title = title, yaxis = list(title = "Active infections"))
+
+descriptions %<>% c(plot_cases="Evolution of the <b>number of cases</b> over time for various countries")
+title = "Total number of cases (as of "%.%t_day()%.%")\n("%.%data_source%.%")"
 plot_cases = plot_ly(data=Data4, x=~Date, y=~Cases, color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
-  layout(title = "Total cases", yaxis = list(title = "Total Cases"))
+  layout(title = title, yaxis = list(title = "Cases"))
 
+descriptions %<>% c(plot_deaths="Evolution of the <b>number of deaths</b> over time for various countries")
+title = "Total number of deaths (as of "%.%t_day()%.%")\n("%.%data_source%.%")"
 plot_deaths = plot_ly(data=Data4, x=~Date, y=~Deaths, color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
-  layout(title = "Number of deaths")
+  layout(title = title, yaxis = list(title = "Deaths"))
 
+descriptions %<>% c(plot_tests="Evolution of the <b>number of diagnostic tests</b> for COVID-19 (currently only Czechia)")
+title = "Total number of diagnostic tests for COVID-19 (as of "%.%t_day()%.%")\n("%.%data_source%.%")"
+plot_tests = plot_ly(data=Data4, x=~Date, y=~Tested, color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
+  layout(title = title, yaxis = list(title = "Tested"))
+
+
+descriptions %<>% c(plot_infectpop="Evolution of the <b>number of active infections per population</b> over time for various countries")
+title = "Number of currently infected per "%.%PerPopulation%.%" citizens\n("%.%data_source%.%")"
+plot_infectpop = plot_ly(data=Data4, x=~Date, y=~InfectedPop, color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
+  layout(title = title, yaxis = list(title = "Active infections"))
+
+descriptions %<>% c(plot_casespop="Evolution of the <b>number of cases per population</b> over time for various countries")
+title = "Total number of cases per "%.%PerPopulation%.%" citizens\n("%.%data_source%.%")"
+plot_casespop = plot_ly(data=Data4, x=~Date, y=~CasesPop, color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
+  layout(title = title, yaxis = list(title = "Cases"))
+
+descriptions %<>% c(plot_deathspop="Evolution of the <b>number of deaths per population</b> over time for various countries")
+title = "Total number of deaths per "%.%PerPopulation%.%" citizens\n("%.%data_source%.%")"
+plot_deathspop = plot_ly(data=Data4, x=~Date, y=~DeathsPop, color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
+  layout(title = title, yaxis = list(title = "Deaths"))
+
+descriptions %<>% c(plot_testspop="Evolution of the <b>number of diagnostic tests per population</b> for COVID-19 (currently only Czechia)")
+title = "Total number of diagnostic tests for COVID-19 per "%.%PerPopulation%.%" citizens\n("%.%data_source%.%")"
+plot_testspop = plot_ly(data=Data4, x=~Date, y=~TestedPop, color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
+  layout(title = title, yaxis = list(title = "Tested"))
+
+descriptions %<>% c(plot_caserate="Evolution of the <b>case rate</b> (i.e. DailyCases/Cases) over time for various countries")
+title = "Daily case rate\n("%.%data_source%.%")"
 plot_caserate = Data4 %>% mutate(DailyCaseRate=DailyCases/Cases) %>%
   plot_ly(x=~Date, y=~DailyCaseRate, color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
-  layout(title = "Daily case rate")
+  layout(title = title, yaxis = list(title = "Daily case rate"))
 
+descriptions %<>% c(plot_deathrate="Evolution of the <b>death rate</b> (i.e. DailyDeaths/Deaths) over time for various countries")
+title = "Case-fatality ratio (i.e. death rate)\n("%.%data_source%.%")"
 plot_deathrate = Data4 %>% mutate(CaseFatalityRatio=Deaths/Cases) %>%
   plot_ly(x=~Date, y=~CaseFatalityRatio, color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
-  layout(title = "Case-fatality ratio (i.e. death rate) for all recorded countries")
+  layout(title = title, yaxis = list(title = "Daily death rate"))
 
-plot_infected_log = plot_infected %>% layout(yaxis = list(type = "log"))
+descriptions %<>% c(plot_testrate="Evolution of the <b>test rate</b> (i.e. DailyDeaths/Deaths) over time for various countries")
+title = "Daily test rate\n("%.%data_source%.%")"
+plot_testrate = Data4 %>% mutate(DailyTestRate=DailyTested/Tested) %>%
+  plot_ly(x=~Date, y=~DailyTestRate, color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
+  layout(title = title, yaxis = list(title = "Daily test rate"))
+
+plot_infect_log = plot_infect %>% layout(yaxis = list(type = "log"))
 plot_cases_log = plot_cases %>% layout(yaxis = list(type = "log"))
 plot_deaths_log = plot_deaths %>% layout(yaxis = list(type = "log"))
+plot_tests_log = plot_tests %>% layout(yaxis = list(type = "log"))
 plot_caserate_log = plot_caserate %>% layout(yaxis = list(type = "log"))
 plot_deathrate_log = plot_deathrate %>% layout(yaxis = list(type = "log"))
+plot_testrate_log = plot_testrate %>% layout(yaxis = list(type = "log"))
+descriptions %<>% c(
+    plot_infect_log=descriptions['plot_infect']%.%" (logarhitmic scale)",
+    plot_cases_log=descriptions['plot_cases']%.%" (logarhitmic scale)",
+    plot_deaths_log=descriptions['plot_deaths']%.%" (logarhitmic scale)",
+    plot_tests_log=descriptions['plot_tests']%.%" (logarhitmic scale)",
+    plot_caserate_log=descriptions['plot_caserate']%.%" (logarhitmic scale)",
+    plot_deathrate_log=descriptions['plot_deathrate']%.%" (logarhitmic scale)",
+    plot_testrate_log=descriptions['plot_testrate']%.%" (logarhitmic scale)")
 
-#subplot(plot_infected, plot_cases, plot_deaths, plot_cases_bar, plot_caserate, plot_deathrate, plot_deathrate2, nrow=2, shareY=FALSE, titleY=TRUE, titleX=FALSE) %>%
-#  layout(title = "Total number of CASES and DEATHS") %>% print()
-
-### DO REGRESSION FOR CZECHIA ##
+### DO REGRESSION FOR CZECHIA ###
 min_Cases = 250
 DataCZ250 = DataCZ %>% filter(Date>'2020-03') %>% filter(Cases>=min_Cases)
 m_total = lm(Cases~Tested, data=DataCZ250) %T>% summary()
@@ -491,7 +587,12 @@ plot_lm_daily = plot_ly(DataCZ250, x=~DailyTested, y=~DailyCases, name='observed
   add_annotations(yref="y", xref="x", x=DataCZ250$DailyTested, y=DataCZ250$DailyCases, text=DataCZ250$DateS,
                   showarrow=TRUE, arrowhead = 4, arrowsize = .4, ax = -10, ay = -50)
 
-catn("Finished.")
+descriptions %<>% c(
+  plot_lm_daily="Czechia: Linear fit of the daily number of cases against the daily number of performed diagnostic tests for COVID-19",
+  plot_lm_total="Czechia: Linear fit of the total number of cases against the total number of performed diagnostic tests for COVID-19")
+
+### END OF REGRESSION FOR CZECHIA ###
+
 ls(pattern='^plot') %>%
   split_into_groups(6) %>%
   lapply(paste, collapse='\t  ') %>%
@@ -499,18 +600,23 @@ ls(pattern='^plot') %>%
   catn("\nCreated plot objects:\n\n\t", .,'\n')
 
 if(do_save_plotly_to_file) {
-  catn("<!DOCTYPE HTML>\n<html lang='en'>\n<head>\n<title>Pecanka: Coronavirus plots</title>\n</head>\n<body style='font-family: Arial'>", file='index.html')
-  catn("<div style='background-color: #dddddd; font-weight: bold; height: 30px; line-height: 30px; vertical-align: middle'>\n",
-       "Wait for all the interactive plots to load (this might take a while, they are quite big!) ...\n</div>", file='index.html', append=TRUE)
-  file = list()
-  for(p in ls(pattern='^plot')) {
-    catn("Saving plot "%.%p%.%"' to file ...")
-    filename = p%.%'.html'
+  catf = hijack(catn, file='index.html', append=TRUE)
+  catf("<!DOCTYPE HTML>\n<html lang='en'>\n<head>\n<title>Pecanka Consulting: Coronavirus plots</title>", append=FALSE)
+  catf("<link rel='stylesheet' type='text/css' href='style.css'></head>\n<body><div class='main'>")
+  catf("<div class='head'>CORONOVIRUS: COVID-19</div><p>")
+  catf("<div class='descriptions'>A collection of plots showing the current state and the historical evolutionof the COVID-19")
+  catf(" pandemic around the world.<p>Author: <a href='https://www.pecanka.net'>Jakub Pecanka, PhD</a><p>"%.%data_source)
+  catf("</div><div class='list'><ul>")
+  ps = ls(pattern='^plot') %>% {.[order(descriptions[.])]}
+  for(p in ps) {
+    catn("Saving plot '"%.%p%.%"' to file ...")
+    filename = '.~'%.%p%.%'.html'
     filename2 = 'plots_plotly/'%.%filename
-    #htmlwidgets::saveWidget(as_widget(get(p)), file=filename)
+    htmlwidgets::saveWidget(as_widget(get(p)), file=filename)
     file.rename(filename, filename2)
-    catn("<iframe style='width: 100%; height: 900px; border: none;' src='"%.%filename2%.%"'></iframe>", file='index.html', append=TRUE)
+    catf("<div class='link'><li><a href='",filename2,"'>",descriptions[p],"</a></li></div>")
   }
-  catn("</body>\n</html>", file='index.html', append=TRUE)
+  catf("</ul></div><p></div></body>\n</html>")
+  rm(catf)
   catn("Finished.")
 }
