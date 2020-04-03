@@ -12,7 +12,7 @@ url_mzcz = 'https://onemocneni-aktualne.mzcr.cz/covid-19'
 url_mzcz_api = 'https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/'
 
 do_download_data = FALSE
-do_load_data = FALSE
+do_load_data = !FALSE
 
 do_force_fresh_data = FALSE
 do_use_any_existing_data = FALSE
@@ -376,7 +376,7 @@ if(do_download_data) {
 
 }
 
-if(do_load_data || !exists('Data') || !exists('Latest')) {
+if(do_load_data || do_download_data || !exists('Data') || !exists('Latest')) {
 
   Data_ocdc = read_data_ocdc(url_ocdc)
   Latest_ocdc = Data_ocdc %>% group_by(Country) %>% slice(n()) %>% ungroup()
@@ -655,8 +655,9 @@ ls(pattern='^plot') %>%
   catn("\nCreated plot objects:\n\n\t", .,'\n')
 
 if(do_save_plotly_to_file) {
+  setwd('plots_plotly')
   ds = descriptions
-  catf = hijack(catn, file='index.html', append=TRUE)
+  catf = hijack(catn, file='../index.html', append=TRUE)
   catf("<!DOCTYPE HTML>\n<html lang='en'>\n<head>\n<title>Pecanka Consulting: Coronavirus plots</title>", append=FALSE)
   catf("<link rel='stylesheet' type='text/css' href='style.css'></head>\n<body><div class='main'>")
   catf("<div class='head'>CORONOVIRUS: COVID-19</div><p>")
@@ -685,15 +686,14 @@ if(do_save_plotly_to_file) {
     catf("</ul><div class='note2'>logarhitmic scale</div><ul>")
     if(gaps[p]) catf("<p>")
     filename = '.~'%.%p%.%'.html'
-    filename2 = 'plots_plotly/'%.%filename
     #if(regexpr('_bar$',p)>0) {
-    htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000', selfcontained=TRUE,
-                            title="Pecanka Consulting: Coronavirus plots: "%.%ds[p])
+    htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000',
+                            title="Coronavirus: "%.%ds[p]%.%" (by Pecanka Consulting)")
     #}
-    file.rename(filename, filename2)
-    catf("<div class='link'><li><a href='",filename2,"'>",ds[p],"</a></li></div>")
+    catf("<div class='link'><li><a href='plots_plotly/'"%.%filename%.%"'>",ds[p],"</a></li></div>")
   }
   catf("</ul></div><p></div></body>\n</html>")
   rm(catf)
+  setwd('..')
   catn("Finished.")
 }
