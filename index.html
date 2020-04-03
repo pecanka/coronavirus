@@ -2,49 +2,59 @@
 <html lang='en'>
 <head>
 <title>Pecanka Consulting: Coronavirus plots</title>
-<link rel='stylesheet' type='text/css' href='style.css'></head>
+<link rel='stylesheet' type='text/css' href='style.css'>
+</head>
 <body><div class='main'>
 <div class='head'>CORONOVIRUS: COVID-19</div><p>
-<div class='descriptions'>A collection of plots showing the current state and the historical evolutionof the COVID-19
- pandemic around the world.<p>Author: <a href='https://www.pecanka.net'>Jakub Pecanka, PhD</a><p><span style='font-size: 75%'>Based on data from <a href='https://www.worldometers.info/coronavirus/'>Worldometers</a>, <a href='https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-04-03.xlsx'>OCDC</a> and <a href='https://onemocneni-aktualne.mzcr.cz/covid-19'>mzcr.cz</a></span>
+<div class='descriptions'>A collection of plots showing the current state
+and the historical progression of the COVID-19 pandemic around the world.<p>
+Author: <a href='https://www.pecanka.net'>Jakub Pecanka, PhD</a><p>
+<span style='font-size: 75%'>Based on data from <a href='https://www.worldometers.info/coronavirus/'>Worldometers</a>, <a href='https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-04-04.xlsx'>OCDC</a> and <a href='https://onemocneni-aktualne.mzcr.cz/covid-19'>mzcr.cz</a></span>
 </div><div class='list'><div class='note2'>linear scale</div><ul>
-<div class='link'><li><a href='plots_plotly/plot_casespop_bar.html'>Barplot of the <b>NUMBER OF CASES (PER POPULATION)</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_cases_bar.html'>Barplot of the <b>NUMBER OF CASES</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_deathspop_bar.html'>Barplot of the <b>NUMBER OF DEATHS (PER POPULATION)</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_deaths_bar.html'>Barplot of the <b>NUMBER OF DEATHS</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_recoverpop_bar.html'>Barplot of the <b>NUMBER OF RECOVERED PATIENTS (PER POPULATION)</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_recover_bar.html'>Barplot of the <b>NUMBER OF RECOVERED PATIENTS</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_bar_Cases.html'>Barplot: <b>NUMBER OF CASES</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_bar_Deaths.html'>Barplot: <b>NUMBER OF DEATHS</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_bar_Recovered.html'>Barplot: <b>NUMBER OF RECOVERED PATIENTS</b></a></li></div>
 <p>
-<div class='link'><li><a href='plots_plotly/plot_lag.html'>Comparison of the lag (in number of days) behind Italy</a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_barpop_Cases.html'>Barplot: <b>NUMBER OF CASES (PER POPULATION)</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_barpop_Deaths.html'>Barplot: <b>NUMBER OF DEATHS (PER POPULATION)</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_barpop_Recovered.html'>Barplot: <b>NUMBER OF RECOVERED PATIENTS (PER POPULATION)</b></a></li></div>
 <p>
-<div class='link'><li><a href='plots_plotly/plot_infectpop.html'>Evolution of the <b>NUMBER OF ACTIVE INFECTIONS (PER POPULATION)</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_infect.html'>Evolution of the <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_casespop.html'>Evolution of the <b>NUMBER OF CASES (PER POPULATION)</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_cases.html'>Evolution of the <b>NUMBER OF CASES</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_deathspop.html'>Evolution of the <b>NUMBER OF DEATHS (PER POPULATION)</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_deaths.html'>Evolution of the <b>NUMBER OF DEATHS</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_caserate.html'>Evolution of the <b>RATE OF INCREASE OF CASES</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_deathrate.html'>Evolution of the <b>RATE OF INCREASE OF DEATHS</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_lagItaly.html'>Country comparison: <b>LAGs BEHIND ITALY</b> (in number of days)</a></li></div>
+<p>
+<div class='link'><li><a href='plots_plotly/plot_ts_Cases.html'>Time series: <b>NUMBER OF CASES</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_ts_Deaths.html'>Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_ts_Infected.html'>Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_ts_Tested.html'>Time series: <b>NUMBER OF TESTS</b></a></li></div>
+<p>
+<div class='link'><li><a href='plots_plotly/plot_tspop_Cases.html'>Time series: <b>NUMBER OF CASES (PER POPULATION)</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_tspop_Deaths.html'>Time series: <b>NUMBER OF DEATHS (PER POPULATION)</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_tspop_Infected.html'>Time series: <b>NUMBER OF ACTIVE INFECTIONS (PER POPULATION)</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_tspop_Tested.html'>Time series: <b>NUMBER OF TESTS (PER POPULATION)</b></a></li></div>
+<p>
+<div class='link'><li><a href='plots_plotly/plot_tsrate_DailyCasesRate.html'>Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_tsrate_DailyDeathsRate.html'>Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_tsrate_DailyInfectedRate.html'>Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_tsrate_DailyTestedRate.html'>Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+<p>
 </ul><div class='note2'>logarhitmic scale</div><ul>
-<div class='link'><li><a href='plots_plotly/plot_infectpop_log.html'>Evolution of the <b>NUMBER OF ACTIVE INFECTIONS (PER POPULATION)</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_infect_log.html'>Evolution of the <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_casespop_log.html'>Evolution of the <b>NUMBER OF CASES (PER POPULATION)</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_cases_log.html'>Evolution of the <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_deathspop_log.html'>Evolution of the <b>NUMBER OF DEATHS (PER POPULATION)</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_deaths_log.html'>Evolution of the <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
-</ul><div class='note'>Plots based on data available for CZECHIA only</div><div class='note2'>linear scale</div><ul>
-<div class='link'><li><a href='plots_plotly/plot_testspop.html'>Evolution of the <b>NUMBER OF DIAGNOSTIC TESTS FOR COVID-19 (PER POPULATION)</b> (currently only Czechia)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_tests.html'>Evolution of the <b>NUMBER OF DIAGNOSTIC TESTS FOR COVID-19</b> (currently only Czechia)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_caserate_log.html'>Evolution of the <b>RATE OF INCREASE OF CASES</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_deathrate_log.html'>Evolution of the <b>RATE OF INCREASE OF DEATHS</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_testrate.html'>Evolution of the <b>RATE OF INCREASE OF TESTS</b> (currently only Czechia)</a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_xtslog_Cases.html'>Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_xtslog_Deaths.html'>Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_xtslog_Infected.html'>Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_xtslog_Tested.html'>Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
 <p>
-<div class='link'><li><a href='plots_plotly/plot_lm_daily.html'>Linear model: DAILY CASES vs DAILY TESTS (Czechia)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_lm_total.html'>Linear model: TOTAL CASES vs TOTAL TESTS (Czechia)</a></li></div>
-</ul><div class='note2'>logarhitmic scale</div><ul>
+<div class='link'><li><a href='plots_plotly/plot_xtslogpop_Cases.html'>Time series: <b>NUMBER OF CASES (PER POPULATION)</b> (logarhitmic scale)</a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_xtslogpop_Deaths.html'>Time series: <b>NUMBER OF DEATHS (PER POPULATION)</b> (logarhitmic scale)</a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_xtslogpop_Infected.html'>Time series: <b>NUMBER OF ACTIVE INFECTIONS (PER POPULATION)</b> (logarhitmic scale)</a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_xtslogpop_Tested.html'>Time series: <b>NUMBER OF TESTS (PER POPULATION)</b> (logarhitmic scale)</a></li></div>
 <p>
-<div class='link'><li><a href='plots_plotly/plot_testspop_log.html'>Evolution of the <b>NUMBER OF DIAGNOSTIC TESTS FOR COVID-19 (PER POPULATION)</b> (currently only Czechia) (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_tests_log.html'>Evolution of the <b>NUMBER OF DIAGNOSTIC TESTS FOR COVID-19</b> (currently only Czechia) (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plot_testrate_log.html'>Evolution of the <b>RATE OF INCREASE OF TESTS</b> (currently only Czechia) (logarhitmic scale)</a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_xtslograte_DailyCasesRate.html'>Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_xtslograte_DailyDeathsRate.html'>Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_xtslograte_DailyInfectedRate.html'>Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_xtslograte_DailyTestedRate.html'>Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+</ul><div class='note'>Plots based on data available for CZECHIA only</div>
+<div class='note2'>linear scale</div><ul>
+<p>
+<div class='link'><li><a href='plots_plotly/plot_z_lm_daily.html'>Linear model: <b>DAILY CASES</b> vs <b>DAILY TESTS</b> (Czechia)</a></li></div>
+<div class='link'><li><a href='plots_plotly/plot_z_lm_total.html'>Linear model: <b>TOTAL CASES</b> vs <b>TOTAL TESTS</b> (Czechia)</a></li></div>
 </ul></div><p></div></body>
 </html>
