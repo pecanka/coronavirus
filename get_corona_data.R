@@ -688,10 +688,18 @@ if(do_save_plotly_to_file) {
     filename = p%.%'.html'
     #if(regexpr('_bar$',p)>0) {
     #dir_create(filename)
-    #htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000',
-    #                        title="Coronavirus: "%.%ds[p]%.%" (by Pecanka Consulting)")
+    title = "Coronavirus: "%.%gsub("<[/]?b>","",ds[p])%.%" (by Pecanka Consulting)"
+    htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000', title=title)
     #}
+    content = readLines(filename)
+    w = which(substr(content,1,32)=='<div id=\"htmlwidget_container\">')
+    catn("Placing the 'Go back' cone on line ",w," of the plotly file ...")
+    content[w] %<>% paste0("<a href='../index.html'><div style='border: 1px solid #101010;"%.%
+      " background-color: #303030; color:white; padding: 10px; position: absolute; z-index:10;"%.%
+      " top: 0; left: 0; font-family: Calibri, Arial, Sans Serif;'>&larr;&nbsp;Back to the overview of plots...</div></a>", .)
+    writeLines(content, filename)
     catf("<div class='link'><li><a href='plots_plotly/"%.%filename%.%"'>",ds[p],"</a></li></div>")
+    #break
   }
   catf("</ul></div><p></div></body>\n</html>")
   rm(catf)
