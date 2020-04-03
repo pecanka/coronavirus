@@ -690,7 +690,7 @@ if(do_save_plotly_to_file) {
     htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000',
                             title="Coronavirus: "%.%ds[p]%.%" (by Pecanka Consulting)")
     #}
-    catf("<div class='link'><li><a href='plots_plotly/'"%.%filename%.%"'>",ds[p],"</a></li></div>")
+    catf("<div class='link'><li><a href='plots_plotly/"%.%filename%.%"'>",ds[p],"</a></li></div>")
   }
   catf("</ul></div><p></div></body>\n</html>")
   rm(catf)
