@@ -687,8 +687,8 @@ if(do_save_plotly_to_file) {
     filename = '.~'%.%p%.%'.html'
     filename2 = 'plots_plotly/'%.%filename
     #if(regexpr('_bar$',p)>0) {
-    #htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000', selfcontained=TRUE,
-    #                          title="Pecanka Consulting: Coronavirus plots: "%.%p)
+    htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000', selfcontained=TRUE,
+                            title="Pecanka Consulting: Coronavirus plots: "%.%ds[p])
     #}
     file.rename(filename, filename2)
     catf("<div class='link'><li><a href='",filename2,"'>",ds[p],"</a></li></div>")
