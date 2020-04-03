@@ -571,7 +571,7 @@ plot_caserate = Data4 %>% mutate(DailyCaseRate=DailyCases/Cases) %>%
   layout(title = title, yaxis = list(title = "Daily case rate")) %>%
   layout(plot_bgcolor='black', paper_bgcolor='black', font=list(color='white'))
 
-descriptions %<>% c(plot_deathrate="Evolution of the <b>OF INCREASE OF DEATHS</b>")
+descriptions %<>% c(plot_deathrate="Evolution of the <b>RATE OF INCREASE OF DEATHS</b>")
 title = "Case-fatality ratio (i.e. death rate)\n"%.%data_source%.%""
 plot_deathrate = Data4 %>% mutate(CaseFatalityRatio=Deaths/Cases) %>%
   plot_ly(x=~Date, y=~CaseFatalityRatio, color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
@@ -689,15 +689,17 @@ if(do_save_plotly_to_file) {
     #if(regexpr('_bar$',p)>0) {
     #dir_create(filename)
     title = "Coronavirus: "%.%gsub("<[/]?b>","",ds[p])%.%" (by Pecanka Consulting)"
-    htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000', title=title)
+    #htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000', title=title)
     #}
     content = readLines(filename)
     w = which(substr(content,1,32)=='<div id=\"htmlwidget_container\">')
-    catn("Placing the 'Go back' cone on line ",w," of the plotly file ...")
-    content[w] %<>% paste0("<a href='../index.html'><div style='border: 1px solid #101010;"%.%
-      " background-color: #303030; color:white; padding: 10px; position: absolute; z-index:10;"%.%
-      " top: 0; left: 0; font-family: Calibri, Arial, Sans Serif;'>&larr;&nbsp;Back to the overview of plots...</div></a>", .)
-    writeLines(content, filename)
+    if(length(w)>0) {
+      catn("Placing the 'Go back' code on line ",w," of the plotly file ...")
+      content[w] %<>% paste0("<a href='../index.html'><div style='border: 1px solid #101010;"%.%
+        " background-color: #303030; color:white; padding: 10px; position: absolute; z-index:10;"%.%
+        " top: 0; left: 0; font-family: Calibri, Arial, Sans Serif;'>&larr;&nbsp;Back to the overview of plots...</div></a>", .)
+      writeLines(content, filename)
+    } else note("The 'Go back' code was not placed.")
     catf("<div class='link'><li><a href='plots_plotly/"%.%filename%.%"'>",ds[p],"</a></li></div>")
     #break
   }
