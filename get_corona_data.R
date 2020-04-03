@@ -12,7 +12,7 @@ url_mzcz = 'https://onemocneni-aktualne.mzcr.cz/covid-19'
 url_mzcz_api = 'https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/'
 
 do_download_data = FALSE
-do_load_data = !FALSE
+do_load_data = FALSE
 
 do_force_fresh_data = FALSE
 do_use_any_existing_data = FALSE
@@ -687,8 +687,9 @@ if(do_save_plotly_to_file) {
     if(gaps[p]) catf("<p>")
     filename = '.~'%.%p%.%'.html'
     #if(regexpr('_bar$',p)>0) {
-    htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000',
-                            title="Coronavirus: "%.%ds[p]%.%" (by Pecanka Consulting)")
+    dir.create(filename)
+    #htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000',
+    #                        title="Coronavirus: "%.%ds[p]%.%" (by Pecanka Consulting)")
     #}
     catf("<div class='link'><li><a href='plots_plotly/"%.%filename%.%"'>",ds[p],"</a></li></div>")
   }
