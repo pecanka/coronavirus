@@ -663,7 +663,7 @@ if(do_save_plotly_to_file) {
   catf("<div class='head'>CORONOVIRUS: COVID-19</div><p>")
   catf("<div class='descriptions'>A collection of plots showing the current state and the historical evolutionof the COVID-19")
   catf(" pandemic around the world.<p>Author: <a href='https://www.pecanka.net'>Jakub Pecanka, PhD</a><p>"%.%data_source)
-  catf("</div><div class='list'><ul>")
+  catf("</div><div class='list'><div class='note2'>linear scale</div><ul>")
 
   ps = ls(pattern='^plot')
   ds %<>% .[ps]
@@ -681,9 +681,9 @@ if(do_save_plotly_to_file) {
   for(p in ps) {
     catn("Saving plot '"%.%p%.%"' to file ...")
     if(p==ps[which.max(regexpr("Czechia",ds)>0)])
-      catf("</ul><div class='note'>Plots based on data available for CZECHIA only</div><ul>")
+      catf("</ul><div class='note'>Plots based on data available for CZECHIA only</div><div class='note2'>linear scale</div><ul>")
     if((diff(c(1, vals))>0)[p]>0)
-    catf("</ul><div class='note2'>logarhitmic scale</div><ul>")
+      catf("</ul><div class='note2'>logarhitmic scale</div><ul>")
     if(gaps[p]) catf("<p>")
     filename = '.~'%.%p%.%'.html'
     #if(regexpr('_bar$',p)>0) {
