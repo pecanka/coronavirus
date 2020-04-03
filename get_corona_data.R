@@ -685,9 +685,9 @@ if(do_save_plotly_to_file) {
     if((diff(c(1, vals))>0)[p]>0)
       catf("</ul><div class='note2'>logarhitmic scale</div><ul>")
     if(gaps[p]) catf("<p>")
-    filename = '.~'%.%p%.%'.html'
+    filename = p%.%'.html'
     #if(regexpr('_bar$',p)>0) {
-    dir.create(filename)
+    #dir_create(filename)
     #htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000',
     #                        title="Coronavirus: "%.%ds[p]%.%" (by Pecanka Consulting)")
     #}
