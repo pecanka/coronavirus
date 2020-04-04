@@ -441,15 +441,17 @@ for(C in Countries_focus_narrow) {
                mutate(., Date0=Date) %>% select(ends_with('0')) %>% rename_all(~sub('0$','',.x)))} %>%
     mutate(Date=sub('[0-9]+-','',Date))
 
-  Col = Colors(12, skip=9) %>% {c(h1(.),t1(.))} %>% pif(C<Country0, rev)
+  #Col = c(Colors(12, skip=11), Colors(1, skip=0)) %>% pif(C<Country0, rev)
+  Col = c("#cc4125","#64dd60") %>% setNames(c(Country0, C)) %>% pif(C<Country0, rev)
 
   for(v in c('Cases','Deaths')) {
-    D3 %>% mutate(y=!!sym(v)) %>%
+    D3 %>% mutate(y=!!sym(v), col=Col[Country]) %>%
       plot_ly(x=~Date, y=~y, color=~Country, name=~Country,
-                   colors=Col, type='scatter', mode='lines', showlegend=TRUE) %>%
+              colors=Col, type='scatter', mode='lines', showlegend=TRUE) %>%
       layout(legend=list(x = 0.1, y = 0.5)) %>%
       layout(yaxis=list(title=v)) %>%
       layout(xaxis=list(title="", showticklabels=FALSE)) %>%
+      #add_trace(x=~Date, y=~y, data=D3 %>% mutate(y=!!sym(v)) %>% filter(Country==C), colors=Col[C]) %>%
       #layout(annotations=list(text='<b>'%.%C%.%'</b>', y=0.9, x=0.5, yref="paper", xref="x",
       #                        align='left', xanchor='left', showarrow=FALSE)) %>%
       #layout(annotations=list(text=c('<b>'%.%C%.%'</b>',Country0), x=rep(0.2,2), y=c(0.7,0.6), yref="paper",
@@ -470,8 +472,10 @@ for(C in Countries_focus_narrow) {
 descriptions %<>% c(plot_lagItaly="Country comparison: <b>LAGs BEHIND "%.%toupper(Country0)%.%"</b> (in number of days)")
 
 annot_bottom = list(yref="paper", xref="paper", align='left', xanchor='left', showarrow=FALSE)
+annot_author = list(yref="paper", xref="paper", align='right', xanchor='right', showarrow=FALSE)
 
 text_source = "<span style='font-size: 90%;'><i>Source: "%.%data_source%.%"</i></span>"
+text_author = "<span style='font-size: 90%;'><i>Author: Jakub Pecanka (<a href='https://www.pecanka.net'>Pecanka Consulting</a>)</i></span>"
 
 title = "Total number of cases and deaths: a comparison with "%.%Country0
 lag_explanation = c("Explanation: Each country's progression of case counts is matched up against "%.%Country0%.%
@@ -487,13 +491,14 @@ plot_lagItaly = append(plots_Cases, plots_Deaths) %>%
   layout(plot_bgcolor='black', paper_bgcolor='black', font=list(color='white')) %>%
   layout(annotations=annot_bottom %append% list(text=lag_explanation[1], y=-0.10, x=-0.025)) %>%
   layout(annotations=annot_bottom %append% list(text=lag_explanation[2], y=-0.14, x=0.01)) %>%
-  layout(annotations=annot_bottom %append% list(text=text_source, y=-0.20, x=-0.03))
+  layout(annotations=annot_bottom %append% list(text=text_source, y=-0.20, x=-0.03)) %>%
+  layout(annotations=annot_author %append% list(text=text_author, y=-0.20, x=1))
 
 ### PRODUCE PLOTS FOR ALL COUNTRIES ###
 catn("Plotting ...")
 
 set_axis_lab = function(d, pattern1='.+<[bB]>', pattern2='[(<].+') {
-  d %>% sub(pattern1,'',.) %>% sub(pattern2,'',.) %>% str_trim() %>% setNames(names(d))
+  d %>% sub(pattern1,'',.) %>% sub(pattern2,'',.) %>% str_trim() %>% tolower %>% setNames(names(d))
 }
 
 set_titles = function(descriptions) {
@@ -534,6 +539,7 @@ for(p in names(tail(descriptions,-n_old))) {
     layout(plot_bgcolor='black', paper_bgcolor='black', font=list(color='white')) %>%
     layout(margin=list(l=50, r=50, b=50, t=50, pad=1)) %>%
     layout(annotations=annot_bottom %append% list(text=text_source, y=-0.18, x=-0.04)) %>%
+    layout(annotations=annot_author %append% list(text=text_author, y=-0.18, x=1)) %>%
     assign(p, ., envir=.GlobalEnv)
 }
 
@@ -562,6 +568,7 @@ for(p in names(tail(descriptions,-n_old))) {
     layout(plot_bgcolor='black', paper_bgcolor='black', font=list(color='white')) %>%
     layout(margin=list(l=50, r=50, b=90, t=35, pad=1)) %>%
     layout(annotations=annot_bottom %append% list(text=text_source, y=-0.18, x=-0.04)) %T>%
+    layout(annotations=annot_author %append% list(text=text_author, y=-0.18, x=1)) %>%
     assign(p, ., envir=.GlobalEnv) %>%
     layout(yaxis = list(type = "log")) %>%
     assign(p_log, ., envir=.GlobalEnv)
@@ -580,7 +587,8 @@ n_old = length(descriptions)
 descriptions %<>% c(plot_z_lm_daily = "Linear model: <b>DAILY CASES</b> vs <b>DAILY TESTS</b> (Czechia)",
                     plot_z_lm_total = "Linear model: <b>TOTAL CASES</b> vs <b>TOTAL TESTS</b> (Czechia)")
 
-title = '<b>Czech Republic</b>\n<i>Data</i>: all days after '%.%h1(DataCZ250$Date)%.%
+title = '<b>Czech Republic</b>: dependence of discovered cases on performed tests\n'%.%
+        "<span style='font-size: 85%'><br><i>Data</i>: all days after "%.%h1(DataCZ250$Date)%.%
         ' (i.e. days with at least '%.%min_Cases%.%' cases)'%.%
         ')\n<i>Model</i>: simple LRM (i.e. Cases~Tested), R<sup>2</sup>='
 
@@ -592,16 +600,20 @@ for(p in tail(names(descriptions), -n_old)) {
   date_short = DataCZ250$Date %>% sub('[0-9]+-','',.)
 
   DataCZ250 %>% mutate(Predicted=m$fitted.values,
-                       DateS=Date %>% sub('[0-9]+-','',.)) %>%
-    plot_ly(x=~get(u), y=~get(v), name='observed', type='scatter', mode='line', colors=Colors()) %>%
-    add_trace(x=~Tested, y=~Predicted, name='predicted', mode='lines+markers', color='red') %>%
-    add_annotations(yref="paper", xref="paper", y=1.05, x=0, text=title%.%signif(summary(m)$r.squared,3),
-                    align='left', showarrow=FALSE, font=list(size=17)) %>%
-    add_annotations(yref="y", xref="x", x=~get(u), y=~get(v), text=date_short,
+                       DateS=Date %>% sub('[0-9]+-','',.),
+                       x=!!sym(u), y=!!sym(v)) %>%
+    plot_ly(x=~x, y=~y, name='observed', type='scatter', mode='markers', colors=Colors()) %>%
+    add_trace(x=~x, y=~Predicted, name='predicted', mode='lines+markers', color='red') %>%
+    add_annotations(yref="paper", xref="paper", y=1.05, x=0.035, text=title%.%signif(summary(m)$r.squared,3)%.%'</span>',
+                    align='left', showarrow=FALSE, font=list(size=15)) %>%
+    add_annotations(yref="y", xref="x", x=~x, y=~y, text=date_short,
                     showarrow=TRUE, arrowhead = 4, arrowsize = .4, ax = -10, ay = -50) %>%
     layout(plot_bgcolor='black', paper_bgcolor='black', font=list(color='white'),
            yaxis = list(title=set_axis_lab(descriptions[p], '[^<>]+<[bB]>')),
            xaxis = list(title=set_axis_lab(descriptions[p]))) %>%
+    layout(margin=list(l=50, r=50, b=90, t=50, pad=1)) %>%
+    layout(annotations=annot_bottom %append% list(text=text_source, y=-0.19, x=-0.04)) %>%
+    layout(annotations=annot_author %append% list(text=text_author, y=-0.19, x=1.1)) %>%
     assign(p, ., envir=.GlobalEnv)
 
 }
@@ -659,7 +671,8 @@ str_diff = function(x) {
     if(is_log[p]) catf("</ul><div class='note2'>logarhitmic scale</div><ul>")
     filename = p%.%'.html'
     add_goback = FALSE
-    if(regexpr('plot_z_lm_',p)>0) {
+    #if(regexpr('plot_z_lm_',p)>0) {
+    if(regexpr('plot_lag',p)>0) {
       title = "Coronavirus: "%.%gsub("<[/]?b>","",ds[p])%.%" (by Pecanka Consulting)"
       htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000', title=title); add_goback = TRUE
     }
