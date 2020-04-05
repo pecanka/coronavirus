@@ -17,16 +17,16 @@ do_load_data = FALSE
 do_force_fresh_data = FALSE
 do_use_any_existing_data = FALSE
 
-#do_process_lag = TRUE
-#do_force_lag_calculation = !FALSE
+do_process_lag = TRUE
 
 do_plot = TRUE
 do_plot_lag = TRUE
 do_save_plotly_to_file = TRUE
 
-countries_focus = 'all'
-countries_focus = 'broad'
-#countries_focus = 'narrow'
+format_for_plots = 'html'
+#format_for_plots = 'png'
+
+countries_focus = TRUE
 
 PerPopulation = "100000"
 Country0 = 'Italy'
@@ -34,7 +34,9 @@ Countries_focus_narrow = c("Netherlands","Germany","USA","Czechia")
 
 Countries_focus_broad = c('Czechia','Italy','Germany','Netherlands',
   'Spain','USA','S. Korea','Austria','UK','Canada','Belgium','Denmark',
-  'Norway','Poland','Sweden','Switzerland','France')
+  'Norway','Poland','Sweden','Switzerland','France','Portugal','Brazil',
+  'Israel','Australia','Ireland','Chile','Romania','Japan','Luxembourg',
+  'Finland','Mexico','Greece','Slovakia')
 
 ### TEMPORARILY ADD THE CZECH DEATHS MANUALLY ###
 #cz_daily_deaths = tribble(~Date, ~DailyDeaths,
@@ -116,7 +118,7 @@ download_data_ocdc = function(url, force_download=FALSE) {
 
 ####################################################
 
-read_data_ocdc = function(url, max_lag=2, lag=1) {
+read_data_ocdc = function(url, max_lag=3, lag=1) {
 
   file = 'data/'%.%separate_path(url)$filename
 
@@ -124,11 +126,12 @@ read_data_ocdc = function(url, max_lag=2, lag=1) {
     warn("File '",file,"' does not exist.")
     if(lag<=max_lag) {
       catn("Trying previous day's data ...")
-      data = read_data_ocdc(sub(t_day(), y_day(lag=-lag), url), lag=lag+1)
+      data = read_data_ocdc(sub(y_day(lag=-lag+1), y_day(lag=-lag), url), lag=lag+1)
     } else {
       NULL
     }
   } else {
+    catn("Reading file '",file,"' ...")
     read_xlsx(file)
   }
 
@@ -364,7 +367,8 @@ process_lag = function(Data, Lag_by='Cases', lag_start=-10, lag_end=40, Country0
 ##########################################################
 
 CountryCZ = tibble(name='Czechia', url=url_mzcz)
-available_countries_wom = download_country_list(url_wom)
+available_countries_wom = download_country_list(url_wom) %>%
+  `if`(countries_focus, filter(., name %in% Countries_focus_broad), .)
 
 #some_fresh_data_present = FALSE
 
@@ -383,20 +387,29 @@ if(do_load_data || do_download_data || !exists('Data') || !exists('Latest')) {
   DataOCDC = read_data_ocdc(url_ocdc)
   LatestOCDC = DataOCDC %>% group_by(Country) %>% slice(n()) %>% ungroup()
 
-  DataCZ = load_data_individual(CountryCZ)
-  LatestCZ = DataCZ$Latest
-  DataCZ %<>% .$Data
+  dataCZ = load_data_individual(CountryCZ)
+  LatestCZ = dataCZ$Latest
+  DataCZ = dataCZ$Data
 
   DataCZ = DataOCDC %>% filter(Country=='Czechia') %>%
     select(Date, Deaths, DailyDeaths, CasesOCDC=Cases, DailyCasesOCDC=DailyCases) %>%
-    left_join(DataCZ, ., by='Date')
+    left_join(DataCZ, ., by='Date') %>% arrange(Date) %T>% print(n=100)
 
   data = load_data_individual(available_countries_wom)
   Data = data$Data
   Latest = data$Latest
 
-  Data %<>% bind_rows(DataCZ, .)
-  Latest %<>% bind_rows(LatestCZ, .)
+  #stop()
+  #Data %>% bind_rows(DataCZ, .) %>% arrange(Date)
+  #Latest %<>% bind_rows(LatestCZ, .)
+  Data %<>% full_join(DataCZ %>% select(Date, Country, DeathsCZ=Deaths, DailyDeathsCZ=DailyDeaths, one_of(setdiff(names(.), names(Data))))) %>%
+    mutate(Deaths=coalesce(Deaths, DeathsCZ), DailyDeaths=coalesce(DailyDeaths,DailyDeathsCZ)) %>%
+    select(-ends_with('CZ')) %>%
+    arrange(Country, Date) #%>% filter(Country=='Czechia')
+  Latest %<>% full_join(LatestCZ) %>% arrange(Cases)
+
+  Data %>% select(Date, Country) %>% anyDuplicated() %>% {stopifnot(.==0)}
+  Latest %>% select(Country) %>% anyDuplicated() %>% {stopifnot(.==0)}
 
   PopData = DataOCDC %>% group_by(Country) %>% slice(1) %>% ungroup() %>%
     select(Country, Population) %>% add_row(Country='Hong Kong', Population=7500000)
@@ -415,27 +428,58 @@ if(do_load_data || do_download_data || !exists('Data') || !exists('Latest')) {
 
 }
 
-#if(do_process_lag && (do_force_lag_calculation || some_fresh_data_present || !exists('K'))) {
+#Data4 = Data_Lag_Cases %>% filter(Country %in% Countries_focus_narrow)
+#DataCZ2 = Data_Lag_Cases %>% filter(Country=='Czechia')
 
-K_Cases = process_lag(Data, 'Cases', Country0=Country0)
-Data_Lag_Cases = K_Cases$Data_Lag
+Data4 = Data %>% mutate(Date=sub('[0-9]+-','',Date)) %>%
+  mutate(DailyInfected=diff(c(NA,Infected)),
+         DailyInfectedRatio=DailyInfected/Cases,
+         DailyCasesRatio=DailyCases/Cases,
+         DailyDeathsRatio=DailyDeaths/Cases,
+         DailyTestedRatio=DailyTested/Tested)
 
-K_Deaths = process_lag(Data, 'Deaths', Country0=Country0, return_lagged_data=FALSE)
-K = full_join(K_Cases$K, K_Deaths$K, by='Country') %>%
-  mutate(Lag_diff=Lag_Deaths-Lag_Cases)
+if(countries_focus) {
+  Data4 %<>% filter(Country %in% Countries_focus_broad)
+  Latest %<>% filter(Country %in% Countries_focus_broad)
+}
 
-KK = bind_cols(K %>% arrange(Lag_Cases), K %>% arrange(Lag_Deaths), K %>% arrange(Lag_diff)) %T>% print(n=100)
+###############################################################
 
-Data4 = Data_Lag_Cases %>% filter(Country %in% Countries_focus_narrow)
-DataCZ2 = Data_Lag_Cases %>% filter(Country=='Czechia')
-
-### PRODUCE COMPARISON PLOTS ###
-catn("Plotting comparisons with Italy ...")
 descriptions = ylabs = c()
+
+set_axis_lab = function(d, pattern1='.+<[bB]>', pattern2='[(<].+') {
+  d %>% sub(pattern1,'',.) %>% sub(pattern2,'',.) %>% str_trim() %>% tolower %>% setNames(names(d))
+}
+
+set_titles = function(descriptions, what='Progression of the') {
+  descriptions %>% set_axis_lab() %>%
+    paste0(rep(c(""," per "%.%PerPopulation%.%" citizens"), e=length(descriptions)/2)) %>%
+    paste(toupperfirst(what),.,"(as of "%.%t_day()%.%")") %>%
+    setNames(names(descriptions))
+}
+
+#########################
+### DO LAG COMPARISON ###
+#########################
+
+if(do_process_lag || !exists("Data_Lag_Cases")) {
+
+  K_Cases = process_lag(Data, 'Cases', Country0=Country0)
+  Data_Lag_Cases = K_Cases$Data_Lag
+
+  K_Deaths = process_lag(Data, 'Deaths', Country0=Country0, return_lagged_data=FALSE)
+  K = full_join(K_Cases$K, K_Deaths$K, by='Country') %>%
+    mutate(Lag_diff=Lag_Deaths-Lag_Cases)
+
+  KK = bind_cols(K %>% arrange(Lag_Cases), K %>% arrange(Lag_Deaths), K %>% arrange(Lag_diff)) %T>% print(n=100)
+
+}
+
+catn("Plotting comparisons with Italy ...")
 plots_Cases = plots_Deaths = list()
 for(C in Countries_focus_narrow) {
 
-  D3 = Data4 %>% filter(Country==C) %T>%
+  D3 = Data_Lag_Cases %>% filter(Country==C) %T>%
     write.table(file='tables/'%.%C%.%'_vs_'%.%Country0%.%'_'%.%t_day()%.%'.txt', row.names=FALSE, quote=FALSE) %>%
     {bind_rows(select(., -ends_with('0')),
                mutate(., Date0=Date) %>% select(ends_with('0')) %>% rename_all(~sub('0$','',.x)))} %>%
@@ -445,19 +489,13 @@ for(C in Countries_focus_narrow) {
   Col = c("#cc4125","#64dd60") %>% setNames(c(Country0, C)) %>% pif(C<Country0, rev)
 
   for(v in c('Cases','Deaths')) {
-    D3 %>% mutate(y=!!sym(v), col=Col[Country]) %>%
-      plot_ly(x=~Date, y=~y, color=~Country, name=~Country,
-              colors=Col, type='scatter', mode='lines', showlegend=TRUE) %>%
-      layout(legend=list(x = 0.1, y = 0.5)) %>%
-      layout(yaxis=list(title=v)) %>%
-      layout(xaxis=list(title="", showticklabels=FALSE)) %>%
-      #add_trace(x=~Date, y=~y, data=D3 %>% mutate(y=!!sym(v)) %>% filter(Country==C), colors=Col[C]) %>%
-      #layout(annotations=list(text='<b>'%.%C%.%'</b>', y=0.9, x=0.5, yref="paper", xref="x",
-      #                        align='left', xanchor='left', showarrow=FALSE)) %>%
-      #layout(annotations=list(text=c('<b>'%.%C%.%'</b>',Country0), x=rep(0.2,2), y=c(0.7,0.6), yref="paper",
-      #                        xref='paper', align='left', xanchor='left', showarrow=TRUE, arrowcolor=Col,
-      #                        arrowhead = 1, ax = c(0,0), ay=c(0.7,0.6), axref="paper", ayref="paper",
-      #                        font = list(color = Col, size = 14))) %>%
+    D3 %>% mutate(y=!!sym(v), col=Col[Country]) %T>% assign('D3b', ., envir=.GlobalEnv) %>%
+      plot_ly(x=~Date, y=~y, color=~Country, name=~Country, colors=Col,
+              type='scatter', mode='lines', showlegend=TRUE) %>%
+      layout(legend=list(x = 0.1, y = 0.5),
+             yaxis=list(title=ifelse(C==Countries_focus_narrow[1], v, "")),
+             xaxis=list(title="", showticklabels=FALSE)) %>%
+      add_trace(x=~Date, y=~y, data=D3b %>% filter(Country==C), colors=Col[C]) %>%
       add_annotations(text = C,        x = 0.1, y = 0.9, xref='paper', yref='paper', showarrow = FALSE,
                       xanchor='left', font = list(color = Col[2-as.numeric(C<Country0)], size = 14)) %>%
       add_annotations(text = Country0, x = 0.1, y = 0.8, xref='paper', yref='paper', showarrow = FALSE,
@@ -471,17 +509,19 @@ for(C in Countries_focus_narrow) {
 
 descriptions %<>% c(plot_lagItaly="Country comparison: <b>LAGs BEHIND "%.%toupper(Country0)%.%"</b> (in number of days)")
 
-annot_bottom = list(yref="paper", xref="paper", align='left', xanchor='left', showarrow=FALSE)
-annot_author = list(yref="paper", xref="paper", align='right', xanchor='right', showarrow=FALSE)
-
 text_source = "<span style='font-size: 90%;'><i>Source: "%.%data_source%.%"</i></span>"
-text_author = "<span style='font-size: 90%;'><i>Author: Jakub Pecanka (<a href='https://www.pecanka.net'>Pecanka Consulting</a>)</i></span>"
+text_author = "<span style='font-size: 90%;'><i>Author: Jakub Pecanka (Pecanka Consulting,"%.%
+              " <a href='https://www.pecanka.net'>www.pecanka.net</a>)</i></span>"
 
-title = "Total number of cases and deaths: a comparison with "%.%Country0
-lag_explanation = c("Explanation: Each country's progression of case counts is matched up against "%.%Country0%.%
-  "'s case count, which determines the number of days the given country lags behind "%.%Country0%.%
-  ". The resulting", "matching is shown on the top row. The bottom row shows the death count progression"%.%
-  " with "%.%Country0%.%"'s counts shifted by the lag determined based on the reported case counts.")
+annot_bottom = list(yref="paper", xref="paper", align='left', xanchor='center', showarrow=FALSE)
+annot_source = list(text=text_source, y=-0.19, x=-0.04, yref="paper", xref="paper", xanchor='left', showarrow=FALSE)
+annot_author = list(text=text_author, y=-0.19, x=1.12, yref="paper", xref="paper", xanchor='right', showarrow=FALSE)
+
+title = "Progression of the number of cases and deaths: a comparison with "%.%Country0
+explain_lag = "Each country's progression of case counts is matched up against "%.%Country0%.%
+  "'s case count, which determines the number of days the given country lags behind "%.%Country0%.%".\n"%.%
+  "The resulting matching is shown on the top row, while the bottom row shows the death count progression"%.%
+  " with "%.%Country0%.%"'s counts shifted by the determined lag."
 
 plot_lagItaly = append(plots_Cases, plots_Deaths) %>%
   append(list(nrows=2, shareY = FALSE, titleY=TRUE, titleX = TRUE)) %>%
@@ -489,37 +529,15 @@ plot_lagItaly = append(plots_Cases, plots_Deaths) %>%
   layout(title=list(text=title, y=1.35), showlegend = FALSE) %>%
   layout(margin=list(l=50, r=50, b=90, t=50, pad=1)) %>%
   layout(plot_bgcolor='black', paper_bgcolor='black', font=list(color='white')) %>%
-  layout(annotations=annot_bottom %append% list(text=lag_explanation[1], y=-0.10, x=-0.025)) %>%
-  layout(annotations=annot_bottom %append% list(text=lag_explanation[2], y=-0.14, x=0.01)) %>%
-  layout(annotations=annot_bottom %append% list(text=text_source, y=-0.20, x=-0.03)) %>%
-  layout(annotations=annot_author %append% list(text=text_author, y=-0.20, x=1))
+  layout(annotations=annot_bottom %modify% list(text=explain_lag, y=-0.12, x=0.48)) %>%
+  layout(annotations=annot_source) %>%
+  layout(annotations=annot_author %modify% list(x=1))
 
-### PRODUCE PLOTS FOR ALL COUNTRIES ###
-catn("Plotting ...")
+####################
+### DO BAR PLOTS ###
+####################
 
-set_axis_lab = function(d, pattern1='.+<[bB]>', pattern2='[(<].+') {
-  d %>% sub(pattern1,'',.) %>% sub(pattern2,'',.) %>% str_trim() %>% tolower %>% setNames(names(d))
-}
-
-set_titles = function(descriptions) {
-  descriptions %>% set_axis_lab() %>%
-    paste0(rep(c(""," per "%.%PerPopulation%.%" citizens"), e=length(descriptions)/2)) %>%
-    paste0("Progression of the",.," (as of "%.%t_day()%.%")") %>%
-    setNames(names(descriptions))
-}
-
-Data4 = Data %>% mutate(Date=sub('[0-9]+-','',Date)) %>%
-  mutate(DailyInfected=diff(c(NA,Infected)),
-         DailyInfectedRate=DailyInfected/Cases,
-         DailyCasesRate=DailyCases/Cases,
-         DailyDeathsRatio=DailyDeaths/Cases,
-         DailyTestedRate=DailyTested/Tested)
-
-if(countries_focus=="broad") Data4 %<>% filter(Country %in% Countries_focus_broad)
-if(countries_focus=="narrow") Data4 %<>% filter(Country %in% Countries_focus_narrow)
-
-if(countries_focus=="broad") Latest %<>% filter(Country %in% Countries_focus_broad)
-if(countries_focus=="narrow") Latest %<>% filter(Country %in% Countries_focus_narrow)
+catn("Plotting barplots...")
 
 n_old = length(descriptions)
 descriptions %<>% c(plot_bar_Cases="Barplot: <b>NUMBER OF CASES</b>")
@@ -531,17 +549,24 @@ descriptions %<>% c(plot_barpop_Recovered="Barplot: <b>NUMBER OF RECOVERED PATIE
 
 
 for(p in names(tail(descriptions,-n_old))) {
-  v = p %>% sub('plot_[a-z]+_','',.)
+  v = p %>% sub('.*_','',.)
   Latest %>% arrange(desc(!!sym(v))) %>%
     plot_ly(x=~Country, y=~get(v), color=~Country, name=~Country, colors=Colors(), type='bar') %>%
-    layout(title = set_titles(tail(descriptions, -n_old))[p], yaxis = list(title=set_axis_lab(descriptions[p])),
-           xaxis = list(title = "Country", categoryorder = "array", categoryarray = ~Country)) %>%
+    layout(title = set_titles(tail(descriptions, -n_old), 'Current')[p],
+           yaxis = list(title=set_axis_lab(descriptions[p])),
+           xaxis = list(title = "", categoryorder = "array", categoryarray = ~Country)) %>%
     layout(plot_bgcolor='black', paper_bgcolor='black', font=list(color='white')) %>%
-    layout(margin=list(l=50, r=50, b=50, t=50, pad=1)) %>%
-    layout(annotations=annot_bottom %append% list(text=text_source, y=-0.18, x=-0.04)) %>%
-    layout(annotations=annot_author %append% list(text=text_author, y=-0.18, x=1)) %>%
+    layout(margin=list(l=50, r=50, b=55, t=50, pad=1)) %>%
+    layout(annotations=annot_source) %>%
+    layout(annotations=annot_author) %>%
     assign(p, ., envir=.GlobalEnv)
 }
+
+############################
+### DO TIME SERIES PLOTS ###
+############################
+
+catn("Plotting progression plots...")
 
 n_old = length(descriptions)
 descriptions %<>% c(plot_ts_Infected="Time series: <b>NUMBER OF ACTIVE INFECTIONS</b>")
@@ -554,21 +579,23 @@ descriptions %<>% c(plot_tspop_Cases="Time series: <b>NUMBER OF CASES (PER POPUL
 descriptions %<>% c(plot_tspop_Deaths="Time series: <b>NUMBER OF DEATHS (PER POPULATION)</b>")
 descriptions %<>% c(plot_tspop_Tested="Time series: <b>NUMBER OF TESTS (PER POPULATION)</b>")
 
-descriptions %<>% c(plot_tsrate_DailyInfectedRate="Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b>")
-descriptions %<>% c(plot_tsrate_DailyCasesRate="Time series: <b>RATE OF DAILY CASES</b>")
-descriptions %<>% c(plot_tsrate_DailyDeathsRate="Time series: <b>RATE OF DAILY DEATHS</b>")
-descriptions %<>% c(plot_tsrate_DailyTestedRate="Time series: <b>RATE OF DAILY TESTS</b>")
+descriptions %<>% c(plot_tsrate_DailyInfectedRatio="Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b>")
+descriptions %<>% c(plot_tsrate_DailyCasesRatio="Time series: <b>RATE OF DAILY CASES</b>")
+descriptions %<>% c(plot_tsrate_DailyDeathsRatio="Time series: <b>RATE OF DAILY DEATHS</b>")
+descriptions %<>% c(plot_tsrate_DailyTestedRatio="Time series: <b>RATE OF DAILY TESTS</b>")
 
 for(p in names(tail(descriptions,-n_old))) {
-  v = p %>% sub('plot_ts_','',.)
+  v = p %>% sub('.*_','',.)
   p_log = sub('_ts','_xtslog',p)
-  Data4 %>%
-    plot_ly(x=~Date, y=~get(v), color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
-    layout(title = set_titles(tail(descriptions, -n_old))[p], yaxis = list(title=set_axis_lab(descriptions[p]))) %>%
+  Data4 %>% mutate(y=!!sym(v)) %>%
+    plot_ly(x=~Date, y=~y, color=~Country, name=~Country, colors=Colors(), type='scatter', mode='lines') %>%
+    layout(title = set_titles(tail(descriptions, -n_old))[p],
+           yaxis = list(title=set_axis_lab(descriptions[p])),
+           xaxis = list(title = "")) %>%
     layout(plot_bgcolor='black', paper_bgcolor='black', font=list(color='white')) %>%
     layout(margin=list(l=50, r=50, b=90, t=35, pad=1)) %>%
-    layout(annotations=annot_bottom %append% list(text=text_source, y=-0.18, x=-0.04)) %T>%
-    layout(annotations=annot_author %append% list(text=text_author, y=-0.18, x=1)) %>%
+    layout(annotations=annot_source) %>%
+    layout(annotations=annot_author) %>%
     assign(p, ., envir=.GlobalEnv) %>%
     layout(yaxis = list(type = "log")) %>%
     assign(p_log, ., envir=.GlobalEnv)
@@ -579,41 +606,90 @@ for(p in names(tail(descriptions,-n_old))) {
 }
 
 
+#################################
 ### DO REGRESSION FOR CZECHIA ###
+#################################
+
+catn("Plotting linear model plots...")
 min_Cases = 250
-DataCZ250 = DataCZ %>% filter(Date>'2020-03') %>% filter(Cases>=min_Cases)
+day0 = DataCZ %>% filter(Cases>=min_Cases) %>% slice(1) %>% pull(Date) # '2020-03-15' for min_Cases=250
+splits = '2020-03-28'
+#DataCZ250 = DataCZ %>% filter(Date>'2020-03') %>% filter(Cases>=min_Cases) %>%
+DataCZ250 = DataCZ %>% mutate(DateS=Date %>% sub('[0-9]+-','',.)) %>%
+  filter(Date>=day0)
+
 
 n_old = length(descriptions)
 descriptions %<>% c(plot_z_lm_daily = "Linear model: <b>DAILY CASES</b> vs <b>DAILY TESTS</b> (Czechia)",
                     plot_z_lm_total = "Linear model: <b>TOTAL CASES</b> vs <b>TOTAL TESTS</b> (Czechia)")
 
 title = '<b>Czech Republic</b>: dependence of discovered cases on performed tests\n'%.%
-        "<span style='font-size: 85%'><br><i>Data</i>: all days after "%.%h1(DataCZ250$Date)%.%
-        ' (i.e. days with at least '%.%min_Cases%.%' cases)'%.%
-        ')\n<i>Model</i>: simple LRM (i.e. Cases~Tested), R<sup>2</sup>='
+        "<span style='font-size: 75%; border: 1px solid silver'>"%.%
+        '<b>Model 0: </b>simple LRM (i.e. @y~@x, R<sup>2</sup>=@r0)'%.%
+        ' based on all days after '%.%day0%.%'\n'%.%
+        '<b>Model 1: </b>simple LRM (i.e. @y~@x) based on all days from '%.%
+        day0%.%' (the first day with at least '%.%min_Cases%.%
+        ' cases)\nand up to '%.%splits[1]%.%' (the day where a qualitative shift started to appear, see the note below)\n'%.%
+        '<b>Model 2: </b>simple LRM (i.e. @y~@x)'%.%
+        ' based on the days after '%.%splits[1]%.%
+        '</span>'
+
+explain_model = 'Note: Model 0 works with all data, while Models 1 and 2 work with two disjoint'%.%
+  ' periods (split by '%.%day0%.%'). The observed differences among the 3 models'%.%
+  ' illustrate the apparent\nchanges in the relationship between the number of discovered cases and '%.%
+  'the number of performed tests, which initially appeared to be stronger than in the more'%.%
+  ' recent period.'
 
 for(p in tail(names(descriptions), -n_old)) {
 
   u = ifelse(regexpr('daily',p)>0,'Daily','') %.% 'Tested'
   v = ifelse(regexpr('daily',p)>0,'Daily','') %.% 'Cases'
-  m = with(DataCZ250, lm(I(get(v))~I(get(u))))
-  date_short = DataCZ250$Date %>% sub('[0-9]+-','',.)
 
-  DataCZ250 %>% mutate(Predicted=m$fitted.values,
-                       DateS=Date %>% sub('[0-9]+-','',.),
-                       x=!!sym(u), y=!!sym(v)) %>%
-    plot_ly(x=~x, y=~y, name='observed', type='scatter', mode='markers', colors=Colors()) %>%
-    add_trace(x=~x, y=~Predicted, name='predicted', mode='lines+markers', color='red') %>%
-    add_annotations(yref="paper", xref="paper", y=1.05, x=0.035, text=title%.%signif(summary(m)$r.squared,3)%.%'</span>',
+  DCZ0 = DataCZ250 %>%
+    mutate(x=!!sym(u), y=!!sym(v),
+           DateS=Date %>% sub('[0-9]+-','',.)) %>%
+    drop_na(x, y)
+
+  DCZ1 = DCZ0 %>% filter(Date<=splits[1])
+  DCZ2 = DCZ0 %>% filter(Date>splits[1])
+
+  m0 = with(DCZ0, lm(y~x))
+  m1 = with(DCZ1, lm(y~x))
+  m2 = with(DCZ2, lm(y~x))
+
+  DCZ0 %<>% structure('m0'=m0, 'm1'=m1, 'm2'=m2, 'u'=u, 'v'=v)
+
+  Col = Colors() %>% .[seq(1, length(.), length=3)]
+  arrow_n1x = 9
+  arrow_n1y = 9
+
+  DCZ0 %>%
+    mutate(Predicted0=predict(m0),
+           Predicted1=predict(m1, list(x=DCZ0$x)),
+           Predicted2=predict(m2, list(x=DCZ0$x))) %>%
+    plot_ly(type='scatter', mode='markers', colors=Col) %>%
+    add_trace(x=~x, y=~y, name='observed', marker=list(size = 17)) %>%
+    add_trace(x=~x, y=~Predicted0, name='Model 0', mode='lines') %>%
+    add_trace(x=~x, y=~Predicted1, name='Model 1', mode='lines') %>%
+    add_trace(x=~x, y=~Predicted2, name='Model 2', mode='lines') %>%
+    add_annotations(yref="paper", xref="paper", y=1.05, x=0.035,
+                    text=title %>% sub('@r0',signif(summary(attr(DCZ0,'m0'))$r.squared,3),.) %>%
+                           gsub('@y',attr(DCZ0,'v'),.) %>% gsub('@x',attr(DCZ0,'u'),.),
                     align='left', showarrow=FALSE, font=list(size=15)) %>%
-    add_annotations(yref="y", xref="x", x=~x, y=~y, text=date_short,
-                    showarrow=TRUE, arrowhead = 4, arrowsize = .4, ax = -10, ay = -50) %>%
+    add_annotations(yref="y", xref="x", x=~x, y=~y, text=DCZ0$DateS, font = list(color = Col[1]),
+                    showarrow=TRUE, arrowhead=4, arrowsize=0.6, arrowcolor=Col[1],
+                    ax=20, ay=60) %>%
+                    #ax=c(seq(5,10,l=arrow_n1x), seq(10,12,l=nrow(DCZ0)-arrow_n1x)),
+                    #ay=c(seq(90,30,l=arrow_n1y),seq(30,45,l=nrow(DCZ0)-arrow_n1y))) %>%
     layout(plot_bgcolor='black', paper_bgcolor='black', font=list(color='white'),
-           yaxis = list(title=set_axis_lab(descriptions[p], '[^<>]+<[bB]>')),
-           xaxis = list(title=set_axis_lab(descriptions[p]))) %>%
-    layout(margin=list(l=50, r=50, b=90, t=50, pad=1)) %>%
-    layout(annotations=annot_bottom %append% list(text=text_source, y=-0.19, x=-0.04)) %>%
-    layout(annotations=annot_author %append% list(text=text_author, y=-0.19, x=1.1)) %>%
+           legend = list(x = 0.9, y = 0.16),
+           yaxis=list(title=set_axis_lab(descriptions[p], '[^<>]+<[bB]>')),
+           xaxis=list(title='')) %>%
+    layout(annotations=annot_bottom %modify% list(text=set_axis_lab(descriptions[p]), y=-0.085)) %>%
+    layout(margin=list(l=50, r=50, b=125, t=50, pad=1)) %>%
+    layout(annotations=annot_bottom %modify% list(text=explain_model, y=-0.225, x=0.48)) %>%
+    layout(annotations=annot_source %modify% list(y=-0.3)) %>%
+    layout(annotations=annot_author %modify% list(y=-0.3, x=1)) %>%
     assign(p, ., envir=.GlobalEnv)
 
 }
@@ -645,23 +721,11 @@ if(do_save_plotly_to_file) {
   ps = ls(pattern='^plot_') %>% sort()
   ds %<>% .[ps]
 
-  #vals = rep(1, length(ds))
-  #vals %<>% {. + as.numeric(regexpr("logarhitmic",ds)>0)}
-  #vals %<>% {. + as.numeric(regexpr("Czechia",ds)>0)}
-  #vals %<>% {. + as.numeric(regexpr("logarhitmic.*Czechia|Czechia.*logarhitmic",ds)>0)}
-  #ord = order(vals %.% ds)
-  #ps %<>% .[ord]
-  #vals %<>% .[ord] %>% setNames(ps)
-str_diff = function(x) {
-  tail(x,-1) != head(x,-1)
-}
-
   is_gap = ps %>% sub('_[^_]+$','',.) %>% sub('plot_','',.) %>% c(.[1],.) %>% str_diff() %>% setNames(ps)
   is_log = ps %>% sub('_[^_]+$','',.) %>% sub('plot_','',.) %>% {regexpr('log',.)>0} %>% {. & !dplyr::lag(.)} %>% setNames(ps)
 
-  #ps = ls(pattern='^plot') %>% {.[order(ds[.])]} %>%
-  #  { c(.[regexpr("Czechia",ds[.])<0], .[regexpr("Czechia",descriptions[.])>0]) }
   for(p in ps) {
+    filename = p%.%'.'%.%format_for_plots
     catn("Saving plot '"%.%p%.%"' to file ...")
     if(p==ps[which.max(regexpr("Czechia",ds)>0)]) {
       catf("</ul><div class='note'>Plots based on data available for CZECHIA only</div>")
@@ -669,14 +733,26 @@ str_diff = function(x) {
     }
     if(is_gap[p]) catf("<p>")
     if(is_log[p]) catf("</ul><div class='note2'>logarhitmic scale</div><ul>")
-    filename = p%.%'.html'
     add_goback = FALSE
+
     #if(regexpr('plot_z_lm_',p)>0) {
-    if(regexpr('plot_lag',p)>0) {
-      title = "Coronavirus: "%.%gsub("<[/]?b>","",ds[p])%.%" (by Pecanka Consulting)"
-      htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000', title=title); add_goback = TRUE
+    pattern = 'plot_lag|plot_bar_Cases|plot_ts_Cases|plot_z_lm_total'
+    #pattern = 'plot_lag'
+    #pattern = 'plot_bar_Cases'
+    #pattern = 'plot_ts_Cases'
+    pattern = 'plot_z_lm_total|plot_z_lm_daily'
+    pattern = 'plot_z_lm_total'
+    #pattern = 'plot_z_lm_daily'
+    pattern = 'plot_.*Ratio'
+    if(regexpr(pattern,p)>0) {
+    if(format_for_plots=='html') {
+      html_title = "Coronavirus: "%.%gsub("<[/]?b>","",ds[p])%.%" (by Pecanka Consulting)"
+      htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000', title=html_title); add_goback = TRUE
+    } else if(format_for_plots=='png') {
+      orca(get(p), file=filename)
+      stop()
+    } else error("Unknown format for plots '",format_for_plots,"'.")
     }
-    #filename = p%.%'.png'; orca(get(p), file=filename)
 
     if(add_goback) {
       content = readLines(filename)
