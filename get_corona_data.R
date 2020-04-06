@@ -3,7 +3,8 @@ options(scipen=5)
 
 setwd2()
 
-llib(rvest, stringr, tidyr, lubridate, plotly, rjson, readxl)
+require(utilbox)
+llib(dplyr, rvest, stringr, tidyr, lubridate, plotly, rjson, readxl)
 
 #########################################################
 url_ocdc = 'https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-'%.%t_day()%.%'.xlsx'
@@ -12,7 +13,7 @@ url_wom = 'https://www.worldometers.info/coronavirus/'
 url_mzcz = 'https://onemocneni-aktualne.mzcr.cz/covid-19'
 url_mzcz_api = 'https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/'
 
-do_download_data = !FALSE
+do_download_data = FALSE
 do_load_data = FALSE
 
 do_force_fresh_data = FALSE
@@ -529,17 +530,22 @@ if(do_load_data || do_download_data || !exists('Data') || !exists('Latest')) {
   Latest %>% select(Country) %>% anyDuplicated() %>% equals(0) %>% stopifnot()
 
   Data4 = Data %>% mutate(Date=sub('[0-9]+-','',Date)) %>%
-    mutate(DailyInfected=diff(c(NA,Infected)),
-           DailyInfectedRatio=DailyInfected/Cases,
-           DailyCasesRatio=DailyCases/Cases,
-           DailyDeathsRatio=DailyDeaths/Cases,
-           DailyTestedRatio=DailyTested/Tested)
+    group_by(Country) %>%
+    mutate(DailyInfected=diff(c(0,Infected))) %>%
+    mutate(DailyInfectedRatio=DailyInfected/c(0,head(Infected,-1)),
+           DailyCasesRatio=DailyCases/c(0,head(Cases,-1)),
+           DailyDeathsRatio=DailyDeaths/c(0,head(Deaths,-1)),
+           DailyTestedRatio=DailyTested/c(0,head(Tested,-1))) %>%
+    ungroup()
 
   if(countries_focus) {
-    call = . %>% filter(Country %in% Countries_focus_broad)
-    Data4 %<>% call
-    Latest %<>% call
+    call_focus = . %>% filter(Country %in% Countries_focus_broad)
+    Data4 %<>% call_focus
+    Latest %<>% call_focus
   }
+
+  Data4 %<>% arrange(Country) %>% mutate(XCol=Colors(Country))
+  Latest %<>% arrange(Country) %>% mutate(XCol=Colors(Country))
 
 } # if(do_load_data ...)
 
@@ -568,14 +574,15 @@ set_titles = function(descriptions, what='Progression of the') {
 
 if(do_process_lag || !exists("Data_Lag_Cases")) {
 
-  K_Cases = process_lag(Data, 'Cases', Country0=Country0)
+  K_Cases = Data %>% process_lag('Cases', Country0=Country0)
   Data_Lag_Cases = K_Cases$Data_Lag
 
-  K_Deaths = process_lag(Data, 'Deaths', Country0=Country0, return_lagged_data=FALSE)
+  K_Deaths = Data %>% process_lag('Deaths', Country0=Country0, return_lagged_data=FALSE)
   K = full_join(K_Cases$K, K_Deaths$K, by='Country') %>%
     mutate(Lag_diff=Lag_Deaths-Lag_Cases)
 
-  KK = bind_cols(K %>% arrange(Lag_Cases), K %>% arrange(Lag_Deaths), K %>% arrange(Lag_diff)) %T>% print(n=100)
+  KK = bind_cols(K %>% arrange(Lag_Cases), K %>% arrange(Lag_Deaths),
+                 K %>% arrange(Lag_diff)) %T>% print(n=100)
 
 }
 
@@ -599,24 +606,26 @@ if(do_plot_lag) {
                  mutate(., Date0=Date) %>% select(ends_with('0')) %>% rename_all(~sub('0$','',.x)))} %>%
       mutate(Date=sub('[0-9]+-','',Date))
 
-    #Col = c(Colors(12, skip=11), Colors(1, skip=0)) %>% pif(C<Country0, rev)
     Col = c("#cc4125","#64dd60") %>% setNames(c(Country0, C)) %>% pif(C<Country0, rev)
 
     for(v in c('Cases','Deaths')) {
-      D3 %>% mutate(y=!!sym(v), col=Col[Country]) %T>% assign('D3b', ., envir=.GlobalEnv) %>%
-        plot_ly(x=~Date, y=~y, color=~Country, name=~Country, colors=Col,
-                type='scatter', mode='lines', showlegend=TRUE) %>%
+      p = 'plots_'%.%v
+
+      D3 %<>% mutate(y=!!sym(v), col=Col[Country])
+
+      plot_ly(D3, x=~Date, y=~y, color=~Country, name=~Country, colors=Col,
+              type='scatter', mode='lines', showlegend=TRUE) %>%
         layout(legend=list(x = 0.1, y = 0.5),
                yaxis=list(title=ifelse(C==Countries_focus_narrow[1], v, "")),
                xaxis=list(title="", showticklabels=FALSE)) %>%
-        add_trace(x=~Date, y=~y, data=D3b %>% filter(Country==C), colors=Col[C]) %>%
+        add_trace(x=~Date, y=~y, data=filter(D3,Country==C), colors=Col[C]) %>%
         add_annotations(text = C,        x = 0.1, y = 0.9, xref='paper', yref='paper', showarrow = FALSE,
                         xanchor='left', font = list(color = Col[2-as.numeric(C<Country0)], size = 14)) %>%
         add_annotations(text = Country0, x = 0.1, y = 0.8, xref='paper', yref='paper', showarrow = FALSE,
                         xanchor='left', font = list(color = Col[1+as.numeric(C<Country0)], size = 14)) %>%
         list() %>%
-        append(get('plots_'%.%v, envir=.GlobalEnv), .) %>%
-        assign('plots_'%.%v, ., envir=.GlobalEnv)
+        append(get(p, envir=.GlobalEnv), .) %>%
+        assign(p, ., envir=.GlobalEnv)
     }
 
   }
@@ -632,7 +641,7 @@ if(do_plot_lag) {
   plot_lagItaly = append(plots_Cases, plots_Deaths) %>%
     append(list(nrows=2, shareY = FALSE, titleY=TRUE, titleX = TRUE)) %>%
     do.call(subplot, .) %>%
-    layout(title=list(text=title, y=1.35), showlegend = FALSE) %>%
+    layout(title=list(text=title, y=1.35), showlegend=FALSE) %>%
     layout(margin=list(l=50, r=50, b=90, t=50, pad=1)) %>%
     layout(plot_bgcolor='black', paper_bgcolor='black', font=list(color='white')) %>%
     layout(annotations=annot_bottom %modify% list(text=explain_lag, y=-0.12, x=0.48)) %>%
@@ -670,21 +679,22 @@ if(do_plot_bar) {
 
     v = p %>% sub('.*_','',.)
 
-    #Latest %>% arrange(Country) %>% mutate(y=!!sym(v), XCol=Colors(Country)) %>% arrange(desc(y)) %>% select(Country, y, XCol) %>% mutate()
+    #Latest %>% arrange(Country) %>% mutate(y=!!sym(v)) %>% arrange(desc(y)) %>% select(Country, y, XCol) %>% mutate()
 
     ## This is carefully set up so that the colors are based on 'Country' even
     ## after the reordering of categories according to value. Plotly requires
     ## the use of factors as the basis for the x-axis and they must be made from
     ## numerical value (which gives the order) and given the desired labels
     ## (i.e. Country, in this case)
-    D = Latest %>% arrange(Country) %>% mutate(y=!!sym(v), XCol=Colors(Country)) %>%
+    D = Latest %>% arrange(Country) %>% mutate(y=!!sym(v)) %>%
       select(Country, y, XCol) %>% filter(complete.cases(.)) %>% arrange(desc(y)) %>%
-      mutate(Order=factor(1:n(), labels=Country))
+      mutate(fCountry=as_factor(Country))
+      #mutate(fCountry=factor(1:n(), labels=Country))
 
-    plot_ly(D, x=~Order, y=~y, color=~Order, name=~Country, colors=~XCol, type='bar') %>%
+    plot_ly(D, x=~fCountry, y=~y, color=~fCountry, name=~Country, colors=~XCol, type='bar') %>%
       layout(title = set_titles(descriptions[p], 'Current'),
              yaxis = list(title=set_axis_lab(descriptions[p])),
-             xaxis = list(title="")) %>%#, type="category", categoryorder="array", categoryarray=~Order)) %>%
+             xaxis = list(title="")) %>%#, type="category", categoryorder="array", categoryarray=~fCountry)) %>%
       layout(plot_bgcolor='black', paper_bgcolor='black', font=list(color='white')) %>%
       layout(margin=list(l=50, r=50, b=55, t=50, pad=1)) %>%
       layout(annotations=annot_source) %>%
@@ -705,19 +715,24 @@ if(do_plot_ts) {
 
   catn("Plotting progression plots...")
 
-  descriptions %<>% c(plot_ts_Infected="Time series: <b>NUMBER OF ACTIVE INFECTIONS</b>")
   descriptions %<>% c(plot_ts_Cases="Time series: <b>NUMBER OF CASES</b>")
   descriptions %<>% c(plot_ts_Deaths="Time series: <b>NUMBER OF DEATHS</b>")
+  descriptions %<>% c(plot_ts_Infected="Time series: <b>NUMBER OF ACTIVE INFECTIONS</b>")
   descriptions %<>% c(plot_ts_Tested="Time series: <b>NUMBER OF TESTS</b>")
 
-  descriptions %<>% c(plot_tspop_InfectedPop="Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b>")
+  descriptions %<>% c(plot_ts_DailyCases="Time series: <b>NUMBER OF DAILY CASES</b>")
+  descriptions %<>% c(plot_ts_DailyDeaths="Time series: <b>NUMBER OF DAILY DEATHS</b>")
+  descriptions %<>% c(plot_ts_DailyInfected="Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b>")
+  descriptions %<>% c(plot_ts_DailyTested="Time series: <b>NUMBER OF DAILY TESTS</b>")
+
   descriptions %<>% c(plot_tspop_CasesPop="Time series: <b>NUMBER OF CASES PER POPULATION</b>")
   descriptions %<>% c(plot_tspop_DeathsPop="Time series: <b>NUMBER OF DEATHS PER POPULATION</b>")
+  descriptions %<>% c(plot_tspop_InfectedPop="Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b>")
   descriptions %<>% c(plot_tspop_TestedPop="Time series: <b>NUMBER OF TESTS PER POPULATION</b>")
 
-  descriptions %<>% c(plot_tsrate_DailyInfectedRatio="Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b>")
   descriptions %<>% c(plot_tsrate_DailyCasesRatio="Time series: <b>RATE OF DAILY CASES</b>")
   descriptions %<>% c(plot_tsrate_DailyDeathsRatio="Time series: <b>RATE OF DAILY DEATHS</b>")
+  descriptions %<>% c(plot_tsrate_DailyInfectedRatio="Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b>")
   descriptions %<>% c(plot_tsrate_DailyTestedRatio="Time series: <b>RATE OF DAILY TESTS</b>")
 
   for(p in names(descriptions)) {
@@ -728,35 +743,32 @@ if(do_plot_ts) {
     p_log = sub('_ts','_xtslog',p)
     title = set_titles(descriptions, 'Progression of the')[p]
 
-    #D = Data4 %>% mutate(y=!!sym(v)) %>% group_by(Country) %>% mutate(LV=t1(y)) %>% ungroup() %>% arrange(desc(LV)) %>% mutate(XCol=Colors(Country)) %>%
+    D = Data4 %>% arrange(Country) %>% mutate(y=!!sym(v)) %>%
+      select(Country, Date, y, XCol) %>% filter(complete.cases(.))
 
-    D = Data4 %>% arrange(Country) %>%
-      mutate(y=!!sym(v), XCol=Colors(Country)) %>%
-      select(Country, Date, y, XCol) %>% filter(complete.cases(.)) %>%
-      #mutate(Order=factor(1:n(), labels=Country)
-      mutate(Order=as_factor(Country))
-      #if(p=='plot_ts_Cases') {ddd = D;stop()}
+    if(D$Country %>% unique() %>% length() %>% equals(1))
+      D %<>% bind_rows(slice(.,1) %>% mutate(Country='&nbsp;', fCountry=as_factor(Country), XCol='black'), .)
 
-    plot_ly(D, x=~Date, y=~y, color=~Order, name=~Country, colors=~XCol, type='scatter', mode='lines',
-            line=list(color=~XCol)) %>%
-      layout(title=title,
-             yaxis=list(title=set_axis_lab(descriptions[p])),
-             xaxis=list(title="")) %>%
+    D %<>% mutate(fCountry=as_factor(Country))
+
+    plot_ly(D, x=~Date, y=~y, color=~fCountry, name=~Country, colors=~XCol, type='scatter', mode='lines',
+            line=list(color=~XCol), showlegend=TRUE) %>%
+      layout(title=title, xaxis=list(title=""),
+             yaxis=list(title=set_axis_lab(descriptions[p]),
+                        tickformat=ifelse('Ratio'%match%p,'%',''))) %>%
       layout(plot_bgcolor='black', paper_bgcolor='black', font=list(color='white')) %>%
       layout(margin=list(l=50, r=50, b=90, t=35, pad=1)) %>%
       layout(annotations=annot_source) %>%
       layout(annotations=annot_author) %>%
       assign(p, ., envir=.GlobalEnv) %>%
       layout(title=title %>% paste0('\n(logarhitmic scale)'),
-             yaxis=list(type="log", range=c(0,log10(max(D$y))))) %>%
-             #yaxis=list(type="log", range=c(0,log10(max(D$y))))) %>%
+             yaxis=list(type="log", range=c(0,log10(max(1,D$y))))) %>%
       assign(p_log, ., envir=.GlobalEnv)
 
-      #if(p=='plot_tspop_TestedPop') stop()
+    #if(p=='plot_ts_Tested') stop()
 
     descriptions %<>% c(descriptions[p]%.%" (logarhitmic scale)" %>% setNames(p_log))
 
-    #get(p) %>% print()
   }
 
 } # if(do_plot_ts)
@@ -901,8 +913,8 @@ if(do_save_plotly_to_file) {
     #pattern = 'plot_z_lm_daily'
     #pattern = 'plot_.*Ratio'
     #pattern = '---'
-    pattern = ''
-    #pattern = 'plot_barpop_ActiveCasesPop'
+    #pattern = 'Ratio$'
+    pattern = 'Daily'
     if(regexpr(pattern,p)>0) {
     if(format_for_plots=='html') {
       html_title = "Coronavirus: "%.%gsub("<[/]?b>","",ds[p])%.%" (by Pecanka Consulting)"
