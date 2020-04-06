@@ -18,7 +18,7 @@ body {
 
 .descriptions {
   width: 90%;
-  font-size: 17px;
+  font-size: 20px;
   border: 0px solid silver;
   background-color: #151515;
   margin-left: auto;
@@ -48,7 +48,7 @@ body {
   margin-top: 6px;
   margin-bottom: 6px;
   text-align: center;
-  color: yellow;
+  color: #aaaaaa;
 }
 
 .descriptions, .descriptions a {
