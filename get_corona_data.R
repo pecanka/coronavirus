@@ -353,7 +353,8 @@ load_latest_all_wom = function() {
   rda_file_latest = list.files('data', 'wom_latest_all_countries_', full.names=TRUE) %>%
     file_sort_time() %>% h1()
 
-  if(is_empty(rda_file_latest)) stop('There is no file with the latest data for ', country_name,'.')
+  if(is_empty(rda_file_latest))
+    error('There is no file with the latest data for all countries.')
 
   catn("Loading latest data for all countries from file '",rda_file_latest,"'...")
   load(rda_file_latest)
@@ -746,7 +747,7 @@ if(do_plot_ts) {
     D = Data4 %>% arrange(Country) %>% mutate(y=!!sym(v)) %>%
       select(Country, Date, y, XCol) %>% filter(complete.cases(.))
 
-    if(D$Country %>% unique() %>% length() %>% equals(1))
+    if(is_unique(D$Country))
       D %<>% bind_rows(slice(.,1) %>% mutate(Country='&nbsp;', fCountry=as_factor(Country), XCol='black'), .)
 
     D %<>% mutate(fCountry=as_factor(Country))
@@ -914,7 +915,7 @@ if(do_save_plotly_to_file) {
     #pattern = 'plot_.*Ratio'
     #pattern = '---'
     #pattern = 'Ratio$'
-    pattern = 'Daily'
+    pattern = ''
     if(regexpr(pattern,p)>0) {
     if(format_for_plots=='html') {
       html_title = "Coronavirus: "%.%gsub("<[/]?b>","",ds[p])%.%" (by Pecanka Consulting)"
