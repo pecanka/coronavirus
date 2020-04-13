@@ -377,7 +377,7 @@ process_lag = function(Data, Lag_by='Cases', lag_start=-10, lag_end=40, Country0
     if(n>=0) lead(x, n, ...) else lag(x, -n, ...)
 
   matchup = function(k, D_A, D_B, by='Cases') {
-    matchup1 = function(k, D_A, D_B) mean2(abs(D_A[[by]]- lead2(D_B[[by]], k)))
+    matchup1 = function(k, D_A, D_B) amean(abs(D_A[[by]]- lead2(D_B[[by]], k)))
     sapply(k, matchup1, D_A, D_B) #%>% setNames('k='%.%k)
   }
 
@@ -904,28 +904,19 @@ if(do_save_plotly_to_file) {
     if(is_log[p]) catf("</ul><div class='note2'>logarhitmic scale</div><ul>")
     add_goback = FALSE
 
-    #if(regexpr('plot_z_lm_',p)>0) {
-    #pattern = 'plot_lag|plot_bar_Cases|plot_ts_Cases|plot_z_lm_total'
-    pattern = 'plot_lag'
-    #pattern = 'plot_bar_Cases'
-    #pattern = 'plot_ts_Cases'
-    #pattern = 'plot_z_lm_total|plot_z_lm_daily'
-    #pattern = 'plot_z_lm_total'
-    #pattern = 'plot_z_lm_daily'
-    #pattern = 'plot_.*Ratio'
-    #pattern = '---'
-    #pattern = 'Ratio$'
     pattern = ''
     if(regexpr(pattern,p)>0) {
-    if(format_for_plots=='html') {
-      html_title = "Coronavirus: "%.%gsub("<[/]?b>","",ds[p])%.%" (by Pecanka Consulting)"
-      if(TRUE || !file.exists(filename)) {
-        htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000', title=html_title); add_goback = TRUE
-      }
-    } else if(format_for_plots=='png') {
-      orca(get(p), file=filename)
-      stop()
-    } else error("Unknown format for plots '",format_for_plots,"'.")
+
+      if(format_for_plots=='html') {
+        html_title = "Coronavirus: "%.%gsub("<[/]?b>","",ds[p])%.%" (by Pecanka Consulting)"
+        if(TRUE || !file.exists(filename)) {
+          htmlwidgets::saveWidget(as_widget(get(p)), file=filename, background='#000000', title=html_title); add_goback = TRUE
+        }
+      } else if(format_for_plots=='png') {
+        orca(get(p), file=filename)
+        stop()
+      } else error("Unknown format for plots '",format_for_plots,"'.")
+
     }
 
     if(add_goback) {
@@ -940,8 +931,9 @@ if(do_save_plotly_to_file) {
         writeLines(content, filename)
       } else note("The 'Go back' code was not placed.")
     }
+
     catf("<div class='link'><li><a href='plots_plotly/"%.%filename%.%"'>",ds[p],"</a></li></div>")
-    #break
+
   }
   catf("</ul></div><p></div></body>\n</html>")
   rm(catf)
