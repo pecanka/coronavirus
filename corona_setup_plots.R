@@ -32,8 +32,8 @@ set_titles = function(descriptions, what='Progression of the') {
 
 announce_plots = function() {
   ls(pattern='^plotly_', envir=.GlobalEnv) %>%   
-    str_lengthen() %>%
-    split_into_groups(floor(options()$width/max(1,nchar(.)))) %>%
+    utilbox::str_pad(side='right') %>%
+    split_into_groups(floor(options()$width/max(1,nchar(.)))-1) %>%
     lapply(paste, collapse='\t  ') %>%
     {do.call('paste', . %append% list(sep='\n\t'))} %>%
     catn("\nCreated plot objects:\n\n\t", .,'\n')

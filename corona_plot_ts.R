@@ -24,7 +24,7 @@ plot_ts = function(Data, envir=.GlobalEnv) {
   descr %<>% c(plotly_tsrate_DailyInfectedRatio="Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b>")
   descr %<>% c(plotly_tsrate_DailyTestedRatio="Time series: <b>RATE OF DAILY TESTS</b>")
 
-  for(p in names(descriptions)) {
+  for(p in names(descr)) {
 
     if(regexpr('plotly_ts',p)<0) next
 
@@ -40,8 +40,8 @@ plot_ts = function(Data, envir=.GlobalEnv) {
 
     D %<>% mutate(fCountry=as_factor(Country))
 
-    plot_ly(D, x=~Date, y=~y, color=~fCountry, name=~Country, colors=~XCol, type='scatter', mode='lines',
-            line=list(color=~XCol), showlegend=TRUE) %>%
+    plot_ly(D, x=~Date, y=~y, color=~fCountry, name=~Country, colors=~XCol, 
+            type='scatter', mode='lines', line=list(color=~XCol), showlegend=TRUE) %>%
       layout(title=title, xaxis=list(title=""),
              yaxis=list(title=set_axis_lab(descriptions[p]),
                         tickformat=ifelse('Ratio'%match%p,'%',''))) %>%

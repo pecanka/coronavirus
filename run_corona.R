@@ -14,7 +14,7 @@ url_wom = 'https://www.worldometers.info/coronavirus/'
 url_mzcz = 'https://onemocneni-aktualne.mzcr.cz/covid-19'
 url_mzcz_api = 'https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/'
 
-do_download_data = !FALSE
+do_download_data = !TRUE
 do_load_data = FALSE
 
 do_force_fresh_data = FALSE
@@ -49,7 +49,7 @@ CountryCZ = tibble(name='Czechia', prefix='mzcr_', url=url_mzcz)
 
 #########################################################
 
-source_pattern('corona_functions_')
+source_pattern('corona_')
 
 available_countries_wom = download_country_list_wom(url_wom) %>%
   `if`(countries_focus, filter(., name %in% Countries_focus_broad), .)
@@ -73,28 +73,27 @@ if(do_download_data) {
 
 }
 
-if(do_load_data) 
+if(do_load_data)
   load_data()       # side effect loads: Data, Data4, DataCZ, Latest
 
-if(do_process_lag) 
+if(do_process_lag)
   Data_Lag_Cases = process_lag_cases_deaths(Data)
 
-if(do_plot_lag) 
+if(do_plot_lag)
   plot_lag(Data_Lag_Cases)
 
-if(do_plot_bar) 
+if(do_plot_bar)
   plot_bar(Latest)
 
-if(do_plot_ts) 
+if(do_plot_ts)
   plot_ts(Data4)
 
-if(do_plot_lm) 
+if(do_plot_lm)
   plot_lm(DataCZ)
 
 announce_plots()
-stop()
 
-if(do_save_plotly_to_file) 
+if(do_save_plotly_to_file)
   save_plots_to_file()
 
 catn("Finished.")
