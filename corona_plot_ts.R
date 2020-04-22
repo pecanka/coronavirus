@@ -18,6 +18,11 @@ plot_ts = function(Data, envir=.GlobalEnv) {
   descr %<>% list_update(list(plotly_tspop_DeathsPop="Time series: <b>NUMBER OF DEATHS PER POPULATION</b>"))
   descr %<>% list_update(list(plotly_tspop_InfectedPop="Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b>"))
   descr %<>% list_update(list(plotly_tspop_TestedPop="Time series: <b>NUMBER OF TESTS PER POPULATION</b>"))
+  
+  descr %<>% list_update(list(plotly_tspop_DailyCasesPop="Time series: <b>NUMBER OF DAILY CASES PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_tspop_DailyDeathsPop="Time series: <b>NUMBER OF DAILY DEATHS PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_tspop_DailyInfectedPop="Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_tspop_DailyTestedPop="Time series: <b>NUMBER OF DAILY TESTS PER POPULATION</b>"))
 
   descr %<>% list_update(list(plotly_tsrate_DailyCasesRatio="Time series: <b>RATE OF DAILY CASES</b>"))
   descr %<>% list_update(list(plotly_tsrate_DailyDeathsRatio="Time series: <b>RATE OF DAILY DEATHS</b>"))

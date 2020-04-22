@@ -35,7 +35,8 @@ load_data = function(envir=.GlobalEnv) {
            one_of(setdiff(names(.), names(Data))))
 
   Data %<>% full_join(DataCZ1) %>%
-    mutate(Deaths=coalesce(Deaths, DeathsCZ), DailyDeaths=coalesce(DailyDeaths,DailyDeathsCZ)) %>%
+    mutate(Deaths=coalesce(Deaths, DeathsCZ), 
+           DailyDeaths=coalesce(DailyDeaths,DailyDeathsCZ)) %>%
     select(-ends_with('CZ')) %>%
     arrange(Country, Date) #%>% filter(Country=='Czechia')
 
@@ -61,12 +62,29 @@ load_data = function(envir=.GlobalEnv) {
     setNames(sub("_$",'',names(.)))
 
   Data %<>% left_join(PopData, by='Country') %>%
-    mutate_at(vars(Cases,Deaths,DailyCases,DailyDeaths), ~ifelse(.x==0, NA, .x)) %>%
-    mutate(CasesPop_=Cases, DeathsPop_=Deaths, TestedPop_=Tested, InfectedPop_=Infected) %>%
+    group_by(Country) %>%
+    mutate(DailyInfected=diff(c(0,Infected))) %>%
+    ungroup() %>%
+    mutate_at(vars(Cases,Deaths,Infected,Tested,DailyCases,DailyDeaths,DailyInfected,DailyTested), ~ifelse(.x==0, NA, .x)) %>%
+    mutate(CasesPop_=Cases, 
+           DeathsPop_=Deaths, 
+           TestedPop_=Tested, 
+           InfectedPop_=Infected,
+           DailyCasesPop_=DailyCases, 
+           DailyDeathsPop_=DailyDeaths, 
+           DailyTestedPop_=DailyTested, 
+           DailyInfectedPop_=DailyInfected) %>%
     call_Pop
     
   Latest %<>% left_join(PopData, by='Country') %>%
-    mutate(CasesPop_=Cases, DeathsPop_=Deaths, TestedPop_=Tested, RecoveredPop_=Recovered) %>%
+    mutate(CasesPop_=Cases, 
+           DeathsPop_=Deaths, 
+           TestedPop_=Tested, 
+           RecoveredPop_=Recovered) %>%#,
+           #DailyCasesPop_=DailyCases, 
+           #DailyDeathsPop_=DailyDeaths, 
+           #DailyTestedPop_=DailyTested, 
+           #DailyRecoveredPop_=DailyRecovered) %>%
     call_Pop
 
   Latest_all %<>% left_join(PopData, by='Country') %>%
@@ -83,9 +101,9 @@ load_data = function(envir=.GlobalEnv) {
   Data %>% select(Date, Country) %>% anyDuplicated() %>% equals(0) %>% stopifnot()
   Latest %>% select(Country) %>% anyDuplicated() %>% equals(0) %>% stopifnot()
 
-  Data4 = Data %>% mutate(Date=sub('[0-9]+-','',Date)) %>%
+  Data4 = Data %>% 
+    mutate(Date=sub('[0-9]+-','',Date)) %>%
     group_by(Country) %>%
-    mutate(DailyInfected=diff(c(0,Infected))) %>%
     mutate(DailyInfectedRatio=DailyInfected/c(0,head(Infected,-1)),
            DailyCasesRatio=DailyCases/c(0,head(Cases,-1)),
            DailyDeathsRatio=DailyDeaths/c(0,head(Deaths,-1)),

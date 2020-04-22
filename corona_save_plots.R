@@ -1,4 +1,4 @@
-save_plots_to_file = function(envir=.GlobalEnv, add_goback=TRUE) {
+save_plots_to_file = function(envir=.GlobalEnv, add_goback=TRUE, only_nonexistent=TRUE) {
 
   ps = ls(pattern='^plotly_', envir=envir) %>% sort()
   
@@ -16,7 +16,7 @@ save_plots_to_file = function(envir=.GlobalEnv, add_goback=TRUE) {
   
     filename = p%.%'.'%.%format_for_plots
     
-    #if(file.exists(filename)) next
+    if(only_nonexistent && file.exists(filename)) next
     
     catn("Saving plot '"%.%p%.%"' to file '",filename,"' ...")
     
