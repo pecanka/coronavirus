@@ -4,8 +4,8 @@ plot_lag = function(Data, envir=.GlobalEnv, envir1=environment()) {
 
   descr = get('descriptions', envir=envir)
   
-  descr %<>% c(structure("Country comparison: <b>LAGs BEHIND "%.%toupper(Country0)%.%
-                         "</b> (in number of days)", names='plotly_lag'%.%Country0))
+  descr %<>% list_update(structure(list("Country comparison: <b>LAGs BEHIND "%.%toupper(Country0)%.%
+                         "</b> (in number of days)"), names='plotly_lag'%.%Country0))
   
   assign('descriptions', descr, envir=envir) 
 

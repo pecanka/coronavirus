@@ -4,24 +4,22 @@ plot_bar = function(Latest, envir=.GlobalEnv) {
 
   descr = get('descriptions', envir=envir)
 
-  descr %<>% c(plotly_bar_Cases="Barplot: <b>NUMBER OF CASES</b>")
-  descr %<>% c(plotly_bar_ActiveCases="Barplot: <b>NUMBER OF ACTIVE CASES</b>")
-  descr %<>% c(plotly_bar_CriticalCases="Barplot: <b>NUMBER OF CRITICAL/SERIOUS CASES</b>")
-  descr %<>% c(plotly_bar_Deaths="Barplot: <b>NUMBER OF DEATHS</b>")
-  descr %<>% c(plotly_bar_Recovered="Barplot: <b>NUMBER OF RECOVERED PATIENTS</b>")
-  descr %<>% c(plotly_bar_TotalTests="Barplot: <b>NUMBER OF DIAGNOSTIC TESTS</b>")
-  descr %<>% c(plotly_bar_NewDeaths="Barplot: <b>NUMBER OF NEW DEATHS</b>")
-  descr %<>% c(plotly_barpop_CasesPop="Barplot: <b>NUMBER OF CASES PER POPULATION</b>")
-  descr %<>% c(plotly_barpop_ActiveCasesPop="Barplot: <b>NUMBER OF ACTIVE CASES PER POPULATION</b>")
-  descr %<>% c(plotly_barpop_CriticalCasesPop="Barplot: <b>NUMBER OF CRITICAL/SERIOUS CASES PER POPULATION</b>")
-  descr %<>% c(plotly_barpop_DeathsPop="Barplot: <b>NUMBER OF DEATHS PER POPULATION</b>")
-  descr %<>% c(plotly_barpop_Recovered="Barplot: <b>NUMBER OF RECOVERED PATIENTS PER POPULATION</b>")
-  descr %<>% c(plotly_barpop_NewDeathsPop="Barplot: <b>NUMBER OF NEW DEATHS PER POPULATION</b>")
-  descr %<>% c(plotly_barpop_TotalTestsPop="Barplot: <b>NUMBER OF DIAGNOSTIC TESTS PER POPULATION</b>")
+  descr %<>% list_update(list(plotly_bar_Cases="Barplot: <b>NUMBER OF CASES</b>"))
+  descr %<>% list_update(list(plotly_bar_ActiveCases="Barplot: <b>NUMBER OF ACTIVE CASES</b>"))
+  descr %<>% list_update(list(plotly_bar_CriticalCases="Barplot: <b>NUMBER OF CRITICAL/SERIOUS CASES</b>"))
+  descr %<>% list_update(list(plotly_bar_Deaths="Barplot: <b>NUMBER OF DEATHS</b>"))
+  descr %<>% list_update(list(plotly_bar_Recovered="Barplot: <b>NUMBER OF RECOVERED PATIENTS</b>"))
+  descr %<>% list_update(list(plotly_bar_TotalTests="Barplot: <b>NUMBER OF DIAGNOSTIC TESTS</b>"))
+  descr %<>% list_update(list(plotly_bar_NewDeaths="Barplot: <b>NUMBER OF NEW DEATHS</b>"))
+  descr %<>% list_update(list(plotly_barpop_CasesPop="Barplot: <b>NUMBER OF CASES PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_barpop_ActiveCasesPop="Barplot: <b>NUMBER OF ACTIVE CASES PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_barpop_CriticalCasesPop="Barplot: <b>NUMBER OF CRITICAL/SERIOUS CASES PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_barpop_DeathsPop="Barplot: <b>NUMBER OF DEATHS PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_barpop_Recovered="Barplot: <b>NUMBER OF RECOVERED PATIENTS PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_barpop_NewDeathsPop="Barplot: <b>NUMBER OF NEW DEATHS PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_barpop_TotalTestsPop="Barplot: <b>NUMBER OF DIAGNOSTIC TESTS PER POPULATION</b>"))
 
-  assign('descriptions', descr, envir=envir) 
-
-  for(p in names(descriptions)) {
+  for(p in names(descr)) {
 
     if(regexpr('plotly_bar',p)<0) next
 
@@ -40,8 +38,8 @@ plot_bar = function(Latest, envir=.GlobalEnv) {
       #mutate(fCountry=factor(1:n(), labels=Country))
 
     plot_ly(D, x=~fCountry, y=~y, color=~fCountry, name=~Country, colors=~XCol, type='bar') %>%
-      layout(title = set_titles(descriptions[p], 'Current'),
-             yaxis = list(title=set_axis_lab(descriptions[p])),
+      layout(title = set_titles(descr[[p]], 'Current'),
+             yaxis = list(title=set_axis_lab(descriptions[[p]])),
              xaxis = list(title="")) %>%#, type="category", categoryorder="array", categoryarray=~fCountry)) %>%
       layout(plot_bgcolor='black', paper_bgcolor='black', font=list(color='white')) %>%
       layout(margin=list(l=50, r=50, b=55, t=50, pad=1)) %>%
@@ -50,5 +48,7 @@ plot_bar = function(Latest, envir=.GlobalEnv) {
       assign(p, ., envir=envir)
 
   }
+
+  assign('descriptions', descr, envir=envir) 
 
 }

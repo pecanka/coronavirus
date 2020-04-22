@@ -8,8 +8,8 @@ plot_lm = function(Data, envir=.GlobalEnv) {
 
   descr = get('descriptions', envir=envir)
   
-  descr %<>% c(plotly_z_lm_daily="Linear model: <b>DAILY CASES</b> vs <b>DAILY TESTS</b> (Czechia)")
-  descr %<>% c(plotly_z_lm_total="Linear model: <b>TOTAL CASES</b> vs <b>TOTAL TESTS</b> (Czechia)")
+  descr %<>% list_update(list(plotly_z_lm_daily="Linear model: <b>DAILY CASES</b> vs <b>DAILY TESTS</b> (Czechia)"))
+  descr %<>% list_update(list(plotly_z_lm_total="Linear model: <b>TOTAL CASES</b> vs <b>TOTAL TESTS</b> (Czechia)"))
   
   assign('descriptions', descr, envir=envir) 
 
@@ -34,7 +34,7 @@ plot_lm = function(Data, envir=.GlobalEnv) {
   DataCZ250 = DataCZ %>% mutate(DateS=Date %>% sub('[0-9]+-','',.)) %>%
     filter(Date>=day0)
     
-  for(p in names(descriptions)) {
+  for(p in names(descr)) {
   
     if(regexpr('plotly_z_lm',p)<0) next
 
@@ -76,9 +76,9 @@ plot_lm = function(Data, envir=.GlobalEnv) {
                       showarrow=TRUE, arrowhead=4, arrowsize=0.6, arrowcolor=Col[1], ax=20, ay=60) %>%
       layout(plot_bgcolor='black', paper_bgcolor='black', font=list(color='white'),
              legend = list(x = 0.9, y = 0.16),
-             yaxis=list(title=set_axis_lab(descriptions[p], '[^<>]+<[bB]>')),
+             yaxis=list(title=set_axis_lab(descr[[p]], '[^<>]+<[bB]>')),
              xaxis=list(title='')) %>%
-      layout(annotations=annot_bottom %modify% list(text=set_axis_lab(descriptions[p]), y=-0.085)) %>%
+      layout(annotations=annot_bottom %modify% list(text=set_axis_lab(descr[[p]]), y=-0.085)) %>%
       layout(margin=list(l=50, r=50, b=125, t=50, pad=1)) %>%
       layout(annotations=annot_bottom %modify% list(text=explain_model, y=-0.225, x=0.48)) %>%
       layout(annotations=annot_source %modify% list(y=-0.3)) %>%

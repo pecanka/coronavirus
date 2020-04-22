@@ -1,0 +1,50 @@
+<HTML>
+<BODY>
+
+<script>
+
+function toggle_country(C) {
+
+  var height = document.getElementById(C).style.height;
+  var overflow = document.getElementById(C).style.overflow;
+  
+  if (overflow === "hidden")
+    document.getElementById(C).style.overflow="visible" ;
+  else
+    document.getElementById(C).style.overflow="hidden";
+    
+}
+
+</script>
+
+<div onclick="toggle_country('Italy')">Click here to show/hide Italy</div>
+
+<div id='Italy' style='background-color: #555555; height: 0px; overflow: hidden;'>
+
+eval evaluates the expr argument in the environment specified by envir and returns the computed value. If envir is not specified, then the default is parent.frame() (the environment where the call to eval was made).
+
+Objects to be evaluated can be of types call or expression or name (when the name is looked up in the current scope and its binding is evaluated), a promise or any of the basic types such as vectors, functions and environments (which are returned unchanged).
+
+The evalq form is equivalent to eval(quote(expr), ...). eval evaluates its first argument in the current scope before passing it to the evaluator: evalq avoids this.
+
+eval.parent(expr, n) is a shorthand for eval(expr, parent.frame(n)).
+
+If envir is a list (such as a data frame) or pairlist, it is copied into a temporary environment (with enclosure enclos), and the temporary environment is used for evaluation. So if expr changes any of the components named in the (pair)list, the changes are lost.
+
+If envir is NULL it is interpreted as an empty list so no values could be found in envir and look-up goes directly to enclos.
+
+local evaluates an expression in a local environment. It is equivalent to evalq except that its default argument creates a new, empty environment. This is useful to create anonymous recursive functions and as a kind of limited namespace feature since variables defined in the environment are not visible from the outside.
+Value
+
+The result of evaluating the object: for an expression vector this is the result of evaluating the last element.
+Note
+
+Due to the difference in scoping rules, there are some differences between R and S in this area. In particular, the default enclosure in S is the global environment.
+
+When evaluating expressions in a data frame that has been passed as an argument to a function, the relevant enclosure is often the caller's environment, i.e., one needs eval(x, data, parent.frame()).
+References
+
+</div>
+
+</BODY>
+</HTML>

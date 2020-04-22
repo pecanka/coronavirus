@@ -1,5 +1,5 @@
 
-descriptions = ylabs = c()
+if(!exists('descriptions')) descriptions = list()
 
 data_source = "Based on data from <a href='"%.%url_wom%.%"'>Worldometers</a>, "%.%
   "<a href='"%.%url_ocdc%.%"'>OCDC</a>"%.%" and <a href='"%.%url_mzcz%.%"'>mzcr.cz</a>"
@@ -32,7 +32,7 @@ set_titles = function(descriptions, what='Progression of the') {
 
 announce_plots = function() {
   ls(pattern='^plotly_', envir=.GlobalEnv) %>%   
-    utilbox::str_pad(side='right') %>%
+    str_lengthen(side='right') %>%
     split_into_groups(floor(options()$width/max(1,nchar(.)))-1) %>%
     lapply(paste, collapse='\t  ') %>%
     {do.call('paste', . %append% list(sep='\n\t'))} %>%

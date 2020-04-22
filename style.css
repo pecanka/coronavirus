@@ -2,7 +2,7 @@ body {
   background-color: black;
   color: #33bb45;
   text-align: center;
-  font-size: 15 px;
+  font-size: 15px;
   font-family: Calibri, Arial, sans-serif;
 }
 
@@ -63,21 +63,53 @@ body {
   background-color: #dddddd;
   height: 30px;
   line-height: 30px;
-  vertical-align: middle'
+  vertical-align: middle;
 }
 
-.main {
-  background-color: #333333;
+.main, .main2 {
+  background-color: #194247;
   width: 1000px;
   margin-left: auto;
   margin-right: auto;
   border: 1px solid silver;
 }
 
+.main2 {
+  color: white;
+  opacity: 0.8;
+}
+
+.main2 a:link {
+  color: black;
+}
+
+.main2 a:visited {
+  color: #252525;
+}
+
+.main2 a:hover, .main2 a:active {
+  color: #606060;
+}
+
 .link {
   height: 30px;
   line-height: 30px;
   vertical-align: middle
+}
+
+.linkcountry {
+  height: 35px;
+  width: 129px;
+  line-height: 30px;
+  vertical-align: middle;
+  border: 1px solid #999999;
+  background-color: #202020;
+  text-align: center;
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 a:link, a:visited, a:hover, a:active {

@@ -1,10 +1,10 @@
-#source('d:/Dropbox/Projects/CoronaVirus/run_corona.R')
+#source('d:/Dropbox/Projects/CoronaVirus/run_corona.R', local=.GlobalEnv)
 options(scipen=5)
 
 setwd2()
 
 require(utilbox)
-llib(dplyr, rvest, stringr, tidyr, lubridate, plotly, rjson, readxl)
+llib(magrittr, dplyr, rvest, stringr, tidyr, lubridate, plotly, rjson, readxl)
 
 #########################################################
 
@@ -20,15 +20,18 @@ do_load_data = FALSE
 do_force_fresh_data = FALSE
 do_use_any_existing_data = FALSE
 
-do_process_lag = TRUE
+do_process_lag = FALSE
+do_plot = FALSE
+do_plot_lag = FALSE
+do_plot_bar = FALSE
+do_plot_ts = FALSE
+do_plot_lm = FALSE
 
-do_plot = TRUE
-do_plot_lag = TRUE
-do_plot_bar = TRUE
-do_plot_ts = TRUE
-do_plot_lm = TRUE
+do_process_lag = do_plot = do_plot_lag = do_plot_bar = do_plot_ts = do_plot_lm = FALSE
 
 do_save_plotly_to_file = TRUE
+
+do_make_index_html = TRUE
 
 format_for_plots = 'html'
 #format_for_plots = 'png'
@@ -49,7 +52,7 @@ CountryCZ = tibble(name='Czechia', prefix='mzcr_', url=url_mzcz)
 
 #########################################################
 
-source_pattern('corona_')
+source_pattern('corona_', announce=FALSE)
 
 available_countries_wom = download_country_list_wom(url_wom) %>%
   `if`(countries_focus, filter(., name %in% Countries_focus_broad), .)
@@ -95,5 +98,8 @@ announce_plots()
 
 if(do_save_plotly_to_file)
   save_plots_to_file()
-
+  
+if(do_make_index_html)
+  make_index_html()
+  
 catn("Finished.")

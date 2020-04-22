@@ -3,74 +3,1377 @@
 <head>
 <title>Pecanka Consulting: Coronavirus plots</title>
 <link rel='stylesheet' type='text/css' href='style.css'>
+<script type='text/javascript' src='toggle.js' ></script>
 </head>
-<body><div class='main'>
-<div class='head'>CORONOVIRUS: COVID-19</div><p>
-<center>Jakub Pecanka, PhD (Pecanka Consulting, <a href='https://www.pecanka.net'>www.pecanka.net</a>)</center><p>
-<div class='descriptions'>A collection of plots showing the current state
-and the historical progression of the COVID-19 pandemic in select countries around the world.<p>
-<span style='font-size: 80%'>Based on data from <a href='https://www.worldometers.info/coronavirus/'>Worldometers</a>, <a href='https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-04-16.xlsx'>OCDC</a> and <a href='https://onemocneni-aktualne.mzcr.cz/covid-19'>mzcr.cz</a></span>
-</div><div class='list'><div class='note2'>linear scale</div><ul>
-<div class='link'><li><a href='plots_plotly/plotly_bar_ActiveCases.html'>Barplot: <b>NUMBER OF ACTIVE CASES</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_bar_Cases.html'>Barplot: <b>NUMBER OF CASES</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_bar_CriticalCases.html'>Barplot: <b>NUMBER OF CRITICAL/SERIOUS CASES</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_bar_Deaths.html'>Barplot: <b>NUMBER OF DEATHS</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_bar_NewDeaths.html'>Barplot: <b>NUMBER OF NEW DEATHS</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_bar_Recovered.html'>Barplot: <b>NUMBER OF RECOVERED PATIENTS</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_bar_TotalTests.html'>Barplot: <b>NUMBER OF DIAGNOSTIC TESTS</b></a></li></div>
-<p>
-<div class='link'><li><a href='plots_plotly/plotly_barpop_ActiveCasesPop.html'>Barplot: <b>NUMBER OF ACTIVE CASES PER POPULATION</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_barpop_CasesPop.html'>Barplot: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_barpop_CriticalCasesPop.html'>Barplot: <b>NUMBER OF CRITICAL/SERIOUS CASES PER POPULATION</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_barpop_DeathsPop.html'>Barplot: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_barpop_NewDeathsPop.html'>Barplot: <b>NUMBER OF NEW DEATHS PER POPULATION</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_barpop_Recovered.html'>Barplot: <b>NUMBER OF RECOVERED PATIENTS PER POPULATION</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_barpop_TotalTestsPop.html'>Barplot: <b>NUMBER OF DIAGNOSTIC TESTS PER POPULATION</b></a></li></div>
-<p>
-<div class='link'><li><a href='plots_plotly/plotly_lagItaly.html'>Country comparison: <b>LAGs BEHIND ITALY</b> (in number of days)</a></li></div>
-<p>
-<div class='link'><li><a href='plots_plotly/plotly_ts_Cases.html'>Time series: <b>NUMBER OF CASES</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases.html'>Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths.html'>Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected.html'>Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested.html'>Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_ts_Deaths.html'>Time series: <b>NUMBER OF DEATHS</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_ts_Infected.html'>Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_ts_Tested.html'>Time series: <b>NUMBER OF TESTS</b></a></li></div>
-<p>
-<div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop.html'>Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop.html'>Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop.html'>Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop.html'>Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
-<p>
-<div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio.html'>Time series: <b>RATE OF DAILY CASES</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio.html'>Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio.html'>Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio.html'>Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
-<p>
-</ul><div class='note2'>logarhitmic scale</div><ul>
-<div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases.html'>Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases.html'>Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths.html'>Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected.html'>Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested.html'>Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths.html'>Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected.html'>Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested.html'>Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
-<p>
-<div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop.html'>Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop.html'>Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop.html'>Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop.html'>Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
-<p>
-<div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio.html'>Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio.html'>Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio.html'>Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio.html'>Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
-</ul><div class='note'>Plots based on data available for CZECHIA only</div>
-<div class='note2'>linear scale</div><ul>
-<p>
-<div class='link'><li><a href='plots_plotly/plotly_z_lm_daily.html'>Linear model: <b>DAILY CASES</b> vs <b>DAILY TESTS</b> (Czechia)</a></li></div>
-<div class='link'><li><a href='plots_plotly/plotly_z_lm_total.html'>Linear model: <b>TOTAL CASES</b> vs <b>TOTAL TESTS</b> (Czechia)</a></li></div>
-</ul></div><p></div></body>
+<body>
+<div class='main' id='' style='display: block;'>
+  <div class='head'>CORONOVIRUS: COVID-19</div><p>
+    <center>Jakub Pecanka, PhD (Pecanka Consulting,
+    <a href='https://www.pecanka.net'>www.pecanka.net</a>)</center><p>
+    <div class='descriptions'>A collection of plots showing the
+    current state and the historical progression of the COVID-19
+    pandemic in select countries around the world.<p>
+    <span style='font-size: 80%'>Based on data from <a href='https://www.worldometers.info/coronavirus/'>Worldometers</a>, <a href='https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-04-22.xlsx'>OCDC</a> and <a href='https://onemocneni-aktualne.mzcr.cz/covid-19'>mzcr.cz</a></span>
+  </div>
+  <div class='list'>
+    <div class='note2'>linear scale</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_bar_ActiveCases.html'>Barplot: <b>NUMBER OF ACTIVE CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_bar_Cases.html'>Barplot: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_bar_CriticalCases.html'>Barplot: <b>NUMBER OF CRITICAL/SERIOUS CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_bar_Deaths.html'>Barplot: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_bar_NewDeaths.html'>Barplot: <b>NUMBER OF NEW DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_bar_Recovered.html'>Barplot: <b>NUMBER OF RECOVERED PATIENTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_bar_TotalTests.html'>Barplot: <b>NUMBER OF DIAGNOSTIC TESTS</b></a></li></div>
+    <p>
+    <div class='link'><li><a href='plots_plotly/plotly_barpop_ActiveCasesPop.html'>Barplot: <b>NUMBER OF ACTIVE CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_barpop_CasesPop.html'>Barplot: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_barpop_CriticalCasesPop.html'>Barplot: <b>NUMBER OF CRITICAL/SERIOUS CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_barpop_DeathsPop.html'>Barplot: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_barpop_NewDeathsPop.html'>Barplot: <b>NUMBER OF NEW DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_barpop_Recovered.html'>Barplot: <b>NUMBER OF RECOVERED PATIENTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_barpop_TotalTestsPop.html'>Barplot: <b>NUMBER OF DIAGNOSTIC TESTS PER POPULATION</b></a></li></div>
+    <p>
+    <div class='link'><li><a href='plots_plotly/plotly_lagItaly.html'>Country comparison: <b>LAGs BEHIND ITALY</b> (in number of days)</a></li></div>
+    <p>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases.html'>Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases.html'>Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths.html'>Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected.html'>Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested.html'>Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths.html'>Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected.html'>Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested.html'>Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <p>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop.html'>Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop.html'>Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop.html'>Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop.html'>Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <p>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio.html'>Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio.html'>Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio.html'>Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio.html'>Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <p>
+    </ul>
+    <div class='note2'>logarhitmic scale</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases.html'>Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases.html'>Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths.html'>Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected.html'>Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested.html'>Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths.html'>Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected.html'>Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested.html'>Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <p>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop.html'>Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop.html'>Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop.html'>Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop.html'>Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <p>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio.html'>Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio.html'>Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio.html'>Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio.html'>Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main' id='' style='display: block;'>
+  <div class='list'>
+    <div class='note'>Plots based on data available for CZECHIA only</div>
+    <ul>
+    <p>
+    <div class='link'><li><a href='plots_plotly/plotly_z_lm_daily.html'>Linear model: <b>DAILY CASES</b> vs <b>DAILY TESTS</b> (Czechia)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_z_lm_total.html'>Linear model: <b>TOTAL CASES</b> vs <b>TOTAL TESTS</b> (Czechia)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main' id='' style='display: block;'>
+  <div class='list'>
+    <div class='note'>INDIVIDUAL COUNTRIES</div>
+    <ul>
+    <a id='Australia'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Australia', '#df64df')">
+    <a href='#Australia'>Australia</a>
+    </div>
+    <a id='Austria'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Austria', '#12c909')">
+    <a href='#Austria'>Austria</a>
+    </div>
+    <a id='Belgium'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Belgium', '#dbcb35')">
+    <a href='#Belgium'>Belgium</a>
+    </div>
+    <a id='Brazil'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Brazil', '#6c44a1')">
+    <a href='#Brazil'>Brazil</a>
+    </div>
+    <a id='Canada'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Canada', '#4bbb5d')">
+    <a href='#Canada'>Canada</a>
+    </div>
+    <a id='Chile'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Chile', '#0357a7')">
+    <a href='#Chile'>Chile</a>
+    </div>
+    <a id='Czechia'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Czechia', '#862d20')">
+    <a href='#Czechia'>Czechia</a>
+    </div>
+    <a id='Denmark'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Denmark', '#ffa703')">
+    <a href='#Denmark'>Denmark</a>
+    </div>
+    <a id='Finland'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Finland', '#2fe996')">
+    <a href='#Finland'>Finland</a>
+    </div>
+    <a id='France'></a>
+    <div class='linkcountry' onclick="toggle_country('box_France', '#754343')">
+    <a href='#France'>France</a>
+    </div>
+    <a id='Germany'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Germany', '#fa499b')">
+    <a href='#Germany'>Germany</a>
+    </div>
+    <a id='Greece'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Greece', '#34b454')">
+    <a href='#Greece'>Greece</a>
+    </div>
+    <a id='Ireland'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Ireland', '#d4af37')">
+    <a href='#Ireland'>Ireland</a>
+    </div>
+    <a id='Israel'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Israel', '#7b1a28')">
+    <a href='#Israel'>Israel</a>
+    </div>
+    <a id='Italy'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Italy', '#9a3aca')">
+    <a href='#Italy'>Italy</a>
+    </div>
+    <a id='Japan'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Japan', '#3f8126')">
+    <a href='#Japan'>Japan</a>
+    </div>
+    <a id='Luxembourg'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Luxembourg', '#0f6567')">
+    <a href='#Luxembourg'>Luxembourg</a>
+    </div>
+    <a id='Mexico'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Mexico', '#a32a1d')">
+    <a href='#Mexico'>Mexico</a>
+    </div>
+    <a id='Netherlands'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Netherlands', '#6a3631')">
+    <a href='#Netherlands'>Netherlands</a>
+    </div>
+    <a id='Norway'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Norway', '#d655ba')">
+    <a href='#Norway'>Norway</a>
+    </div>
+    <a id='Poland'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Poland', '#f90f0b')">
+    <a href='#Poland'>Poland</a>
+    </div>
+    <a id='Portugal'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Portugal', '#f7ab4d')">
+    <a href='#Portugal'>Portugal</a>
+    </div>
+    <a id='Romania'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Romania', '#fdfc0d')">
+    <a href='#Romania'>Romania</a>
+    </div>
+    <a id='Slovakia'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Slovakia', '#0564b2')">
+    <a href='#Slovakia'>Slovakia</a>
+    </div>
+    <a id='Spain'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Spain', '#30a316')">
+    <a href='#Spain'>Spain</a>
+    </div>
+    <a id='Sweden'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Sweden', '#c24d5b')">
+    <a href='#Sweden'>Sweden</a>
+    </div>
+    <a id='Switzerland'></a>
+    <div class='linkcountry' onclick="toggle_country('box_Switzerland', '#46f600')">
+    <a href='#Switzerland'>Switzerland</a>
+    </div>
+    <a id='UK'></a>
+    <div class='linkcountry' onclick="toggle_country('box_UK', '#d2f449')">
+    <a href='#UK'>UK</a>
+    </div>
+    <a id='USA'></a>
+    <div class='linkcountry' onclick="toggle_country('box_USA', '#6ab5fb')">
+    <a href='#USA'>USA</a>
+    </div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Australia' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Australia</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Australia.html'>AUSTRALIA: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Australia.html'>AUSTRALIA: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Australia.html'>AUSTRALIA: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Australia.html'>AUSTRALIA: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Australia.html'>AUSTRALIA: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Australia.html'>AUSTRALIA: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Australia.html'>AUSTRALIA: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Australia.html'>AUSTRALIA: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Australia.html'>AUSTRALIA: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Austria' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Austria</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Austria.html'>AUSTRIA: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Austria.html'>AUSTRIA: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Austria.html'>AUSTRIA: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Austria.html'>AUSTRIA: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Austria.html'>AUSTRIA: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Austria.html'>AUSTRIA: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Austria.html'>AUSTRIA: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Austria.html'>AUSTRIA: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Austria.html'>AUSTRIA: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Belgium' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Belgium</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Belgium.html'>BELGIUM: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Belgium.html'>BELGIUM: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Belgium.html'>BELGIUM: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Belgium.html'>BELGIUM: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Belgium.html'>BELGIUM: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Belgium.html'>BELGIUM: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Belgium.html'>BELGIUM: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Belgium.html'>BELGIUM: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Belgium.html'>BELGIUM: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Brazil' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Brazil</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Brazil.html'>BRAZIL: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Brazil.html'>BRAZIL: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Brazil.html'>BRAZIL: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Brazil.html'>BRAZIL: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Brazil.html'>BRAZIL: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Brazil.html'>BRAZIL: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Brazil.html'>BRAZIL: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Brazil.html'>BRAZIL: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Brazil.html'>BRAZIL: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Canada' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Canada</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Canada.html'>CANADA: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Canada.html'>CANADA: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Canada.html'>CANADA: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Canada.html'>CANADA: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Canada.html'>CANADA: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Canada.html'>CANADA: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Canada.html'>CANADA: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Canada.html'>CANADA: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Canada.html'>CANADA: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Chile' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Chile</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Chile.html'>CHILE: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Chile.html'>CHILE: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Chile.html'>CHILE: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Chile.html'>CHILE: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Chile.html'>CHILE: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Chile.html'>CHILE: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Chile.html'>CHILE: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Chile.html'>CHILE: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Chile.html'>CHILE: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Czechia' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Czechia</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Czechia.html'>CZECHIA: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Czechia.html'>CZECHIA: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Czechia.html'>CZECHIA: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Czechia.html'>CZECHIA: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Czechia.html'>CZECHIA: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Czechia.html'>CZECHIA: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Czechia.html'>CZECHIA: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Czechia.html'>CZECHIA: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Czechia.html'>CZECHIA: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Denmark' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Denmark</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Denmark.html'>DENMARK: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Denmark.html'>DENMARK: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Denmark.html'>DENMARK: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Denmark.html'>DENMARK: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Denmark.html'>DENMARK: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Denmark.html'>DENMARK: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Denmark.html'>DENMARK: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Denmark.html'>DENMARK: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Denmark.html'>DENMARK: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Finland' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Finland</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Finland.html'>FINLAND: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Finland.html'>FINLAND: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Finland.html'>FINLAND: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Finland.html'>FINLAND: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Finland.html'>FINLAND: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Finland.html'>FINLAND: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Finland.html'>FINLAND: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Finland.html'>FINLAND: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Finland.html'>FINLAND: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_France' style='display: none;'>
+  <div class='list'>
+    <div class='note'>France</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_France.html'>FRANCE: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_France.html'>FRANCE: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_France.html'>FRANCE: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_France.html'>FRANCE: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_France.html'>FRANCE: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_France.html'>FRANCE: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_France.html'>FRANCE: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_France.html'>FRANCE: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_France.html'>FRANCE: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_France.html'>FRANCE: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_France.html'>FRANCE: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_France.html'>FRANCE: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_France.html'>FRANCE: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_France.html'>FRANCE: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_France.html'>FRANCE: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_France.html'>FRANCE: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_France.html'>FRANCE: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_France.html'>FRANCE: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_France.html'>FRANCE: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_France.html'>FRANCE: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_France.html'>FRANCE: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_France.html'>FRANCE: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_France.html'>FRANCE: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_France.html'>FRANCE: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_France.html'>FRANCE: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_France.html'>FRANCE: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_France.html'>FRANCE: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_France.html'>FRANCE: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_France.html'>FRANCE: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_France.html'>FRANCE: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_France.html'>FRANCE: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_France.html'>FRANCE: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Germany' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Germany</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Germany.html'>GERMANY: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Germany.html'>GERMANY: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Germany.html'>GERMANY: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Germany.html'>GERMANY: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Germany.html'>GERMANY: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Germany.html'>GERMANY: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Germany.html'>GERMANY: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Germany.html'>GERMANY: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Germany.html'>GERMANY: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Greece' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Greece</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Greece.html'>GREECE: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Greece.html'>GREECE: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Greece.html'>GREECE: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Greece.html'>GREECE: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Greece.html'>GREECE: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Greece.html'>GREECE: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Greece.html'>GREECE: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Greece.html'>GREECE: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Greece.html'>GREECE: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Ireland' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Ireland</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Ireland.html'>IRELAND: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Ireland.html'>IRELAND: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Ireland.html'>IRELAND: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Ireland.html'>IRELAND: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Ireland.html'>IRELAND: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Ireland.html'>IRELAND: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Ireland.html'>IRELAND: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Ireland.html'>IRELAND: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Ireland.html'>IRELAND: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Israel' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Israel</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Israel.html'>ISRAEL: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Israel.html'>ISRAEL: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Israel.html'>ISRAEL: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Israel.html'>ISRAEL: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Israel.html'>ISRAEL: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Israel.html'>ISRAEL: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Israel.html'>ISRAEL: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Israel.html'>ISRAEL: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Israel.html'>ISRAEL: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Italy' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Italy</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Italy.html'>ITALY: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Italy.html'>ITALY: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Italy.html'>ITALY: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Italy.html'>ITALY: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Italy.html'>ITALY: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Italy.html'>ITALY: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Italy.html'>ITALY: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Italy.html'>ITALY: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Italy.html'>ITALY: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Japan' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Japan</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Japan.html'>JAPAN: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Japan.html'>JAPAN: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Japan.html'>JAPAN: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Japan.html'>JAPAN: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Japan.html'>JAPAN: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Japan.html'>JAPAN: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Japan.html'>JAPAN: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Japan.html'>JAPAN: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Japan.html'>JAPAN: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Luxembourg' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Luxembourg</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Luxembourg.html'>LUXEMBOURG: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Mexico' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Mexico</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Mexico.html'>MEXICO: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Mexico.html'>MEXICO: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Mexico.html'>MEXICO: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Mexico.html'>MEXICO: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Mexico.html'>MEXICO: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Mexico.html'>MEXICO: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Mexico.html'>MEXICO: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Mexico.html'>MEXICO: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Mexico.html'>MEXICO: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Netherlands' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Netherlands</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Netherlands.html'>NETHERLANDS: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Netherlands.html'>NETHERLANDS: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Netherlands.html'>NETHERLANDS: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Netherlands.html'>NETHERLANDS: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Netherlands.html'>NETHERLANDS: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Netherlands.html'>NETHERLANDS: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Netherlands.html'>NETHERLANDS: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Netherlands.html'>NETHERLANDS: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Netherlands.html'>NETHERLANDS: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Norway' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Norway</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Norway.html'>NORWAY: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Norway.html'>NORWAY: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Norway.html'>NORWAY: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Norway.html'>NORWAY: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Norway.html'>NORWAY: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Norway.html'>NORWAY: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Norway.html'>NORWAY: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Norway.html'>NORWAY: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Norway.html'>NORWAY: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Poland' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Poland</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Poland.html'>POLAND: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Poland.html'>POLAND: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Poland.html'>POLAND: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Poland.html'>POLAND: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Poland.html'>POLAND: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Poland.html'>POLAND: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Poland.html'>POLAND: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Poland.html'>POLAND: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Poland.html'>POLAND: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Portugal' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Portugal</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Portugal.html'>PORTUGAL: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Portugal.html'>PORTUGAL: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Portugal.html'>PORTUGAL: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Portugal.html'>PORTUGAL: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Portugal.html'>PORTUGAL: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Portugal.html'>PORTUGAL: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Portugal.html'>PORTUGAL: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Portugal.html'>PORTUGAL: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Portugal.html'>PORTUGAL: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Romania' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Romania</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Romania.html'>ROMANIA: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Romania.html'>ROMANIA: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Romania.html'>ROMANIA: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Romania.html'>ROMANIA: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Romania.html'>ROMANIA: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Romania.html'>ROMANIA: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Romania.html'>ROMANIA: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Romania.html'>ROMANIA: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Romania.html'>ROMANIA: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Slovakia' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Slovakia</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Slovakia.html'>SLOVAKIA: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Slovakia.html'>SLOVAKIA: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Slovakia.html'>SLOVAKIA: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Slovakia.html'>SLOVAKIA: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Slovakia.html'>SLOVAKIA: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Slovakia.html'>SLOVAKIA: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Slovakia.html'>SLOVAKIA: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Slovakia.html'>SLOVAKIA: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Slovakia.html'>SLOVAKIA: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Spain' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Spain</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Spain.html'>SPAIN: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Spain.html'>SPAIN: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Spain.html'>SPAIN: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Spain.html'>SPAIN: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Spain.html'>SPAIN: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Spain.html'>SPAIN: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Spain.html'>SPAIN: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Spain.html'>SPAIN: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Spain.html'>SPAIN: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Sweden' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Sweden</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Sweden.html'>SWEDEN: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Sweden.html'>SWEDEN: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Sweden.html'>SWEDEN: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Sweden.html'>SWEDEN: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Sweden.html'>SWEDEN: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Sweden.html'>SWEDEN: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Sweden.html'>SWEDEN: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Sweden.html'>SWEDEN: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Sweden.html'>SWEDEN: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_Switzerland' style='display: none;'>
+  <div class='list'>
+    <div class='note'>Switzerland</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_Switzerland.html'>SWITZERLAND: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_Switzerland.html'>SWITZERLAND: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_Switzerland.html'>SWITZERLAND: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_Switzerland.html'>SWITZERLAND: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_Switzerland.html'>SWITZERLAND: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_Switzerland.html'>SWITZERLAND: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_Switzerland.html'>SWITZERLAND: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_Switzerland.html'>SWITZERLAND: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_Switzerland.html'>SWITZERLAND: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_UK' style='display: none;'>
+  <div class='list'>
+    <div class='note'>UK</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_UK.html'>UK: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_UK.html'>UK: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_UK.html'>UK: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_UK.html'>UK: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_UK.html'>UK: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_UK.html'>UK: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_UK.html'>UK: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_UK.html'>UK: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_UK.html'>UK: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_UK.html'>UK: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_UK.html'>UK: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_UK.html'>UK: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_UK.html'>UK: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_UK.html'>UK: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_UK.html'>UK: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_UK.html'>UK: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_UK.html'>UK: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_UK.html'>UK: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_UK.html'>UK: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_UK.html'>UK: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_UK.html'>UK: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_UK.html'>UK: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_UK.html'>UK: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_UK.html'>UK: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_UK.html'>UK: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_UK.html'>UK: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_UK.html'>UK: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_UK.html'>UK: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_UK.html'>UK: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_UK.html'>UK: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_UK.html'>UK: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_UK.html'>UK: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+<div class='main2' id='box_USA' style='display: none;'>
+  <div class='list'>
+    <div class='note'>USA</div>
+    <ul>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Cases_Only_USA.html'>USA: Time series: <b>NUMBER OF CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyCases_Only_USA.html'>USA: Time series: <b>NUMBER OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyDeaths_Only_USA.html'>USA: Time series: <b>NUMBER OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyInfected_Only_USA.html'>USA: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_DailyTested_Only_USA.html'>USA: Time series: <b>NUMBER OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Deaths_Only_USA.html'>USA: Time series: <b>NUMBER OF DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Infected_Only_USA.html'>USA: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_ts_Tested_Only_USA.html'>USA: Time series: <b>NUMBER OF TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_CasesPop_Only_USA.html'>USA: Time series: <b>NUMBER OF CASES PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_DeathsPop_Only_USA.html'>USA: Time series: <b>NUMBER OF DEATHS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_InfectedPop_Only_USA.html'>USA: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tspop_TestedPop_Only_USA.html'>USA: Time series: <b>NUMBER OF TESTS PER POPULATION</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyCasesRatio_Only_USA.html'>USA: Time series: <b>RATE OF DAILY CASES</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyDeathsRatio_Only_USA.html'>USA: Time series: <b>RATE OF DAILY DEATHS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyInfectedRatio_Only_USA.html'>USA: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_tsrate_DailyTestedRatio_Only_USA.html'>USA: Time series: <b>RATE OF DAILY TESTS</b></a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Cases_Only_USA.html'>USA: Time series: <b>NUMBER OF CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyCases_Only_USA.html'>USA: Time series: <b>NUMBER OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyDeaths_Only_USA.html'>USA: Time series: <b>NUMBER OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyInfected_Only_USA.html'>USA: Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_DailyTested_Only_USA.html'>USA: Time series: <b>NUMBER OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Deaths_Only_USA.html'>USA: Time series: <b>NUMBER OF DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Infected_Only_USA.html'>USA: Time series: <b>NUMBER OF ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslog_Tested_Only_USA.html'>USA: Time series: <b>NUMBER OF TESTS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_CasesPop_Only_USA.html'>USA: Time series: <b>NUMBER OF CASES PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_DeathsPop_Only_USA.html'>USA: Time series: <b>NUMBER OF DEATHS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_InfectedPop_Only_USA.html'>USA: Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslogpop_TestedPop_Only_USA.html'>USA: Time series: <b>NUMBER OF TESTS PER POPULATION</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyCasesRatio_Only_USA.html'>USA: Time series: <b>RATE OF DAILY CASES</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyDeathsRatio_Only_USA.html'>USA: Time series: <b>RATE OF DAILY DEATHS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyInfectedRatio_Only_USA.html'>USA: Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b> (logarhitmic scale)</a></li></div>
+    <div class='link'><li><a href='plots_plotly/plotly_xtslograte_DailyTestedRatio_Only_USA.html'>USA: Time series: <b>RATE OF DAILY TESTS</b> (logarhitmic scale)</a></li></div>
+    </ul>
+  </div>
+</div>
+
+</body>
 </html>

@@ -1,4 +1,4 @@
-read_data_ocdc = function(url, max_lag=3, lag=1) {
+read_data_ocdc = function(url, max_lag=10, lag=1) {
 
   file = 'data/'%.%separate_path(url)$filename
 
@@ -35,8 +35,10 @@ read_data_ocdc = function(url, max_lag=3, lag=1) {
   }
 
   data %>% mutate(Country=recode(Country,
-      'Czech_Republic'='Czechia', 'United_States_of_America'='USA',
-      'United_Kingdom'='UK', 'South_Korea'='S. Korea'))
+      'Czech_Republic'='Czechia', 
+      'United_States_of_America'='USA',
+      'United_Kingdom'='UK', 
+      'South_Korea'='SouthKorea'))
 
 }
 
@@ -67,14 +69,14 @@ load_data_mzcr = function(CountryCZ) {
 
 ####################################################
 
-load_data_individual = function(countries) {
+load_data_individual = function(countries, max_lag=as.numeric(as.Date(t_day())-as.Date('2020-01-01'))) {
 
   if(missing(countries)) countries = download_country_list_wom(url_wom)
 
   Data = Latest = NULL
   for(country in split_rows(countries)) {
 
-    rda_file_country = 'data/'%.%country$prefix%.%country$name%.%'_historical_'%.%c(y_day(lag=0:-2))%.%'.rda' %>%
+    rda_file_country = 'data/'%.%country$prefix%.%country$name%.%'_historical_'%.%c(y_day(lag=0:-max_lag))%.%'.rda' %>%
       `[`(file.exists(.)) %>% h1()
     rda_file_latest = list.files('data', country$name%.%'_latest_', full.names=TRUE) %>%
       file_sort_time() %>% h1()

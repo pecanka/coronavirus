@@ -24,6 +24,10 @@ load_data = function(envir=.GlobalEnv) {
   dataWOM = load_data_individual(available_countries_wom)
   Data = dataWOM$Data
   Latest = dataWOM$Latest
+  
+  change_Korea = . %>% mutate(Country=ifelse(Country=="S. Korea", "SouthKorea", Country))
+  Data %<>% change_Korea
+  Latest %<>% change_Korea
 
   ## Merge the WOM data with the MZCR data
   DataCZ1 = DataCZ %>%
