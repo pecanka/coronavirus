@@ -27,9 +27,9 @@ do_plot_bar = FALSE
 do_plot_ts = FALSE
 do_plot_lm = FALSE
 
-do_process_lag = do_plot = do_plot_lag = do_plot_bar = do_plot_ts = do_plot_lm = TRUE
+do_process_lag = do_plot = do_plot_lag = do_plot_bar = do_plot_ts = do_plot_lm = !TRUE
 
-do_save_plotly_to_file = TRUE
+do_save_plotly_to_file = !TRUE
 
 do_make_index_html = TRUE
 

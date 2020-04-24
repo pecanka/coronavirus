@@ -194,7 +194,7 @@ make_index_html = function(envir=.GlobalEnv) {
 
   for(p in ps[is_all]) {
 
-    if(p %in% ps[first_positive(grepl("Czechia",ds))]) {
+    if(p %in% ps[w_first_positive(grepl("Czechia",ds))]) {
       box_reopen('Plots based on data available for CZECHIA only')
     }
 
