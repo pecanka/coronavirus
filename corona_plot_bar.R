@@ -1,6 +1,6 @@
 plot_bar = function(Latest, envir=.GlobalEnv) {
 
-  catn("Plotting barplots...")
+  catn("Plotting bar plots...")
 
   descr = get('descriptions', envir=envir)
 
@@ -34,7 +34,7 @@ plot_bar = function(Latest, envir=.GlobalEnv) {
     ## (i.e. Country, in this case)
     D = Latest %>% arrange(Country) %>% mutate(y=!!sym(v)) %>%
       select(Country, y, XCol) %>% filter(complete.cases(.)) %>% arrange(desc(y)) %>%
-      mutate(fCountry=as_factor(Country))
+      mutate(fCountry=to_factor(Country))
       #mutate(fCountry=factor(1:n(), labels=Country))
 
     plot_ly(D, x=~fCountry, y=~y, color=~fCountry, name=~Country, colors=~XCol, type='bar') %>%

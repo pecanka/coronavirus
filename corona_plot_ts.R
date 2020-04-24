@@ -1,6 +1,6 @@
 plot_ts = function(Data, envir=.GlobalEnv) {
 
-  catn("Plotting progression plots...")
+  catn("Plotting time series plots...")
 
   descr = get('descriptions', envir=envir)
   
@@ -55,10 +55,10 @@ plot_ts = function(Data, envir=.GlobalEnv) {
 
       if(is_all_same(D$Country)) {
         D %<>% bind_rows(slice(.,1) %>% 
-          mutate(Country='&nbsp;', fCountry=as_factor(Country), XCol='black'), .)
+          mutate(Country='&nbsp;', fCountry=to_factor(Country), XCol='black'), .)
       }
 
-      D %<>% mutate(fCountry=as_factor(Country)) %>%
+      D %<>% mutate(fCountry=to_factor(Country)) %>%
         copy_attributes(DataF, 'plotly_', pattern=TRUE) %>%
         structure('plotly_title'=title)
 

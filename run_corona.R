@@ -1,4 +1,4 @@
-#source('d:/Dropbox/Projects/CoronaVirus/run_corona.R', local=.GlobalEnv)
+#source('d:/Dropbox/Projects/CoronaVirus/run_corona.R')
 options(scipen=5)
 
 setwd2()
@@ -24,10 +24,10 @@ do_process_lag = FALSE
 do_plot = FALSE
 do_plot_lag = FALSE
 do_plot_bar = FALSE
-do_plot_ts = !FALSE
+do_plot_ts = FALSE
 do_plot_lm = FALSE
 
-#do_process_lag = do_plot = do_plot_lag = do_plot_bar = do_plot_ts = do_plot_lm = FALSE
+do_process_lag = do_plot = do_plot_lag = do_plot_bar = do_plot_ts = do_plot_lm = TRUE
 
 do_save_plotly_to_file = TRUE
 
@@ -39,7 +39,7 @@ format_for_plots = 'html'
 countries_focus = TRUE
 
 PerPopulation = 1000000
-Country0 = 'Italy'
+Country0 = "Italy"
 Countries_focus_narrow = c("Netherlands","Germany","USA","UK","Czechia")
 
 Countries_focus_broad = c('Czechia','Italy','Germany','Netherlands',
