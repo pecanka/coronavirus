@@ -4,30 +4,32 @@ plot_ts = function(Data, envir=.GlobalEnv) {
 
   descr = get('descriptions', envir=envir)
   
-  descr %<>% list_update(list(plotly_ts_Cases="Time series: <b>NUMBER OF CASES</b>"))
-  descr %<>% list_update(list(plotly_ts_Deaths="Time series: <b>NUMBER OF DEATHS</b>"))
-  descr %<>% list_update(list(plotly_ts_Infected="Time series: <b>NUMBER OF ACTIVE INFECTIONS</b>"))
-  descr %<>% list_update(list(plotly_ts_Tested="Time series: <b>NUMBER OF TESTS</b>"))
-
-  descr %<>% list_update(list(plotly_ts_DailyCases="Time series: <b>NUMBER OF DAILY CASES</b>"))
-  descr %<>% list_update(list(plotly_ts_DailyDeaths="Time series: <b>NUMBER OF DAILY DEATHS</b>"))
-  descr %<>% list_update(list(plotly_ts_DailyInfected="Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS</b>"))
-  descr %<>% list_update(list(plotly_ts_DailyTested="Time series: <b>NUMBER OF DAILY TESTS</b>"))
-
-  descr %<>% list_update(list(plotly_tspop_CasesPop="Time series: <b>NUMBER OF CASES PER POPULATION</b>"))
-  descr %<>% list_update(list(plotly_tspop_DeathsPop="Time series: <b>NUMBER OF DEATHS PER POPULATION</b>"))
-  descr %<>% list_update(list(plotly_tspop_InfectedPop="Time series: <b>NUMBER OF ACTIVE INFECTIONS PER POPULATION</b>"))
-  descr %<>% list_update(list(plotly_tspop_TestedPop="Time series: <b>NUMBER OF TESTS PER POPULATION</b>"))
+  # Note: The naming of elements after 'plotly_' is tripped decides the final order on the html page.
   
-  descr %<>% list_update(list(plotly_tspop_DailyCasesPop="Time series: <b>NUMBER OF DAILY CASES PER POPULATION</b>"))
-  descr %<>% list_update(list(plotly_tspop_DailyDeathsPop="Time series: <b>NUMBER OF DAILY DEATHS PER POPULATION</b>"))
-  descr %<>% list_update(list(plotly_tspop_DailyInfectedPop="Time series: <b>NUMBER OF DAILY ACTIVE INFECTIONS PER POPULATION</b>"))
-  descr %<>% list_update(list(plotly_tspop_DailyTestedPop="Time series: <b>NUMBER OF DAILY TESTS PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_ts_Cases="Time series: <b>NUMBER of TOTAL CASES</b>"))
+  descr %<>% list_update(list(plotly_ts_Deaths="Time series: <b>NUMBER of TOTAL DEATHS</b>"))
+  descr %<>% list_update(list(plotly_ts_Infected="Time series: <b>NUMBER of TOTAL ACTIVE INFECTIONS</b>"))
+  descr %<>% list_update(list(plotly_ts_Tested="Time series: <b>NUMBER of TOTAL TESTS</b>"))
 
-  descr %<>% list_update(list(plotly_tsrate_DailyCasesRatio="Time series: <b>RATE OF DAILY CASES</b>"))
-  descr %<>% list_update(list(plotly_tsrate_DailyDeathsRatio="Time series: <b>RATE OF DAILY DEATHS</b>"))
-  descr %<>% list_update(list(plotly_tsrate_DailyInfectedRatio="Time series: <b>RATE OF DAILY ACTIVE INFECTIONS</b>"))
-  descr %<>% list_update(list(plotly_tsrate_DailyTestedRatio="Time series: <b>RATE OF DAILY TESTS</b>"))
+  descr %<>% list_update(list(plotly_tsd_DailyCases="Time series: <b>NUMBER of DAILY CASES</b>"))
+  descr %<>% list_update(list(plotly_tsd_DailyDeaths="Time series: <b>NUMBER of DAILY DEATHS</b>"))
+  descr %<>% list_update(list(plotly_tsd_DailyInfected="Time series: <b>NUMBER of DAILY ACTIVE INFECTIONS</b>"))
+  descr %<>% list_update(list(plotly_tsd_DailyTested="Time series: <b>NUMBER of DAILY TESTS</b>"))
+
+  descr %<>% list_update(list(plotly_tspop_CasesPop="Time series: <b>NUMBER of TOTAL CASES PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_tspop_DeathsPop="Time series: <b>NUMBER of TOTAL DEATHS PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_tspop_InfectedPop="Time series: <b>NUMBER of TOTAL ACTIVE INFECTIONS PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_tspop_TestedPop="Time series: <b>NUMBER of TOTAL TESTS PER POPULATION</b>"))
+  
+  descr %<>% list_update(list(plotly_tspopd_DailyCasesPop="Time series: <b>NUMBER of DAILY CASES PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_tspopd_DailyDeathsPop="Time series: <b>NUMBER of DAILY DEATHS PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_tspopd_DailyInfectedPop="Time series: <b>NUMBER of DAILY ACTIVE INFECTIONS PER POPULATION</b>"))
+  descr %<>% list_update(list(plotly_tspopd_DailyTestedPop="Time series: <b>NUMBER of DAILY TESTS PER POPULATION</b>"))
+
+  descr %<>% list_update(list(plotly_tsrate_DailyCasesRatio="Time series: <b>RATE of DAILY CASES</b>"))
+  descr %<>% list_update(list(plotly_tsrate_DailyDeathsRatio="Time series: <b>RATE of DAILY DEATHS</b>"))
+  descr %<>% list_update(list(plotly_tsrate_DailyInfectedRatio="Time series: <b>RATE of DAILY ACTIVE INFECTIONS</b>"))
+  descr %<>% list_update(list(plotly_tsrate_DailyTestedRatio="Time series: <b>RATE of DAILY TESTS</b>"))
 
   CountryCollections = list(NA) %append% as.list(unique(Data$Country))
 

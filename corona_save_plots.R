@@ -96,10 +96,10 @@ make_index_html = function(envir=.GlobalEnv) {
     wL("  <div class='list'>")
   list_close = function()
     wL("  </div>")
-  ul_open = function()
-    wL("    <ul>")
-  ul_close = function()
-    wL("    </ul>")
+  ul_open = function() {}
+    #wL("    <ul>")
+  ul_close = function() {}
+    #wL("    </ul>")
   gap = function()
     wL("    <p>")
 
@@ -154,9 +154,18 @@ make_index_html = function(envir=.GlobalEnv) {
     box_open(x, hidden, id, ul_open, class)
   }
 
-  link = function(p)
-    wL("    <div class='link'><li><a href='"%.%filename(p)%.%"'>"%.%title(p)%.%"</a></li></div>")
-  link_country = function(p)  {
+  link_open = function(class='link')
+    wL("    <div class='"%.%class%.%"'>")
+  link_close = function()
+    wL("    </div>")
+
+  add_link = function(p, open_link=TRUE, close_link=TRUE) {
+    if(open_link) link_open()
+    wL("      <li><a href='"%.%filename(p)%.%"'>"%.%title(p)%.%"</a></li>")
+    if(close_link) link_close()
+  }
+    
+  add_link_country = function(p)  {
     wL("    <a id='"%.%countries[p]%.%"'></a>")
     wL("    <div class='linkcountry' onclick=\"toggle_country('box_"%.%countries[p]%.%"', '"%.% country_colors[countries[p]] %.%"')\">")
     wL("    <a href='#"%.%countries[p]%.%"'>"%.%countries[p]%.%"</a>")
@@ -180,8 +189,10 @@ make_index_html = function(envir=.GlobalEnv) {
 
   country_colors = Data4 %>% group_by(Country) %>% filter(row_number()==1) %>% select(Country, XCol) %>% {structure(.$XCol, names=.$Country)}
 
-  is_gap = ps[is_all] %>% sub('_[^_]+$','',.) %>% sub('plot_','',.) %>% c(.[1],.) %>% str_diff() %>% setNames(ps[is_all])
-  is_log = ps[is_all] %>% sub('_[^_]+$','',.) %>% sub('plot_','',.) %>% {regexpr('log',.)>0} %>% {. & !dplyr::lag(.)} %>% setNames(ps[is_all])
+  plot_types = ps %>% sub('plotly_','',.) %>% sub('_.*$','',.)
+  is_gap = plot_types %>% c(.[1],.) %>% str_diff() %>% setNames(ps)
+  #is_log = plot_types %>% grepl('log',.) %>% {. & !dplyr::lag(.)} %>% setNames(ps)
+  is_log = plot_types %>% grepl('log',.) %>% {. & is_start_of_run(.)} %>% setNames(ps)
 
   html_open()
   html_tracer()
@@ -201,26 +212,43 @@ make_index_html = function(envir=.GlobalEnv) {
     if(is_gap[p]) gap()
     if(is_log[p]) head_small_ul('logarhitmic scale')
 
-    link(p)
+    add_link(p)
 
   }
 
   box_reopen("INDIVIDUAL COUNTRIES")
 
+  link_open('link2')
   for(p in unique(ps[!is_all])) {
-    if(is_new_country[p]) link_country(p)
+    if(is_new_country[p]) add_link_country(p)
   }
+  link_close()
 
   for(p in ps[!is_all]) {
 
     if(is_new_country[p]) {
+      link_close()
       box_reopen(countries[p], hidden=TRUE, id='box_'%.%countries[p], class='main2')
+      head_small('linear scale')
+      link_open()
     }
 
-    link(p)
+    if(is_gap[p] && !is_new_country[p]) {
+      link_close()
+      gap()
+    }
+    if(is_log[p]) {
+      head_small_ul('logarhitmic scale')
+    }
+    if(is_gap[p] && !is_new_country[p]) {
+      link_open('link2')
+    }
+
+    add_link(p, FALSE, FALSE)
 
   }
 
+  link_close()
   box_close()
 
   html_close()

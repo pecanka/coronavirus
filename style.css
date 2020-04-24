@@ -72,6 +72,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   border: 1px solid silver;
+  padding-bottom: 20px
 }
 
 .main2 {
@@ -80,26 +81,38 @@ body {
 }
 
 .main2 a:link {
-  color: black;
+  color: #cccccc;
 }
 
 .main2 a:visited {
-  color: #252525;
+  color: #aaaaaa;
 }
 
 .main2 a:hover, .main2 a:active {
-  color: #606060;
+  color: #ffffff;
 }
 
-.link {
-  height: 30px;
+.link, .link2 {
+  min-height: 30px;
+  width: 90%;
+  padding-left: 30px;
+  margin-left: auto;
+  margin-right: auto;
   line-height: 30px;
-  vertical-align: middle
+  vertical-align: middle;
+  border: 0px solid black;
+  border-radius: 5px;
+  background: rgba(30, 30, 30, 0.5);
+}
+
+.link2 {
+  padding-top: 20px;
+  padding-bottom: 20px;  
 }
 
 .linkcountry {
   height: 35px;
-  width: 129px;
+  width: 120px;
   line-height: 30px;
   vertical-align: middle;
   border: 1px solid #999999;
