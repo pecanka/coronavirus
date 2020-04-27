@@ -1,4 +1,4 @@
-save_plots_to_file = function(envir=.GlobalEnv, add_tracer=TRUE, add_goback=TRUE, only_nonexistent=!TRUE) {
+save_plots_to_file = function(envir=.GlobalEnv, add_tracer=TRUE, add_goback=TRUE, only_nonexistent=FALSE) {
 
   ps = ls(pattern='^plotly_', envir=envir) %>% sort()
 

@@ -14,7 +14,9 @@ url_wom = 'https://www.worldometers.info/coronavirus/'
 url_mzcz = 'https://onemocneni-aktualne.mzcr.cz/covid-19'
 url_mzcz_api = 'https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/'
 
-do_download_data = !TRUE
+do_daily_update = !TRUE
+
+do_download_data = FALSE
 do_load_data = FALSE
 
 do_force_fresh_data = FALSE
@@ -27,11 +29,19 @@ do_plot_bar = FALSE
 do_plot_ts = FALSE
 do_plot_lm = FALSE
 
-do_process_lag = do_plot = do_plot_lag = do_plot_bar = do_plot_ts = do_plot_lm = !TRUE
+do_process_lag = do_plot = do_plot_lag = do_plot_bar = do_plot_ts = do_plot_lm = FALSE
 
-do_save_plotly_to_file = !TRUE
-
+do_save_plotly_to_file = !FALSE
+do_save_plotly_to_file_only_nonexistent = FALSE
 do_make_index_html = TRUE
+
+if(do_daily_update) {
+  do_download_data = TRUE
+  do_process_lag = do_plot = do_plot_lag = do_plot_bar = do_plot_ts = do_plot_lm = TRUE
+  do_save_plotly_to_file = TRUE
+  do_save_plotly_to_file_only_nonexistent = FALSE
+  do_make_index_html = TRUE
+}
 
 format_for_plots = 'html'
 #format_for_plots = 'png'
@@ -97,7 +107,7 @@ if(do_plot_lm)
 announce_plots()
 
 if(do_save_plotly_to_file)
-  save_plots_to_file()
+  save_plots_to_file(only_nonexistent=do_save_plotly_to_file_only_nonexistent)
   
 if(do_make_index_html)
   make_index_html()
