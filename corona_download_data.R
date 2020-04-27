@@ -120,6 +120,8 @@ download_data_wom = function(available_countries, url) {
 
     save(data, file=out_file %>% sub('@type','historical',.) %>% sub('@date',t1(data$Date),.))
      #'data/'%.%country_prefix%.%country_name%.%'_historical_'%.%t1(data$Date)%.%'.rda')
+     
+    if(country$name=='Czechia') browser()
 
   }
 

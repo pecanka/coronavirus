@@ -22,7 +22,8 @@ process_lag = function(Data, Lag_by='Cases', lag_start=-10, lag_end=40, Country0
 
   catn("Processing lag by ",Lag_by," ...")
 
-  Countries = unique(Data$Country)
+  Countries = Data %>% group_by(Country) %>% filter(!all(is.na(Cases))) %>% pull(Country) %>% unique()
+  
   if(Country0 %notin% Countries) stop('Missing data for Country0 (',Country0,').')
 
   lead2 = function(x, n, ...)
@@ -51,6 +52,7 @@ process_lag = function(Data, Lag_by='Cases', lag_start=-10, lag_end=40, Country0
       select(Country, everything())
 
     y = matchup(ks, D0, D, Lag_by)
+    
     k = t1(ks[which(abs(y-min(y,na.rm=TRUE))<1e-12)])
     K[K$Country==C,]$Lag = k
 

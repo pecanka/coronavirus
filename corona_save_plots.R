@@ -4,7 +4,7 @@ save_plots_to_file = function(envir=.GlobalEnv, add_tracer=TRUE, add_goback=TRUE
 
   catn("Total number of plots: ", length(ps))
 
-  ds = descriptions[sub("_Only_.*$",'', ps)]
+  ds = descriptions[sub("_Only_.*$",'', ps)] %>% setNames(ps)
 
   on.exit(setwd('..'))
   setwd('plots_plotly')
@@ -22,7 +22,7 @@ save_plots_to_file = function(envir=.GlobalEnv, add_tracer=TRUE, add_goback=TRUE
 
     if(format_for_plots=='html') {
 
-      html_title = "Coronavirus: "%.%gsub("<[/]?b>","",ds[p])%.%" (by Pecanka Consulting)"
+      html_title = "Coronavirus: "%.%gsub("<[/]?b>","",descriptions[p])%.%" (by Pecanka Consulting)"
       args = list(as_widget(get(p)), file=filename, background='#000000',
                   title=html_title, selfcontained=FALSE, libdir='plotly_files',
                   deps=deps)
