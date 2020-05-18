@@ -1,6 +1,6 @@
 read_data_ocdc = function(url, max_lag=10, lag=1) {
 
-  file = 'data/'%.%separate_path(url)$filename
+  file = 'data/'%p%separate_path(url)$filename
 
   data = if(!file.exists(file)) {
     warn("File '",file,"' does not exist.")
@@ -48,9 +48,9 @@ load_data_mzcr = function(CountryCZ) {
   country_name = CountryCZ$name
   country_prefix = CountryCZ$prefix
 
-  rda_file_country = 'data/'%.%country_prefix%.%country_name%.%'_historical_'%.%c(utilbox::t_day(),y_day())%.%'.rda' %>%
+  rda_file_country = 'data/'%p%country_prefix%p%country_name%p%'_historical_'%p%c(utilbox::t_day(),y_day())%p%'.rda' %>%
     `[`(file.exists(.)) %>% h1()
-  rda_file_latest = list.files('data', country_prefix%.%country_name%.%'_latest_', full.names=TRUE) %>%
+  rda_file_latest = list.files('data', country_prefix%p%country_name%p%'_latest_', full.names=TRUE) %>%
     file_sort_time() %>% h1()
 
   if(is_empty(rda_file_country))
@@ -76,9 +76,9 @@ load_data_individual = function(countries, max_lag=as.numeric(as.Date(t_day())-a
   Data = Latest = NULL
   for(country in split_rows(countries)) {
 
-    rda_file_country = 'data/'%.%country$prefix%.%country$name%.%'_historical_'%.%c(y_day(lag=0:-max_lag))%.%'.rda' %>%
+    rda_file_country = 'data/'%p%country$prefix%p%country$name%p%'_historical_'%p%c(y_day(lag=0:-max_lag))%p%'.rda' %>%
       `[`(file.exists(.)) %>% h1()
-    rda_file_latest = list.files('data', country$name%.%'_latest_', full.names=TRUE) %>%
+    rda_file_latest = list.files('data', country$name%p%'_latest_', full.names=TRUE) %>%
       file_sort_time() %>% h1()
 
     if(is_empty(rda_file_country))

@@ -4,23 +4,23 @@ plot_lag = function(Data, envir=.GlobalEnv, envir1=environment()) {
 
   descr = get('descriptions', envir=envir)
   
-  descr %<>% list_update(structure(list("Country comparison: <b>LAGs BEHIND "%.%toupper(Country0)%.%
-                         "</b> (in number of days)"), names='plotly_lag'%.%Country0))
+  descr %<>% list_update(structure(list("Country comparison: <b>LAGs BEHIND "%p%toupper(Country0)%p%
+                         "</b> (in number of days)"), names='plotly_lag'%p%Country0))
   
   assign('descriptions', descr, envir=envir) 
 
-  title = "Progression of the number of cases and deaths: a comparison with "%.%Country0
-  explain_lag = "Each country's progression of case counts is matched up against "%.%Country0%.%
-    "'s case count, which determines the number of days the given country lags behind "%.%Country0%.%".\n"%.%
-    "The resulting matching is shown on the top row, while the bottom row shows the death count progression"%.%
-    " with "%.%Country0%.%"'s counts shifted by the determined lag."
+  title = "Progression of the number of cases and deaths: a comparison with "%p%Country0
+  explain_lag = "Each country's progression of case counts is matched up against "%p%Country0%p%
+    "'s case count, which determines the number of days the given country lags behind "%p%Country0%p%".\n"%p%
+    "The resulting matching is shown on the top row, while the bottom row shows the death count progression"%p%
+    " with "%p%Country0%p%"'s counts shifted by the determined lag."
 
   # Produce plots individual for individual countries
   plots_Cases = plots_Deaths = list()
   for(C in Countries_focus_narrow) {
 
     D3 = Data %>% filter(Country==C) %T>%
-      write.table(file='tables/'%.%C%.%'_vs_'%.%Country0%.%'_'%.%t_day()%.%'.txt', row.names=FALSE, quote=FALSE) %>%
+      write.table(file='tables/'%p%C%p%'_vs_'%p%Country0%p%'_'%p%t_day()%p%'.txt', row.names=FALSE, quote=FALSE) %>%
       {bind_rows(select(., -ends_with('0')),
                  mutate(., Date0=Date) %>% select(ends_with('0')) %>% rename_all(~sub('0$','',.x)))} %>%
       mutate(Date=sub('[0-9]+-','',Date))
@@ -29,7 +29,7 @@ plot_lag = function(Data, envir=.GlobalEnv, envir1=environment()) {
 
     for(v in c('Cases','Deaths')) {
 
-      p = 'plots_'%.%v
+      p = 'plots_'%p%v
 
       D3 %<>% mutate(y=!!sym(v), col=Col[Country])
 
@@ -61,6 +61,6 @@ plot_lag = function(Data, envir=.GlobalEnv, envir1=environment()) {
     layout(annotations=annot_bottom %modify% list(text=explain_lag, y=-0.12, x=0.48)) %>%
     layout(annotations=annot_source) %>%
     layout(annotations=annot_author %modify% list(x=1)) %>%
-    assign('plotly_lag'%.%Country0, ., envir=envir)
+    assign('plotly_lag'%p%Country0, ., envir=envir)
 
 }

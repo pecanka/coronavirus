@@ -42,7 +42,7 @@ plot_ts = function(Data, envir=.GlobalEnv) {
       v = p %>% sub('.*_','',.)
       title = set_titles(descr[[p]], 'Progression of the')
       
-      p2 = if(is.na(Collection)) p else p %.% '_Only_' %.% collapse0(Collection, sep='_')
+      p2 = if(is.na(Collection)) p else p %p% '_Only_' %p% collapse0(Collection, sep='_')
       
       p_log = sub('_ts','_xtslog',p2)
 
@@ -82,7 +82,7 @@ plot_ts = function(Data, envir=.GlobalEnv) {
 
       #if(p=='plotly_ts_Tested') stop()
 
-      descr %<>% list_update(list(descr[[p]]%.%" (logarhitmic scale)") %>% setNames(p_log))
+      descr %<>% list_update(list(descr[[p]]%p%" (logarhitmic scale)") %>% setNames(p_log))
       
     }
 

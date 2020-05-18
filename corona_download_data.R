@@ -1,6 +1,6 @@
 download_country_list_wom = function(url, name_start='wom__list-of-countries_') {
 
-  pattern = name_start%.%ifelse(do_use_any_existing_data,"",t_day())
+  pattern = name_start%p%ifelse(do_use_any_existing_data,"",t_day())
   f = list.files('data',pattern, full.names=TRUE) %>% file_sort_time() %>% h1()
 
   if(!do_force_fresh_data && length(f)>0) {
@@ -11,8 +11,8 @@ download_country_list_wom = function(url, name_start='wom__list-of-countries_') 
     html = read_html(url)
     name = html %>% html_nodes('.mt_a') %>% html_text()
     surl = html %>% html_nodes('.mt_a') %>% html_attr('href')
-    countries = tibble(name, prefix='wom_', url=url%.%surl) %>% unique()
-    save(countries, file='data/'%.%name_start%.%t_day()%.%'.rda')
+    countries = tibble(name, prefix='wom_', url=url%p%surl) %>% unique()
+    save(countries, file='data/'%p%name_start%p%t_day()%p%'.rda')
   }
 
   countries
@@ -92,7 +92,7 @@ download_data_wom = function(available_countries, url) {
     country_prefix = country %>% pull(prefix)
     country_name = country %>% pull(name)
 
-    out_file = 'data/'%.%country_prefix%.%country_name%.%'_@type_@date.rda'
+    out_file = 'data/'%p%country_prefix%p%country_name%p%'_@type_@date.rda'
 
     catn("Scrapping data for ",country_name," from WOM ...")
     html = try(read_html(country_url))
@@ -101,7 +101,7 @@ download_data_wom = function(available_countries, url) {
 
     latest = html_extract_latest_wom(html, country_name)
     save(latest, file=out_file %>% sub('@type','latest',.) %>% sub('@date',t_day('%Y-%m-%d-%H%M%S'),.))
-      #'data/'%.%country_prefix%.%country_name%.%'_latest_'%.%t_day('%Y-%m-%d-%H%M%S')%.%'.rda')
+      #'data/'%p%country_prefix%p%country_name%p%'_latest_'%p%t_day('%Y-%m-%d-%H%M%S')%p%'.rda')
 
     series = html %>% as.character() %>% regmatches(gregexpr('series:[^}]+[}]',.)) %>% unlist()
     series_names = series %>% str_extract("name: '[^,]+',") %>% str_extract("'.+'") %>% gsub("[' ]","",.)
@@ -119,9 +119,9 @@ download_data_wom = function(available_countries, url) {
       select(Country, Date, everything())
 
     save(data, file=out_file %>% sub('@type','historical',.) %>% sub('@date',t1(data$Date),.))
-     #'data/'%.%country_prefix%.%country_name%.%'_historical_'%.%t1(data$Date)%.%'.rda')
+     #'data/'%p%country_prefix%p%country_name%p%'_historical_'%p%t1(data$Date)%p%'.rda')
      
-    if(country$name=='Czechia') browser()
+    #if(country$name=='Czechia') browser()
 
   }
 

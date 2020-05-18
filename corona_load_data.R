@@ -1,7 +1,5 @@
 load_data = function(envir=.GlobalEnv) {
 
-  Latest_all = load_latest_all_wom()
-
   ## Read OCDC data from a file
   DataOCDC = read_data_ocdc(url_ocdc)
   LatestOCDC = DataOCDC %>% group_by(Country) %>% slice(n()) %>% ungroup()
@@ -16,7 +14,7 @@ load_data = function(envir=.GlobalEnv) {
   ## they are appended below)
   DataCZ = DataOCDC %>% filter(Country=='Czechia') %>%
     select(-Country, -Population, -ID, -Code) %>%
-    rename_all(~.x%.%'OCDC') %>%
+    rename_all(~.x%p%'OCDC') %>%
     select(Date=DateOCDC, Deaths=DeathsOCDC, DailyDeaths=DailyDeathsOCDC, everything()) %>%
     left_join(DataCZ, ., by='Date') %>% arrange(Date) %T>% print(n=100)
 
@@ -58,7 +56,7 @@ load_data = function(envir=.GlobalEnv) {
 
   ## Add the population and country codes to the WOM data
 
-  call_Pop = . %>% mutate_at(vars(ends_with("Pop_")), ~.x/Population*PerPopulation) %>%
+  call_Pop = . %>% mutate_at(vars(ends_with('Pop_')), ~.x/Population*PerPopulation) %>%
     setNames(sub("_$",'',names(.)))
 
   Data %<>% left_join(PopData, by='Country') %>%
@@ -87,10 +85,17 @@ load_data = function(envir=.GlobalEnv) {
            #DailyRecoveredPop_=DailyRecovered) %>%
     call_Pop
 
-  Latest_all %<>% left_join(PopData, by='Country') %>%
+  
+  Latest_all = load_latest_all_wom()
+
+  if('Population' %nin% names(Latest_all))
+    Latest_all %<>% left_join(PopData, by='Country') 
+    
+  Latest_all %<>%
     mutate(ActiveCasesPop_=ActiveCases, CriticalCasesPop_=CriticalCases, NewDeathsPop_=NewDeaths) %>%
     call_Pop
 
+  browser()
   Latest %<>% left_join(Latest_all, by=c('Country','Date'), suffix=c('','_2'))
 
   if(!setequal(unique(Latest$Date), unique(Latest_all$Date)))

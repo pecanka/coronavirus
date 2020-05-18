@@ -3,7 +3,7 @@ download_data_mzcr = function(CountryCZ) {
   country_url = CountryCZ$url
   country_prefix = CountryCZ$prefix
   country_name = CountryCZ$name
-  out_file = 'data/'%.%country_prefix%.%country_name%.%'_@type_@date.rda'
+  out_file = 'data/'%p%country_prefix%p%country_name%p%'_@type_@date.rda'
 
   catn("Getting latest data for ",country_name," from MZCR ...")
   html = try(read_html(country_url))

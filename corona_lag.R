@@ -31,7 +31,7 @@ process_lag = function(Data, Lag_by='Cases', lag_start=-10, lag_end=40, Country0
 
   matchup = function(k, D_A, D_B, by='Cases') {
     matchup1 = function(k, D_A, D_B) amean(abs(D_A[[by]]- lead2(D_B[[by]], k)))
-    sapply(k, matchup1, D_A, D_B) #%>% setNames('k='%.%k)
+    sapply(k, matchup1, D_A, D_B) #%>% setNames('k='%p%k)
   }
 
   Empty = tibble(Date=y_day(lag=-(as.Date(t_day())-as.Date('2020-01-01')):0))
@@ -42,7 +42,7 @@ process_lag = function(Data, Lag_by='Cases', lag_start=-10, lag_end=40, Country0
     select(Country, everything())
 
   ks = lag_start:lag_end
-  K = tibble(Country=Countries, Lag=NA)
+  K = tibble(Country=Countries, Lag=NA_integer_)
   Data_Lag = NULL
   for(C in Countries) {
 
@@ -78,7 +78,7 @@ process_lag = function(Data, Lag_by='Cases', lag_start=-10, lag_end=40, Country0
       filter(ifelse(is.na(Cases),0,Cases)>0 | ifelse(is.na(Cases0),0,Cases0)>0)
   }
 
-  Lag_by = 'Lag_'%.%Lag_by
+  Lag_by = 'Lag_'%p%Lag_by
   K %<>% rename(!!Lag_by:=Lag)
 
   list_clean(nlist(K, Data_Lag))

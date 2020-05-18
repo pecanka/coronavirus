@@ -1,11 +1,11 @@
 
 if(!exists('descriptions')) descriptions = list()
 
-data_source = "Based on data from <a href='"%.%url_wom%.%"'>Worldometers</a>, "%.%
-  "<a href='"%.%url_ocdc%.%"'>OCDC</a>"%.%" and <a href='"%.%url_mzcz%.%"'>mzcr.cz</a>"
+data_source = "Based on data from <a href='"%p%url_wom%p%"'>Worldometers</a>, "%p%
+  "<a href='"%p%url_ocdc%p%"'>OCDC</a>"%p%" and <a href='"%p%url_mzcz%p%"'>mzcr.cz</a>"
 
-text_source = "<span style='font-size: 90%;'><i>Source: "%.%data_source%.%"</i></span>"
-text_author = "<span style='font-size: 90%;'><i>Author: Jakub Pecanka (Pecanka Consulting,"%.%
+text_source = "<span style='font-size: 90%;'><i>Source: "%p%data_source%p%"</i></span>"
+text_author = "<span style='font-size: 90%;'><i>Author: Jakub Pecanka (Pecanka Consulting,"%p%
               " <a href='https://www.pecanka.net'>www.pecanka.net</a>)</i></span>"
 
 annot_bottom = list(yref="paper", xref="paper", align='left',
@@ -24,9 +24,9 @@ set_axis_lab = function(d, pattern1='.+<[bB]>', pattern2='<.+') {
 set_titles = function(descriptions, what='Progression of the') {
   descriptions %>% set_axis_lab() %>%
     inset(seq_along(.), ifelse(regexpr('population',.)<0,
-                               ., sub("population",N2T(PerPopulation)%.%" inhabitants",.))) %>%
+                               ., sub("population",N2T(PerPopulation)%p%" inhabitants",.))) %>%
     gsub('italy','Italy',.) %>%
-    paste(toupperfirst(what),.,"(as of "%.%t_day()%.%")") %>%
+    paste(toupperfirst(what),.,"(as of "%p%t_day()%p%")") %>%
     setNames(names(descriptions))
 }
 

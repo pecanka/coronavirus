@@ -14,15 +14,15 @@ save_plots_to_file = function(envir=.GlobalEnv, add_tracer=TRUE, add_goback=TRUE
 
   for(p in ps) {
 
-    filename = p%.%'.'%.%format_for_plots
+    filename = p%p%'.'%p%format_for_plots
 
     if(only_nonexistent && file.exists(filename)) next
 
-    catn("Saving plot '"%.%p%.%"' to file '",filename,"' ...")
+    catn("Saving plot '"%p%p%p%"' to file '",filename,"' ...")
 
     if(format_for_plots=='html') {
 
-      html_title = "Coronavirus: "%.%gsub("<[/]?b>","",descriptions[p])%.%" (by Pecanka Consulting)"
+      html_title = "Coronavirus: "%p%gsub("<[/]?b>","",descriptions[p])%p%" (by Pecanka Consulting)"
       args = list(as_widget(get(p)), file=filename, background='#000000',
                   title=html_title, selfcontained=FALSE, libdir='plotly_files',
                   deps=deps)
@@ -38,7 +38,7 @@ save_plots_to_file = function(envir=.GlobalEnv, add_tracer=TRUE, add_goback=TRUE
     if(add_tracer) {
       catn("Adding tracer in the plotly file ...")
       content = readLines(filename)
-      content[3] %<>% paste0("\n"%.%html_tracer_code())
+      content[3] %<>% paste0("\n"%p%html_tracer_code())
       writeLines(content, filename)
     }
     
@@ -48,9 +48,9 @@ save_plots_to_file = function(envir=.GlobalEnv, add_tracer=TRUE, add_goback=TRUE
       w = which(substr(content,1,32)=='<div id=\"htmlwidget_container\">')
       if(length(w)>0) {
         catn("Placing the 'Go back' code on line ",w," of the plotly file ...")
-        content[w] %<>% paste0("<a href='../index.html'><div style='border: 1px solid #101010;"%.%
-          " background-color: #505050; color: white; padding: 6px; position: absolute; z-index:10;"%.%
-          " top: 0; left: 0; font-family: Calibri, Arial, Sans Serif;'>&larr;&nbsp;"%.%
+        content[w] %<>% paste0("<a href='../index.html'><div style='border: 1px solid #101010;"%p%
+          " background-color: #505050; color: white; padding: 6px; position: absolute; z-index:10;"%p%
+          " top: 0; left: 0; font-family: Calibri, Arial, Sans Serif;'>&larr;&nbsp;"%p%
           "Back to the overview of plots</div></a>", .)
         writeLines(content, filename)
       } else note("The 'Go back' code was not placed.")
@@ -76,7 +76,7 @@ make_index_html = function(envir=.GlobalEnv) {
   wL = hijack(writeLines, con=con)
 
   filename = function(p)
-    'plots_plotly/'%.%p%.%'.'%.%format_for_plots
+    'plots_plotly/'%p%p%p%'.'%p%format_for_plots
   title = function(p)
     collapse0(c(toupper(countries[p]) %|||||% NULL, ds[[sub("_Only_.*$",'', p)]]), sep=": ")
 
@@ -85,12 +85,12 @@ make_index_html = function(envir=.GlobalEnv) {
   main_close = function()
     wL("</div>\n")
   main_open = function(hidden=FALSE, id='', class='main')
-    wL("<div class='"%.%class%.%"' id='"%.%id%.%"' style='"%.%
+    wL("<div class='"%p%class%p%"' id='"%p%id%p%"' style='"%p%
          ifelse(hidden,
                 'display: none;',
-                'display: block;')%.%
+                'display: block;')%p%
                 #'display: none; height: 0px; overflow: hidden; border: 0px solid white; margin-top: 0px; margin-bottom: 0px; padding: 0px;',
-                #'display: block; height: auto; overflow: visible; border: 1px solid silver; margin-top: 30px; margin-bottom: 30px; padding: 20px;')%.%
+                #'display: block; height: auto; overflow: visible; border: 1px solid silver; margin-top: 30px; margin-bottom: 30px; padding: 20px;')%p%
          "'>")
   list_open = function()
     wL("  <div class='list'>")
@@ -123,14 +123,14 @@ make_index_html = function(envir=.GlobalEnv) {
     wL("    <div class='descriptions'>A collection of plots showing the")
     wL("    current state and the historical progression of the COVID-19")
     wL("    pandemic in select countries around the world.<p>")
-    wL("    <span style='font-size: 80%'>"%.%data_source%.%"</span>")
+    wL("    <span style='font-size: 80%'>"%p%data_source%p%"</span>")
     wL("  </div>")
   }
 
   head_big = function(x)
-    wL("    <div class='note'>"%.%x%.%"</div>")
+    wL("    <div class='note'>"%p%x%p%"</div>")
   head_small = function(x)
-    wL("    <div class='note2'>"%.%x%.%"</div>")
+    wL("    <div class='note2'>"%p%x%p%"</div>")
   head_small_ul = function(x) {
     ul_close()
     head_small(x)
@@ -155,27 +155,27 @@ make_index_html = function(envir=.GlobalEnv) {
   }
 
   link_open = function(class='link')
-    wL("    <div class='"%.%class%.%"'>")
+    wL("    <div class='"%p%class%p%"'>")
   link_close = function()
     wL("    </div>")
 
   add_link = function(p, open_link=TRUE, close_link=TRUE) {
     if(open_link) link_open()
-    wL("      <li><a href='"%.%filename(p)%.%"'>"%.%title(p)%.%"</a></li>")
+    wL("      <li><a href='"%p%filename(p)%p%"'>"%p%title(p)%p%"</a></li>")
     if(close_link) link_close()
   }
     
   add_link_country = function(p)  {
-    wL("    <a id='"%.%countries[p]%.%"'></a>")
-    wL("    <div class='linkcountry' onclick=\"toggle_country('box_"%.%countries[p]%.%"', '"%.% country_colors[countries[p]] %.%"')\">")
-    wL("    <a href='#"%.%countries[p]%.%"'>"%.%countries[p]%.%"</a>")
+    wL("    <a id='"%p%countries[p]%p%"'></a>")
+    wL("    <div class='linkcountry' onclick=\"toggle_country('box_"%p%countries[p]%p%"', '"%p% country_colors[countries[p]] %p%"')\">")
+    wL("    <a href='#"%p%countries[p]%p%"'>"%p%countries[p]%p%"</a>")
     wL("    </div>")
   }
 
   ## ==========================================
 
   first = which(!grepl('(Only)', ps))
-  ord = ps[-first] %>% {order(sub('.*_Only_','',.)%.%.)}
+  ord = ps[-first] %>% {order(sub('.*_Only_','',.)%p%.)}
   ps = c(ps[first], ps[-first][ord])
 
   ds = descriptions[sub("_Only_.*$",'', ps)]
@@ -228,7 +228,7 @@ make_index_html = function(envir=.GlobalEnv) {
 
     if(is_new_country[p]) {
       link_close()
-      box_reopen(countries[p], hidden=TRUE, id='box_'%.%countries[p], class='main2')
+      box_reopen(countries[p], hidden=TRUE, id='box_'%p%countries[p], class='main2')
       head_small('linear scale')
       link_open()
     }
@@ -258,13 +258,13 @@ make_index_html = function(envir=.GlobalEnv) {
 }
 
 html_tracer_code = function() {
-  "<!-- Global site tag (gtag.js) - Google Analytics -->\n"%.%
-  "  <script async src='https://www.googletagmanager.com/gtag/js?id=UA-162945949-1'></script>\n"%.%
-  "  <script>\n"%.%
-  "    window.dataLayer = window.dataLayer || [];\n"%.%
-  "    function gtag(){dataLayer.push(arguments);}\n"%.%
-  "    gtag('js', new Date());\n"%.%
-  "    gtag('config', 'UA-162945949-2');\n"%.%
+  "<!-- Global site tag (gtag.js) - Google Analytics -->\n"%p%
+  "  <script async src='https://www.googletagmanager.com/gtag/js?id=UA-162945949-1'></script>\n"%p%
+  "  <script>\n"%p%
+  "    window.dataLayer = window.dataLayer || [];\n"%p%
+  "    function gtag(){dataLayer.push(arguments);}\n"%p%
+  "    gtag('js', new Date());\n"%p%
+  "    gtag('config', 'UA-162945949-2');\n"%p%
   "  </script>\n"
   "<!-- End of Global site tag (gtag.js) - Google Analytics -->"
 }

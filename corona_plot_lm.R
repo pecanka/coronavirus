@@ -13,22 +13,22 @@ plot_lm = function(Data, envir=.GlobalEnv) {
   
   assign('descriptions', descr, envir=envir) 
 
-  title = '<b>Czech Republic</b>: dependence of discovered cases on performed tests\n'%.%
-          "<span style='font-size: 75%; border: 1px solid silver'>"%.%
-          '<b>Model 0: </b>simple LRM (i.e. @y~@x, R<sup>2</sup>=@r0)'%.%
-          ' based on all days after '%.%day0%.%'\n'%.%
-          '<b>Model 1: </b>simple LRM (i.e. @y~@x) based on all days from '%.%
-          day0%.%' (the first day with at least '%.%min_Cases%.%
-          ' cases)\nand up to '%.%splits[1]%.%' (the day where a qualitative'%.%
-          ' shift started to appear, see the note below)\n'%.%
-          '<b>Model 2: </b>simple LRM (i.e. @y~@x)'%.%
-          ' based on the days after '%.%splits[1]%.%
+  title = '<b>Czech Republic</b>: dependence of discovered cases on performed tests\n'%p%
+          "<span style='font-size: 75%; border: 1px solid silver'>"%p%
+          '<b>Model 0: </b>simple LRM (i.e. @y~@x, R<sup>2</sup>=@r0)'%p%
+          ' based on all days after '%p%day0%p%'\n'%p%
+          '<b>Model 1: </b>simple LRM (i.e. @y~@x) based on all days from '%p%
+          day0%p%' (the first day with at least '%p%min_Cases%p%
+          ' cases)\nand up to '%p%splits[1]%p%' (the day where a qualitative'%p%
+          ' shift started to appear, see the note below)\n'%p%
+          '<b>Model 2: </b>simple LRM (i.e. @y~@x)'%p%
+          ' based on the days after '%p%splits[1]%p%
           '</span>'
 
-  explain_model = 'Note: Model 0 works with all data, while Models 1 and 2 work'%.%
-    ' with two disjoint periods (split by '%.%day0%.%'). The observed differences'%.%
-    ' among the 3 models illustrate the apparent\nchanges in the relationship'%.%
-    ' between the number of discovered cases and the number of performed tests,'%.%
+  explain_model = 'Note: Model 0 works with all data, while Models 1 and 2 work'%p%
+    ' with two disjoint periods (split by '%p%day0%p%'). The observed differences'%p%
+    ' among the 3 models illustrate the apparent\nchanges in the relationship'%p%
+    ' between the number of discovered cases and the number of performed tests,'%p%
     ' which initially appeared to be stronger than in the more recent period.'
 
   DataCZ250 = DataCZ %>% mutate(DateS=Date %>% sub('[0-9]+-','',.)) %>%
@@ -38,8 +38,8 @@ plot_lm = function(Data, envir=.GlobalEnv) {
   
     if(regexpr('plotly_z_lm',p)<0) next
 
-    u = ifelse(regexpr('daily',p)>0,'Daily','') %.% 'Tested'
-    v = ifelse(regexpr('daily',p)>0,'Daily','') %.% 'Cases'
+    u = ifelse(regexpr('daily',p)>0,'Daily','') %p% 'Tested'
+    v = ifelse(regexpr('daily',p)>0,'Daily','') %p% 'Cases'
 
     DCZ0 = DataCZ250 %>%
       mutate(x=!!sym(u), y=!!sym(v),

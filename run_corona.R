@@ -8,7 +8,7 @@ llib(magrittr, dplyr, rvest, stringr, tidyr, lubridate, plotly, rjson, readxl)
 
 #########################################################
 
-url_ocdc = 'https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-'%.%t_day()%.%'.xlsx'
+url_ocdc = 'https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-'%p%t_day()%p%'.xlsx'
 
 url_wom = 'https://www.worldometers.info/coronavirus/'
 url_mzcz = 'https://onemocneni-aktualne.mzcr.cz/covid-19'
