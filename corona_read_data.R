@@ -34,11 +34,12 @@ read_data_ocdc = function(url, max_lag=10, lag=1) {
              ID=CountryID, Code=CountryCode)
   }
 
-  data %>% mutate(Country=recode(Country,
-      'Czech_Republic'='Czechia', 
-      'United_States_of_America'='USA',
-      'United_Kingdom'='UK', 
-      'South_Korea'='SouthKorea'))
+  data %>% 
+    mutate(Country=recode(Country,
+          'Czech_Republic'='Czechia', 
+          'United_States_of_America'='USA',
+          'United_Kingdom'='UK', 
+          'South_Korea'='SouthKorea'))
 
 }
 

@@ -16,7 +16,7 @@ load_data = function(envir=.GlobalEnv) {
     select(-Country, -Population, -ID, -Code) %>%
     rename_all(~.x%p%'OCDC') %>%
     select(Date=DateOCDC, Deaths=DeathsOCDC, DailyDeaths=DailyDeathsOCDC, everything()) %>%
-    left_join(DataCZ, ., by='Date') %>% arrange(Date) %T>% print(n=100)
+    left_join(DataCZ, ., by='Date') %>% arrange(Date) #%T>% print(n=100)
 
   ## Read WOM data from files
   dataWOM = load_data_individual(available_countries_wom)
