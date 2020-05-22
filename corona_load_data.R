@@ -95,7 +95,6 @@ load_data = function(envir=.GlobalEnv) {
     mutate(ActiveCasesPop_=ActiveCases, CriticalCasesPop_=CriticalCases, NewDeathsPop_=NewDeaths) %>%
     call_Pop
 
-  browser()
   Latest %<>% left_join(Latest_all, by=c('Country','Date'), suffix=c('','_2'))
 
   if(!setequal(unique(Latest$Date), unique(Latest_all$Date)))

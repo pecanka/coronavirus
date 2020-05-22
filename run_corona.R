@@ -14,7 +14,7 @@ url_wom = 'https://www.worldometers.info/coronavirus/'
 url_mzcz = 'https://onemocneni-aktualne.mzcr.cz/covid-19'
 url_mzcz_api = 'https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/'
 
-do_daily_update = FALSE
+do_regular_update = !FALSE
 
 do_download_data = FALSE
 do_load_data = FALSE
@@ -35,7 +35,7 @@ do_save_plotly_to_file = !FALSE
 do_save_plotly_to_file_only_nonexistent = FALSE
 do_make_index_html = TRUE
 
-if(do_daily_update) {
+if(do_regular_update) {
   do_download_data = TRUE
   do_process_lag = do_plot = do_plot_lag = do_plot_bar = do_plot_ts = do_plot_lm = TRUE
   do_save_plotly_to_file = TRUE
