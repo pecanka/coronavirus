@@ -14,7 +14,7 @@ url_wom = 'https://www.worldometers.info/coronavirus/'
 url_mzcz = 'https://onemocneni-aktualne.mzcr.cz/covid-19'
 url_mzcz_api = 'https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/'
 
-do_regular_update = !FALSE
+do_regular_update = TRUE
 
 do_download_data = FALSE
 do_load_data = FALSE
