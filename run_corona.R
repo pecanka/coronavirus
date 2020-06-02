@@ -3,6 +3,8 @@ options(scipen=5)
 
 setwd2()
 
+wait("Running in the path '",getwd(),"'. Is this OK?")
+
 require(utilbox)
 llib(magrittr, dplyr, rvest, stringr, tidyr, lubridate, plotly, rjson, readxl)
 
@@ -14,7 +16,7 @@ url_wom = 'https://www.worldometers.info/coronavirus/'
 url_mzcz = 'https://onemocneni-aktualne.mzcr.cz/covid-19'
 url_mzcz_api = 'https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/'
 
-do_regular_update = TRUE
+do_regular_update = !FALSE
 
 do_download_data = FALSE
 do_load_data = FALSE
@@ -62,7 +64,43 @@ CountryCZ = tibble(name='Czechia', prefix='mzcr_', url=url_mzcz)
 
 #########################################################
 
-source_pattern('corona_', announce=FALSE)
+source_from_web = grepl('^http[s]?://', script_dir())
+
+if(source_from_web) {
+
+  path = script_dir()
+  path = 'https://raw.githubusercontent.com/pecanka/coronavirus/master/'
+  
+  warn("Sourcing R files from '",path,"' ...")
+  source(path%p%'corona_download_data.R')
+  source(path%p%'corona_download_data_ocdc.R')
+  source(path%p%'corona_download_data_mzcr.R')
+  source(path%p%'corona_lag.R')
+  source(path%p%'corona_load_data.R')
+  source(path%p%'corona_modify_saveWidget.R')
+  source(path%p%'corona_plot_bar.R')
+  source(path%p%'corona_plot_lag.R')
+  source(path%p%'corona_plot_lm.R')
+  source(path%p%'corona_plot_ts.R')
+  source(path%p%'corona_read_data.R')
+  source(path%p%'corona_save_plots.R')
+  source(path%p%'corona_setup_plots.R')
+  
+  if(!file.exists('style.css')) download.file(path%p%'style.css', 'style.css')
+  if(!file.exists('toggle.js')) download.file(path%p%'toggle.js', 'toggle.js')
+  
+  # re-source the modified files locally
+  #source('d:/Jakub/covid/corona_download_data.R')
+  #source('d:/Jakub/covid/corona_download_data_ocdc.R')
+  #source('d:/Jakub/covid/corona_download_data_mzcr.R')
+
+} else {
+
+  source_pattern('corona_', announce=FALSE)
+
+}
+
+dir_create(c('data','plots_plotly','tables'))
 
 available_countries_wom = download_country_list_wom(url_wom) %>%
   `if`(countries_focus, filter(., name %in% Countries_focus_broad), .)

@@ -8,7 +8,12 @@ download_country_list_wom = function(url, name_start='wom__list-of-countries_') 
     load(f)
   } else {
     catn("Getting list of countries from url '",url,"' ...")
-    html = read_html(url)
+    html = try(read_html(url))
+    if(is_error(html)) {
+      html = try(read_url_via_download(url, read_html))
+    }
+    if('try-error' %in% class(html)) error("Something went wrong when reading '",url,"'.")
+
     name = html %>% html_nodes('.mt_a') %>% html_text()
     surl = html %>% html_nodes('.mt_a') %>% html_attr('href')
     countries = tibble(name, prefix='wom_', url=url%p%surl) %>% unique()
@@ -57,6 +62,9 @@ download_latest_all_wom = function(url='https://www.worldometers.info/coronaviru
   catn("Reading latest counts for all countries from WOM ...")
 
   html = try(read_html(url))
+  if(is_error(html)) {
+    html = try(read_url_via_download(url, read_html))
+  }
   if('try-error' %in% class(html)) error("Something went wrong when reading '",url,"'.")
 
   latest_all = html %>% html_node('table') %>% html_table() %>% as_tibble()
@@ -95,7 +103,10 @@ download_data_wom = function(available_countries, url) {
     out_file = 'data/'%p%country_prefix%p%country_name%p%'_@type_@date.rda'
 
     catn("Scrapping data for ",country_name," from WOM ...")
-    html = try(read_html(country_url))
+    html = try(read_html(url))
+    if(is_error(html)) {
+      html = try(read_url_via_download(url, read_html))
+    }
     if('try-error' %in% class(html)) next
     #some_fresh_data_present = TRUE
 
@@ -103,7 +114,7 @@ download_data_wom = function(available_countries, url) {
     save(latest, file=out_file %>% sub('@type','latest',.) %>% sub('@date',t_day('%Y-%m-%d-%H%M%S'),.))
       #'data/'%p%country_prefix%p%country_name%p%'_latest_'%p%t_day('%Y-%m-%d-%H%M%S')%p%'.rda')
 
-    series = html %>% as.character() %>% regmatches(gregexpr('series:[^}]+(name:)[^}]+[}]',.)) %>% unlist()
+    series = html %>% as.character() %>% regmatches(gregexpr('series:[^}]+[}]',.)) %>% unlist()
     series_names = series %>% str_extract("name: '[^,]+',") %>% str_extract("'.+'") %>% gsub("[' ]","",.)
     series_dates = html %>% as.character() %>% regmatches(gregexpr('xAxis:[^}]+[}]',.)) %>% unlist() %>%
       html_extract("categories: [\\[][^\\]]+[\\]]", series_names)

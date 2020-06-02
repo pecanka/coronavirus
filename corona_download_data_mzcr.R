@@ -6,7 +6,8 @@ download_data_mzcr = function(CountryCZ) {
   out_file = 'data/'%p%country_prefix%p%country_name%p%'_@type_@date.rda'
 
   catn("Getting latest data for ",country_name," from MZCR ...")
-  html = try(read_html(country_url))
+  #html = try(read_html(country_url))
+  html = try(read_url_via_download(country_url, read_html))
   if('try-error' %in% class(html)) error("Data not found.")
 
   latest = html_extract_latest_mzcr(html, country_name)
