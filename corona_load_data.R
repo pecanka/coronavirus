@@ -98,7 +98,7 @@ load_data = function(envir=.GlobalEnv) {
   Latest %<>% left_join(Latest_all, by=c('Country','Date'), suffix=c('','_2'))
 
   if(!setequal(unique(Latest$Date), unique(Latest_all$Date)))
-    error("Something seems to have gone wrong with the data, the dates in",
+    error("Something seems to have gone wrong with the data, the dates in ",
           "'Latest' and 'Latest_all' do not match. Try redownloading the data.")
 
   # Check for duplicated records

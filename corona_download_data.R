@@ -114,7 +114,7 @@ download_data_wom = function(available_countries, url) {
     save(latest, file=out_file %>% sub('@type','latest',.) %>% sub('@date',t_day('%Y-%m-%d-%H%M%S'),.))
       #'data/'%p%country_prefix%p%country_name%p%'_latest_'%p%t_day('%Y-%m-%d-%H%M%S')%p%'.rda')
 
-    series = html %>% as.character() %>% regmatches(gregexpr('series:[^}]+[}]',.)) %>% unlist()
+    series = html %>% as.character() %>% regmatches(gregexpr('series:[ ][[][^}]+[}]',.)) %>% unlist()
     series_names = series %>% str_extract("name: '[^,]+',") %>% str_extract("'.+'") %>% gsub("[' ]","",.)
     series_dates = html %>% as.character() %>% regmatches(gregexpr('xAxis:[^}]+[}]',.)) %>% unlist() %>%
       html_extract("categories: [\\[][^\\]]+[\\]]", series_names)

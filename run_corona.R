@@ -3,8 +3,11 @@ options(scipen=5)
 
 setwd2()
 
-wait("Running in the path '",getwd(),"'. Is this OK?")
+catn("Running in the path '",getwd(),"'.")
+if(getwd()!='d:/Dropbox/Projects/CoronaVirus')
+  wait("Is this path OK?")
 
+catn("Loading libraries ...")
 require(utilbox)
 llib(magrittr, dplyr, rvest, stringr, tidyr, lubridate, plotly, rjson, readxl)
 
@@ -19,6 +22,7 @@ url_mzcz_api = 'https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/'
 do_regular_update = !FALSE
 
 do_download_data = FALSE
+do_download_data_cz = !FALSE
 do_load_data = FALSE
 
 do_force_fresh_data = FALSE
@@ -38,7 +42,8 @@ do_save_plotly_to_file_only_nonexistent = FALSE
 do_make_index_html = TRUE
 
 if(do_regular_update) {
-  do_download_data = TRUE
+  do_download_data = !TRUE
+  do_download_data_cz = TRUE
   do_process_lag = do_plot = do_plot_lag = do_plot_bar = do_plot_ts = do_plot_lm = TRUE
   do_save_plotly_to_file = TRUE
   do_save_plotly_to_file_only_nonexistent = FALSE
@@ -118,11 +123,13 @@ if(do_download_data) {
 
   download_latest_all_wom()
   download_data_ocdc(url_ocdc, do_force_fresh_data)
-  download_data_mzcr(CountryCZ)
   download_data_wom(available_countries_wom, url_wom)
   do_load_data = TRUE
 
 }
+
+if(do_download_data_cz && 'Czechia' %in% Countries_focus_broad) 
+  download_data_mzcr(CountryCZ)
 
 if(do_load_data)
   load_data()       # side effect loads: Data, Data4, DataCZ, Latest
@@ -139,7 +146,7 @@ if(do_plot_bar)
 if(do_plot_ts)
   plot_ts(Data4)
 
-if(do_plot_lm)
+if(do_plot_lm && 'Czechia' %in% Countries_focus_broad)
   plot_lm(DataCZ)
 
 announce_plots()

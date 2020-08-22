@@ -18,13 +18,14 @@ read_data_ocdc = function(url, max_lag=10, lag=1) {
   if(is_empty(data)) error("No data loaded.")
 
   if('DailyCases' %notin% names(data)) {
+    pop_col_name = filter_by_pattern(names(data), 'popData')
     data %<>% mutate(Date=as.character(as.Date(dateRep)-1)) %>%
       rename(DailyCases=cases,
              DailyDeaths=deaths,
              Country=countriesAndTerritories,
              CountryID=geoId,
              CountryCode=countryterritoryCode,
-             Population=popData2018) %>%
+             Population=!!pop_col_name) %>%
       arrange(Country, Date) %>%
       group_by(Country) %>%
       mutate(Cases=cumsum(DailyCases),
