@@ -32,7 +32,7 @@ load_data = function(envir=.GlobalEnv) {
     select(Date, Country, DeathsCZ=Deaths, DailyDeathsCZ=DailyDeaths,
            one_of(setdiff(names(.), names(Data))))
 
-  Data %<>% full_join(DataCZ1) %>%
+  Data %<>% full_join(DataCZ1, by = c("Country", "Date")) %>%
     mutate(Deaths=coalesce(Deaths, DeathsCZ), 
            DailyDeaths=coalesce(DailyDeaths,DailyDeathsCZ)) %>%
     select(-ends_with('CZ')) %>%

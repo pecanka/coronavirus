@@ -73,7 +73,8 @@ load_data_mzcr = function(CountryCZ) {
 
 load_data_individual = function(countries, max_lag=as.numeric(as.Date(t_day())-as.Date('2020-01-01'))) {
 
-  if(missing(countries)) countries = download_country_list_wom(url_wom)
+  if(missing(countries)) 
+    countries = download_country_list_wom(url_wom)
 
   Data = Latest = NULL
   for(country in split_rows(countries)) {

@@ -102,14 +102,16 @@ download_data_wom = function(available_countries, url) {
 
     out_file = 'data/'%p%country_prefix%p%country_name%p%'_@type_@date.rda'
 
-    catn("Scrapping data for ",country_name," from WOM ...")
-    html = try(read_html(url))
+    cat0("Scrapping data for ",country_name," from WOM ... downloading ...")
+    html = try(read_html(country_url))
     if(is_error(html)) {
-      html = try(read_url_via_download(url, read_html))
+      html = try(read_url_via_download(country_url, read_html))
+      if(is_error(html)) next
     }
-    if('try-error' %in% class(html)) next
     #some_fresh_data_present = TRUE
 
+    cat0(" processing ...")
+    
     latest = html_extract_latest_wom(html, country_name)
     save(latest, file=out_file %>% sub('@type','latest',.) %>% sub('@date',t_day('%Y-%m-%d-%H%M%S'),.))
       #'data/'%p%country_prefix%p%country_name%p%'_latest_'%p%t_day('%Y-%m-%d-%H%M%S')%p%'.rda')
@@ -133,6 +135,7 @@ download_data_wom = function(available_countries, url) {
      #'data/'%p%country_prefix%p%country_name%p%'_historical_'%p%t1(data$Date)%p%'.rda')
      
     #if(country$name=='Czechia') browser()
+    catn(" done.")
 
   }
 

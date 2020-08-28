@@ -22,7 +22,7 @@ url_mzcz_api = 'https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/'
 do_regular_update = !FALSE
 
 do_download_data = FALSE
-do_download_data_cz = !FALSE
+do_download_data_cz = FALSE
 do_load_data = FALSE
 
 do_force_fresh_data = FALSE
@@ -43,8 +43,8 @@ do_make_index_html = TRUE
 
 if(do_regular_update) {
   do_download_data = !TRUE
-  do_download_data_cz = TRUE
-  do_process_lag = do_plot = do_plot_lag = do_plot_bar = do_plot_ts = do_plot_lm = TRUE
+  do_download_data_cz = !TRUE
+  do_process_lag = do_plot = do_plot_lag = do_plot_bar = do_plot_ts = do_plot_lm = !TRUE
   do_save_plotly_to_file = TRUE
   do_save_plotly_to_file_only_nonexistent = FALSE
   do_make_index_html = TRUE
@@ -64,7 +64,7 @@ Countries_focus_broad = c('Czechia','Italy','Germany','Netherlands',
   'Norway','Poland','Sweden','Switzerland','France','Portugal','Brazil',
   'Israel','Australia','Ireland','Chile','Romania','Japan','Luxembourg',
   'Finland','Mexico','Greece','Slovakia')
-
+  
 CountryCZ = tibble(name='Czechia', prefix='mzcr_', url=url_mzcz)
 
 #########################################################
